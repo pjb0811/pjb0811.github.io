@@ -1,7 +1,17 @@
 import React from 'react'
 import AppBar from './AppBar'
 import { Link } from 'gatsby'
-import { rhythm, scale } from '../utils/typography'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import Helmet from 'react-helmet'
+import Grid from '@material-ui/core/Grid'
+import 'typeface-roboto'
+import './index.css'
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+})
 
 class Template extends React.Component {
   render() {
@@ -9,11 +19,10 @@ class Template extends React.Component {
     const rootPath = `${__PATH_PREFIX__}/`
 
     return (
-      <div>
-        {/* {header} */}
+      <MuiThemeProvider theme={theme}>
         <AppBar />
         {children}
-      </div>
+      </MuiThemeProvider>
     )
   }
 }

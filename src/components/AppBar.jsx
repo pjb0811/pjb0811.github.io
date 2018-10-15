@@ -36,9 +36,14 @@ class ButtonAppBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              News
+              <Link
+                to={'/'}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+              >
+                pjb0811.github.io
+              </Link>
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">github</Button>
           </Toolbar>
         </AppBar>
       </div>

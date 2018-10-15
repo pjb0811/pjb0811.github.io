@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'pjb0811 Blog',
+    title: 'pjb0811 blog',
     author: 'Jeongbin Park',
-    description: 'A starter blog demonstrating what Gatsby can do.',
+    description: 'Start blog using Gatsby.',
     siteUrl: 'https://pjb0811.github.io/',
   },
   pathPrefix: '/',
@@ -48,22 +48,24 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `pjb0811 blog`,
+        short_name: `pjb0811`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/assets/gatsby-icon.png`,
+        icon: `src/assets/avatar-icon.png`,
       },
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    /* 
     {
       resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography',
       },
-    },
+    }, 
+    */
   ],
 }
