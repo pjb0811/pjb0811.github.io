@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import Icon from '@material-ui/core/Icon'
+import { loadCSS } from 'fg-loadcss/src/loadCSS'
 
 const styles = {
   root: {
@@ -22,6 +24,13 @@ const styles = {
 }
 
 class ButtonAppBar extends React.Component {
+  componentDidMount() {
+    loadCSS(
+      'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
+      document.querySelector('#___gatsby')
+    )
+  }
+
   render() {
     const { classes } = this.props
     return (
@@ -43,7 +52,11 @@ class ButtonAppBar extends React.Component {
                 pjb0811.github.io
               </Link>
             </Typography>
-            <Button color="inherit">github</Button>
+            <Button color="inherit">
+              <a href="https://github.com/pjb0811" style={{ color: 'inherit' }}>
+                <Icon className={'fab fa-github'} />
+              </a>
+            </Button>
           </Toolbar>
         </AppBar>
       </div>

@@ -1,11 +1,11 @@
 import React from 'react'
-import AppBar from './AppBar'
+import AppBar from '../organisms/AppBar'
 import { Link } from 'gatsby'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Helmet from 'react-helmet'
 import Grid from '@material-ui/core/Grid'
 import 'typeface-roboto'
-import './index.css'
+import './layout.css'
 
 const theme = createMuiTheme({
   typography: {
@@ -13,10 +13,9 @@ const theme = createMuiTheme({
   },
 })
 
-class Template extends React.Component {
+class Layout extends React.Component {
   render() {
-    const { location, children } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
+    const { children } = this.props
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -27,4 +26,4 @@ class Template extends React.Component {
   }
 }
 
-export default Template
+export default Layout
