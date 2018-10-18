@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Icon from '@material-ui/core/Icon'
-import { loadCSS } from 'fg-loadcss/src/loadCSS'
 
 const styles = {
   root: {
@@ -24,13 +23,6 @@ const styles = {
 }
 
 class ButtonAppBar extends React.Component {
-  componentDidMount() {
-    loadCSS(
-      'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
-      document.querySelector('#___gatsby')
-    )
-  }
-
   render() {
     const { classes } = this.props
     return (

@@ -49,12 +49,24 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `pjb0811 blog`,
-        short_name: `pjb0811`,
+        short_name: `pjb0811 blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/assets/avatar-icon.png`,
+        icon: `src/assets/pjb0811.png`,
+        icons: [
+          {
+            src: `/favicons/android-chrome-192x192.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `/favicons/android-chrome-512x512.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
       },
     },
     `gatsby-plugin-offline`,

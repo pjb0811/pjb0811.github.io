@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
-import Layout from './Layout'
+import Layout from '../templates/Layout'
 
 class BlogPost extends React.Component {
   render() {
