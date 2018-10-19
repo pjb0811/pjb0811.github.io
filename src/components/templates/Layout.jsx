@@ -3,6 +3,7 @@ import AppBar from '../organisms/AppBar'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { loadCSS } from 'fg-loadcss/src/loadCSS'
 import { withStyles } from '@material-ui/core/styles'
+import Footer from '../organisms/Footer'
 import 'typeface-roboto'
 import './layout.css'
 
@@ -39,6 +40,7 @@ class Layout extends React.Component {
         <div className={classes.root}>
           <AppBar />
           {children}
+          <Footer />
         </div>
       </MuiThemeProvider>
     )

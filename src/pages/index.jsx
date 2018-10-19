@@ -1,13 +1,18 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
 import Layout from '../components/templates/Layout'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import PostList from '../components/organisms/PostList'
 import Jumbotron from '../components/organisms/Jumbotron'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  list: {
+    margin: '0 auto',
+  },
+})
 
 class Index extends React.Component {
   render() {
@@ -17,6 +22,7 @@ class Index extends React.Component {
       'props.data.site.siteMetadata.description'
     )
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const { classes } = this.props
 
     return (
       <Layout location={this.props.location}>
@@ -26,13 +32,16 @@ class Index extends React.Component {
           title={siteTitle}
         />
         <Jumbotron />
-        <PostList posts={posts} />
+        <Grid item xs={8} className={classes.list}>
+          <PostList posts={posts} />
+          <PostList posts={posts} />
+        </Grid>
       </Layout>
     )
   }
 }
 
-export default Index
+export default withStyles(styles)(Index)
 
 export const pageQuery = graphql`
   query {
