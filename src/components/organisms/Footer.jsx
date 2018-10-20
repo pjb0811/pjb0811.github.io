@@ -8,6 +8,9 @@ const styles = {
   root: {
     flexGrow: 1,
   },
+  toolbar: {
+    justifyContent: 'center'
+  }
 }
 
 class Footer extends Component {
@@ -16,7 +19,7 @@ class Footer extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <Typography variant="caption" color="inherit">
               All content copyright pjb0811 © 2018 • All rights reserved.
               Powered by Gatsby.js

@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   list: {
-    margin: '0 auto',
+    margin: '10px auto',
   },
 })
 
@@ -33,7 +33,6 @@ class Index extends React.Component {
         />
         <Jumbotron />
         <Grid item xs={8} className={classes.list}>
-          <PostList posts={posts} />
           <PostList posts={posts} />
         </Grid>
       </Layout>
@@ -59,7 +58,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "YYYY.MM.DD")
             title
           }
         }
