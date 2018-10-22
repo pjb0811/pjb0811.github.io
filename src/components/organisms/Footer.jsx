@@ -1,31 +1,42 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
   toolbar: {
-    justifyContent: 'center'
-  }
-}
+    background: theme.palette.grey['100'],
+    justifyContent: 'center',
+  },
+  caption: {
+    textAlign: 'center',
+  },
+})
 
 class Footer extends Component {
   render() {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Toolbar className={classes.toolbar}>
-            <Typography variant="caption" color="inherit">
-              All content copyright pjb0811 © 2018 • All rights reserved.
-              Powered by Gatsby.js
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <div className={classes.toolbar}>
+          <Typography
+            variant="caption"
+            color="inherit"
+            className={classes.caption}
+          >
+            Copyright © 2018. pjb0811 All rights reserved.
+          </Typography>
+          <Typography
+            variant="caption"
+            color="inherit"
+            className={classes.caption}
+          >
+            Powered by Gatsby.js
+          </Typography>
+        </div>
       </div>
     )
   }
