@@ -1,15 +1,26 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import Layout from '../templates/Layout'
+import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import PostNavigation from '../molecules/PostNavigation'
+
+const styles = theme => ({
+  post: {
+    margin: '10px auto',
+  },
+})
 
 class BlogPost extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const siteDescription = post.excerpt
-    const { previous, next } = this.props.pageContext
+    const { classes } = this.props
 
     return (
       <Layout location={this.props.location}>
@@ -18,41 +29,21 @@ class BlogPost extends React.Component {
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
         />
-        <h1>{post.frontmatter.title}</h1>
-        <p>{post.frontmatter.date}</p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr />
-
-        <ul
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            listStyle: 'none',
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
+        <Grid item xs={8} className={classes.post}>
+          <Typography variant="h3">{post.frontmatter.title}</Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {post.frontmatter.date}
+          </Typography>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <Divider light />
+          <PostNavigation {...this.props.pageContext} />
+        </Grid>
       </Layout>
     )
   }
 }
 
-export default BlogPost
+export default withStyles(styles)(BlogPost)
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -68,7 +59,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY.MM.DD")
       }
     }
   }
