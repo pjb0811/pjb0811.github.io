@@ -28,7 +28,9 @@ class BlogPost extends React.Component {
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
-        />
+        >
+          <script type="text/javascript" async src="/js/disqus.js" />
+        </Helmet>
         <Grid item xs={8} className={classes.post}>
           <Typography variant="h3">{post.frontmatter.title}</Typography>
           <Typography variant="subtitle1" gutterBottom>
@@ -36,6 +38,7 @@ class BlogPost extends React.Component {
           </Typography>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <Divider light />
+          <div id="disqus_thread" />
           <PostNavigation {...this.props.pageContext} />
         </Grid>
       </Layout>

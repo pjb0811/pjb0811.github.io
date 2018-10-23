@@ -1,29 +1,31 @@
 import React, { Component } from 'react'
 import MoveButton from '../atoms/MoveButton'
+import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  nav: {
+    padding: 20,
+  },
+})
 
 class PostNavigation extends Component {
   render() {
-    const { previous, next } = this.props
+    const { previous, next, classes } = this.props
 
     return (
-      <ul
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          listStyle: 'none',
-          padding: 0,
-        }}
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+        className={classes.nav}
       >
-        <li>
-          <MoveButton direction={previous} rel="prev" />
-        </li>
-        <li>
-          <MoveButton direction={next} rel="next" />
-        </li>
-      </ul>
+        <MoveButton direction={previous} rel="prev" />
+        <MoveButton direction={next} rel="next" />
+      </Grid>
     )
   }
 }
 
-export default PostNavigation
+export default withStyles(styles)(PostNavigation)

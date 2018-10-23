@@ -7,6 +7,7 @@ import Footer from '../organisms/Footer'
 import 'typeface-roboto'
 import './layout.css'
 import Helmet from 'react-helmet'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const theme = createMuiTheme({
   typography: {
@@ -42,6 +43,7 @@ class Layout extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={classes.root}>
           <Helmet>
             <link
