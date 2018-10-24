@@ -17,7 +17,7 @@ class PostNavigation extends Component {
       <Grid
         container
         direction="row"
-        justify="space-between"
+        justify="space-around"
         alignItems="center"
         className={classes.nav}
       >

@@ -28,25 +28,20 @@ class ButtonAppBar extends Component {
         <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Link
-                to={'/'}
-                style={{ color: 'inherit', textDecoration: 'none' }}
-              >
-                pjb0811.github.io
-              </Link>
+              <Link to={'/'}>pjb0811.github.io</Link>
             </Typography>
             <IconButton color="inherit">
-              <a href="https://github.com/pjb0811" style={{ color: 'inherit' }}>
+              <a href="https://github.com/pjb0811" className="icon">
                 <Icon className={'fab fa-github'} />
               </a>
             </IconButton>
             <IconButton color="inherit">
-              <a href="mailto:pjb0811@gmail.com" style={{ color: 'inherit' }}>
+              <a href="mailto:pjb0811@gmail.com" className="icon">
                 <Icon className={'far fa-envelope'} />
               </a>
             </IconButton>
-            <IconButton color="inherit">
-              <a href="/rss.xml" style={{ color: 'inherit' }}>
+            <IconButton color="inherit" className="icon">
+              <a href="/rss.xml">
                 <Icon className={'fas fa-rss'} />
               </a>
             </IconButton>
