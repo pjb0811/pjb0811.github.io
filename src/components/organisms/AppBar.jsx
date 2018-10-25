@@ -40,8 +40,8 @@ class ButtonAppBar extends Component {
                 <Icon className={'far fa-envelope'} />
               </a>
             </IconButton>
-            <IconButton color="inherit" className="icon">
-              <a href="/rss.xml">
+            <IconButton color="inherit">
+              <a href="/rss.xml" className="icon">
                 <Icon className={'fas fa-rss'} />
               </a>
             </IconButton>

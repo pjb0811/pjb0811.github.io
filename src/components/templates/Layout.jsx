@@ -7,9 +7,7 @@ import Footer from '../organisms/Footer'
 import 'typeface-roboto'
 import './layout.css'
 import Helmet from 'react-helmet'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { TypographyStyle } from 'react-typography'
-import typography from '../../utils/typography'
+// import CssBaseline from '@material-ui/core/CssBaseline'
 
 const theme = createMuiTheme({
   typography: {
@@ -45,17 +43,15 @@ class Layout extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <CssBaseline />
+        <Helmet>
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+            media="all"
+          />
+        </Helmet>
+        {/* <CssBaseline /> */}
         <div className={classes.root}>
-          <Helmet>
-            <link
-              rel="stylesheet"
-              href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-              media="all"
-            />
-
-            <TypographyStyle typography={typography} />
-          </Helmet>
           <AppBar />
           <div className={classes.toolbar} />
           {children}
