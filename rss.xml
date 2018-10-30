@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Oct 2018 08:20:57 GMT</lastBuildDate><item><title><![CDATA[페이징 작업용 테스트 긴 제목으로 작성 하하하하하 123 qwerasdf]]></title><description><![CDATA[test 13123]]></description><link>https://pjb0811.github.io/test-page-2/</link><guid isPermaLink="false">https://pjb0811.github.io/test-page-2/</guid><pubDate>Wed, 24 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;test 13123&lt;/p&gt;</content:encoded></item><item><title><![CDATA[테스트]]></title><description><![CDATA[test 13123]]></description><link>https://pjb0811.github.io/test-page/</link><guid isPermaLink="false">https://pjb0811.github.io/test-page/</guid><pubDate>Wed, 24 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;test 13123&lt;/p&gt;</content:encoded></item><item><title><![CDATA[New Beginnings]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 30 Oct 2018 02:06:35 GMT</lastBuildDate><item><title><![CDATA[React.Component에서 hooks로]]></title><description><![CDATA[최근, React 는  16.7 출시 계획을 발표했다.  이번 발표는 Stateless 한 기능의 컴포넌트(SFC)를 중심으로 한 새로운 접근 방식을 홍보하기 때문에 상당히 큰 의미를 지닌다. 그렇게 하기 위해, 이 새로운 버전의 library…]]></description><link>https://pjb0811.github.io/from-react-component-to-hooks/</link><guid isPermaLink="false">https://pjb0811.github.io/from-react-component-to-hooks/</guid><pubDate>Mon, 29 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;최근, React 는 &lt;strong&gt;&lt;a href=&quot;https://reactjs.org/docs/hooks-intro.html&quot;&gt;16.7 출시 계획을 발표했다.&lt;/a&gt;&lt;/strong&gt; 이번 발표는 Stateless 한 기능의 컴포넌트(SFC)를 중심으로 한 새로운 접근 방식을 홍보하기 때문에 상당히 큰 의미를 지닌다.&lt;/p&gt;
+&lt;p&gt;그렇게 하기 위해, 이 새로운 버전의 library 는 개발자들이 상태를 저장하고, side effect 를 트리거하고 처리할 수 있는 도구인 “hooks”라고 불리는 것을 제공한다.&lt;/p&gt;
+&lt;p&gt;이러한 접근 방식이 확실히 (내 생각에) 개선되고 대응에 있어 큰 진전이지만, 개발자들이 처음에는 이해하기 어려울 수 있기 때문에 그것을 채택하는 것은 상당히 어려울 수 있다. 바라건대, 이 기사가 끝날 때까지 여러분은 hooks 와 그것들을 이용할 수 있는 방법에 대해 더 잘 이해할 수 있을 것입니다.&lt;/p&gt;
+&lt;h2&gt;hooks 작동 방식&lt;/h2&gt;
+&lt;p&gt;작동 방식을 이해하기 위해 알아야 할 가장 큰 것은 hooks 가 구성 요소를 장착할 때 React 에 의해 &lt;strong&gt;순서&lt;/strong&gt;대로 나열되고 업데이트 시 &lt;strong&gt;동일한 순서&lt;/strong&gt;로 처리된다는 점입니다. 순서 부분은 여기서 결정적이지만, 그것이 무엇을 의미할까요?&lt;/p&gt;
+&lt;p&gt;사용자 ID 를 가져와서 프로필을 가져와서 이름을 사용하여 해당 사용자에게 인사하는 간단한 구성 요소가 있다고 가정해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-c3b2a.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 65.8%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAABc0lEQVQoz42SCW6DMBBFOUubpmFJICzGxivGYJpGaqTe/y79iROatqpa6YNGZt7MZzxRpqZCjalwZT8XwpbabaiOuU4Zfypp0GrfBj0WBO/lPKqoJ/zA5Ez5ZDqbcZ+LqWjlumIh47nutp0J2nEbE7HwUcE8EzNnmrcyp0OuThRGavZ4yUDepuGVmRo713Ym7oASn3AMoH9rx6k0GqqsrYYDsnNhQwYsJK28SKVUJUSucH7hIzy5eh20Z9LV/ViasdA+bSUaLjCcB4UYnyDEZ3grXsjw3hr/XNKHnFyncvOGvFwMhRz2yuXniY6Id6JHFcBtJl6oOTHtE8Lvh7kMDMyO91DGdIgzZtZVF6F7xh2c12ba1N3qK7nAN+YKY2znzjHVzB8b6xOqzm1vN3Qv/EjQctXBYBQz04zHvZnXVGOeqPcT/k2A+9q9bsUQUxM34tsO/Q2nkBhj7rBA2NOE6vU/4UQ4AJl0e+0KNWwIFvO/zj8A24mflYMWat4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;simple user-greeting component&quot;
+        title=&quot;&quot;
+        src=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png&quot;
+        srcset=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-1a291.png 148w,
+/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-2bc4a.png 295w,
+/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png 590w,
+/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-526de.png 885w,
+/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-c3b2a.png 1000w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;React 는 이 구성 요소를 처음으로 렌더링할 때(즉, 구성 요소의 mounting 이 발생할 때) React hook 의 각 호출을 연속적으로 등록합니다. 즉, 다음과 같은 기능을 합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“초기 값이 &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt; 인 새로운 state 를 만들 것입니다.”&lt;/li&gt;
+&lt;li&gt;“초기 값이 &lt;code class=&quot;language-text&quot;&gt;null&lt;/code&gt; 인 새로운 state 를 만들 것입니다.&lt;/li&gt;
+&lt;li&gt;“초기 값이 &lt;code class=&quot;language-text&quot;&gt;null&lt;/code&gt; 인 새로운 state 를 만들 것입니다(이전 값과 다름).&lt;/li&gt;
+&lt;li&gt;“나는 effect 를 만들고 즉시 그것을 요청할 것입니다.” (프로세스 &lt;code class=&quot;language-text&quot;&gt;userId&lt;/code&gt; 가 동일하게 유지되는 한 이 effect 는 다시 생성되지 않습니다.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이제 &lt;code class=&quot;language-text&quot;&gt;fetch&lt;/code&gt; function 이 일부 데이터를 반환하고 &lt;code class=&quot;language-text&quot;&gt;setLoading&lt;/code&gt; 및 &lt;code class=&quot;language-text&quot;&gt;setUser&lt;/code&gt; function 을 호출한다고 가정하겠습니다. 이러한 function 은 우리가 만든 첫 번째 및 두 번째 상태를 업데이트하고 구성 요소의 re-rendering 을 트리거합니다. 즉, 전체 코드를 다시 살펴본 후 React 는 다른 작업을 수행합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“이 구성 요소에 대한 첫 번째 state 가 있는데 값이 &lt;code class=&quot;language-text&quot;&gt;false&lt;/code&gt;입니다. 새 구성 요소를 생성하는 대신 다시 돌려 드리겠습니다.”&lt;/li&gt;
+&lt;li&gt;“이 구성 요소에 대한 두 번째 state 가 있는데, 그 값은 [api 에서 보낸 것이 무엇이든 간에] 새 구성 요소를 생성하는 대신 반환할 것입니다.”&lt;/li&gt;
+&lt;li&gt;“이 구성 요소에 대한 세 번째 state 가 있는데 그 값이 여전히 &lt;code class=&quot;language-text&quot;&gt;false&lt;/code&gt;입니다. 새 구성 요소를 생성하는 대신 다시 돌려 드리겠습니다.”&lt;/li&gt;
+&lt;li&gt;“이미 이 effect 를 등록했는데 props &lt;code class=&quot;language-text&quot;&gt;userId&lt;/code&gt; 가 변경되지 않았으므로 다시 호출할 필요가 없습니다.”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;React 는 hooks 에 대한 모든 호출을 등록함으로써 “state”를 내부적으로 저장하고 필요한 정보를 제공할 수 있습니다. 우리는 &lt;strong&gt;React hooks 의 두 가지 규칙을 존중&lt;/strong&gt;하기 때문에 그렇게 할 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;React 구성 요소 외부에 있는 hooks 를 호출할 수 없습니다(분명히 렌더링 단계에서 React 에 의해 처리되어야 하기 때문에 render function 에 넣어야 하며, 이 경우 SFC 에 해당합니다).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hooks 의 순서와 목록은 변경할 수 없습니다. 구성 요소의 두 번째 &lt;code class=&quot;language-text&quot;&gt;useState&lt;/code&gt;를 제거한다고 가정해 보겠습니다. React 는 첫번째 것을 보고, 그것을 위해 저장한 상태를 돌려주고, 다른 것을 보지만 세 번째는 보지 않습니다. 어느 것이 사라졌는지 알 수 없고 실수를 저지를 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;lifecycle 방식에서 hooks 로 마이그레이션&lt;/h2&gt;
+&lt;h3&gt;componentDidMount 에서 useMount 까지&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;componentDidMount&lt;/code&gt; 메서드는 일반적으로 구성 요소가 마운트될 때 한 번 side effect 가 트리거되는 방법입니다.&lt;/p&gt;
+&lt;p&gt;동등한 hook 는 SFC 가 처음으로 호출될 때 side effect 가 발생하며 이후 호출을 중단한다. 이를 위해 사용할 수 있는 hook 는 &lt;code class=&quot;language-text&quot;&gt;useEffect&lt;/code&gt; 라고 합니다. 기본적으로 구성 요소를 마운트 및 업데이트할 때마다 호출됩니다. 설명서를 자세히 살펴보면 일련의 값을 두 번째 인수로 전달하여 “memoized”할 수 있음을 알 수 있습니다. 또한 빈 배열을 통과하는 것은 React 에게 한 번 더 요청한 후 &lt;strong&gt;다시는 요청하지 않습니다.&lt;/strong&gt; 빈 배열은 “이 기능이 변경될 때 오래된 결과를 가져올 값은 없습니다.”라고 말하는 것과 같습니다. 따라서 &lt;code class=&quot;language-text&quot;&gt;componentDidUpdate&lt;/code&gt; 구현은 다음과 같습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; useEffect &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useMount&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fn&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;useEffect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[페이징 작업용 테스트 긴 제목으로 작성 하하하하하 123 qwerasdf]]></title><description><![CDATA[test 13123]]></description><link>https://pjb0811.github.io/test-page-2/</link><guid isPermaLink="false">https://pjb0811.github.io/test-page-2/</guid><pubDate>Wed, 24 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;test 13123&lt;/p&gt;</content:encoded></item><item><title><![CDATA[테스트]]></title><description><![CDATA[test 13123]]></description><link>https://pjb0811.github.io/test-page/</link><guid isPermaLink="false">https://pjb0811.github.io/test-page/</guid><pubDate>Wed, 24 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;test 13123&lt;/p&gt;</content:encoded></item><item><title><![CDATA[New Beginnings]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://pjb0811.github.io/hi-folks/</link><guid isPermaLink="false">https://pjb0811.github.io/hi-folks/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
 right at the coast of the Semantics, a large language ocean. A small river named
@@ -97,53 +169,4 @@ chicken eggs, though the…]]></description><link>https://pjb0811.github.io/my-s
 chicken eggs, though the taste and texture will be somewhat different, and the
 egg yolk will be less rich.”?
 (&lt;a href=&quot;http://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;Wikipedia Link&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;Yeah, I didn’t either.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[test post!]]></title><description><![CDATA[test 2134]]></description><link>https://pjb0811.github.io/test/</link><guid isPermaLink="false">https://pjb0811.github.io/test/</guid><pubDate>Wed, 06 May 2015 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;test 2134&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I’m sure I’ll write a lot more interesting things in the future. Oh, and here’s a…]]></description><link>https://pjb0811.github.io/hello-world/</link><guid isPermaLink="false">https://pjb0811.github.io/hello-world/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;
-&lt;p&gt;I’m sure I’ll write a lot more interesting things in the future.&lt;/p&gt;
-&lt;p&gt;Oh, and here’s a great quote from this Wikipedia on
-&lt;a href=&quot;http://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;salted duck eggs&lt;/a&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A salted duck egg is a Chinese preserved food product made by soaking duck
-eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-charcoal paste. The eggs may also be sold with the salted paste removed,
-wrapped in plastic, and vacuum packed. From the salt curing process, the
-salted duck eggs have a briny aroma, a gelatin-like egg white and a
-firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;
-  &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-3f5a1.jpg&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-  
-  &lt;span
-    class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
-  &gt;
-    &lt;span
-      class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMB/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAEEBf/aAAwDAQACEAMQAAABgik0dXC//8QAGRABAAMBAQAAAAAAAAAAAAAAAQACEhEy/9oACAEBAAEFAkqW2DlnRj73yf/EABcRAQADAAAAAAAAAAAAAAAAAAAREkH/2gAIAQMBAT8B1WX/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEQL/2gAIAQIBAT8Bi6f/xAAbEAABBAMAAAAAAAAAAAAAAAAAAQIRISIxMv/aAAgBAQAGPwK9GNocyS8hCj//xAAcEAADAQACAwAAAAAAAAAAAAABESEAMUGBobH/2gAIAQEAAT8hsTTH2wx5gg2ZgM8d5JIfmMRAIe//2gAMAwEAAgADAAAAEMgv/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQARIf/aAAgBAwEBPxARwyusv//EABgRAAIDAAAAAAAAAAAAAAAAAAABESFR/9oACAECAQE/EFoktI//xAAcEAEBAAIDAQEAAAAAAAAAAAABEQAxIWGBQeH/2gAIAQEAAT8QRswtDR5g4a7R5C/RHFM3BKk6zThoVp3lEYcnjGIYES7/ACZ//9k=&apos;); background-size: cover; display: block;&quot;
-    &gt;
-      &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
-        alt=&quot;Chinese Salty Egg&quot;
-        title=&quot;&quot;
-        src=&quot;/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-f8fb9.jpg&quot;
-        srcset=&quot;/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-e8976.jpg 148w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-63df2.jpg 295w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-f8fb9.jpg 590w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-85e3d.jpg 885w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-d1924.jpg 1180w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-9452e.jpg 1770w,
-/static/salty_egg-8058f3f26913fea3b6a89a73344fe94a-3f5a1.jpg 2048w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-      /&gt;
-    &lt;/span&gt;
-  &lt;/span&gt;
-  
-  &lt;/a&gt;
-    &lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;Yeah, I didn’t either.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[test post!]]></title><description><![CDATA[test 2134]]></description><link>https://pjb0811.github.io/test/</link><guid isPermaLink="false">https://pjb0811.github.io/test/</guid><pubDate>Wed, 06 May 2015 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;test 2134&lt;/p&gt;</content:encoded></item></channel></rss>
