@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 20 Nov 2018 01:57:45 GMT</lastBuildDate><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 1부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</guid><pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 20 Nov 2018 02:02:03 GMT</lastBuildDate><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 1부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</guid><pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react 및 그와 관련된 새로운 도구들을 활용하여 프로젝트를 시작했을때 “전에는 이렇게 작업했었지..” 하는 내용을 남기고자 합니다. 단순한 개발과정뿐만 아니라 isomorphic SPA 에 개념 또한 기존에 생각했던 내용을 정리해서 스스로 이해하려고 합니다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Isomorphic JavaScript&lt;/h2&gt;
@@ -452,7 +452,41 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;express 에서 제공하는 static 메서드를 통해 build 된 파일을 사용할 수 있도록 하게 해줍니다.&lt;/p&gt;
 &lt;p&gt;아직 더 해야 할 작업이 있지만 우선 다시 서버를 실행해 보겠습니다. 정적 리소스만 읽어왔을 뿐인데 정상적인 페이지가 나오게 되는 것을 보실 수 있으실 겁니다.&lt;/p&gt;
 &lt;p&gt;이러한 이유는 서버에서 메인 페이지 호출 시 빌드된 파일 중 하나인 index.html 를 메인 페이지 리소스로 인식하여 렌더링하도록 설정이 되기 때문입니다.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./server-src2.png&quot; alt=&quot;server-src2&quot;&gt;&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 55.86419753086419%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABJ0AAASdAHeZh94AAACHElEQVQozzVSybLjIAzM/3/YO81lqt5hUo4XvODd2BiMlyQ9DXnvoBIIqWm1dPv68xff/2I80hKJkMFSUeP7/sAwKqyrgZoXzLTzuiCbHlFSMId5uUScVXjEOe6PPMRvzjnszkKvKwEmTLOi71G3LYaph7EGxmhszHPHAUtvtw2zXnFdT6y7xdlIVI3Bfly42ZU/bxOsXbFpBadb2GXEOi2w84jdDLB6xGYvHG6H205s25PnAweBtX7yjXfGX88XbvM0YOlaFMWGXq5YGoUqtyjFhqnR6CqDLDvQVA6q1qiLAW2psEiFme03jcMwkL1xuE4yVNPIZIkoapDGA7JohIgniExBsrgrO1RiRJ5JlGmBPBa8lyiyAlVVke2K8yBzt1ECAg7DSAYZLUGeZ0jTOHgpC9Q1QcqSvoIQzKHVTcM3SV8zXpNhi2nyklHL8/SAAwFyWsG2i5AsRI6WQ/kUNAHUxz0jfx/HEXrR8APdqKMHer1eeL/fH0DPMIqiUBjHCe73ewD38SRJwtmD/5pnpJQK3tcfnL4xJvib/y1NU7ISP0yqwNi36GMe9JeZUhP6viPDgb4nWA9JWTxGy8FqrXHruo4MSoKUoe0kEbxXqEq26PWTH1Ylc7IsD3JkHEiaCnaTohAF1nnlatnPUGbSHuuZRZY/7WhqR/0clvngXlqY2XAlLBZlyJKr1buwKl23h7PTB/Zlx0F7v974DxA2OQnBJHPSAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;server-src2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png&quot;
+        srcset=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-1a291.png 148w,
+/static/server-src2-61b7550bdd83db673e954db6ff7983be-2bc4a.png 295w,
+/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png 590w,
+/static/server-src2-61b7550bdd83db673e954db6ff7983be-526de.png 885w,
+/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png 972w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
 &lt;p&gt;위와 같이 페이지 소스를 보면 정적 리소스 설정만 해주었을 뿐인데 빌드된 파일 중 하나인 index.html 코드를 렌더링해주고 있습니다.&lt;/p&gt;
 &lt;p&gt;자세히 보시면 클라이언트 렌더링을 했을때와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인하실 수 있습니다. index.html 에서 호출된 스크립트를 통해 페이지를 그려주기 때문이죠.
 또 다른 문제점은 정적 리소스를 통해 인덱스 페이지가 설정된 경우 해당 이후 설정한 라우팅 정보를 무시하게 되죠.&lt;/p&gt;
