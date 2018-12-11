@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>http://github.com/dylang/node-rss</link><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Dec 2018 09:58:48 GMT</lastBuildDate><author><![CDATA[Jeongbin Park]]></author><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 2부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전 글에 이어 라우팅 설정 내용을 정리했습니다. 이 전 작업한 글에서 기본적인 Isomorphic SPA…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전 글에 이어 라우팅 설정 내용을 정리했습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>http://github.com/dylang/node-rss</link><generator>RSS for Node</generator><lastBuildDate>Tue, 11 Dec 2018 00:00:25 GMT</lastBuildDate><author><![CDATA[Jeongbin Park]]></author><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 2부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전 글에 이어 라우팅 설정 내용을 정리했다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 한다. 잘 모르는 부분은 모른다고 남겨놓자. 다른 사람에게 설명하기 보다는 스스로의 학습 내용을 정리하는 글이기 때문에 편한 말투로 작성했다.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;이 전 작업한 글에서 기본적인 Isomorphic SPA 설정은 해주었지만 미처 작업하지 못한 내용들이 많이 있습니다. 그 중에서 저는 라우팅 설정부터 먼저 진행하려고 합니다.&lt;/p&gt;
-&lt;p&gt;이 후 작업 내용을 보시면 이해하실 수 있으시겠지만 라우팅 설정과 관련된 서드파티 라이브러리를 통해 기본적인 라우팅 설정 및 코드 스플리팅, 비동기 데이터에 대한 정적 데이터 렌더링까지 처리하기 위해서입니다.&lt;/p&gt;
-&lt;p&gt;React 개발 환경에서 라우팅 설정을 지원해주는 여러가지 라이브러리가 있는데 그 중에서 저는 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;을 활용하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;이 전 작업한 글에서 기본적인 Isomorphic SPA 설정은 해주었지만 미처 작업하지 못한 내용들이 많이 있다. 그 중에서 라우팅 설정부터 먼저 진행하려고 한다.&lt;/p&gt;
+&lt;p&gt;이 후 작업 내용을 보시면 이해하실 수 있겠지만 라우팅 설정과 관련된 서드파티 라이브러리를 통해 기본적인 라우팅 설정 및 코드 스플리팅, 비동기 데이터에 대한 정적 데이터 렌더링까지 처리하기 위해서이다.&lt;/p&gt;
+&lt;p&gt;React 개발 환경에서 라우팅 설정을 지원해주는 여러가지 라이브러리가 있는데 그 중에서 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;을 활용하도록 하자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -19,7 +19,7 @@
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMFAv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAG4pukhl0X/xAAbEAABBAMAAAAAAAAAAAAAAAABAgMREgAEEP/aAAgBAQABBQImMIslzXcCqJmBz//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABwQAAIBBQEAAAAAAAAAAAAAAAABAhAREiIxMv/aAAgBAQAGPwIxmrpmsU0eUcp//8QAHBABAAICAwEAAAAAAAAAAAAAAQARMUEhUWFx/9oACAEBAAE/Ia3BbidU61qUDU0CL2bPk8kAMT//2gAMAwEAAgADAAAAEMgP/8QAFhEBAQEAAAAAAAAAAAAAAAAAARBB/9oACAEDAQE/EEcn/8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8QJ//EABwQAQACAgMBAAAAAAAAAAAAAAERIQAxQVFhgf/aAAgBAQABPxCf3ZASp5fDnKMQKEKJkeuneLzMrFe3vETDZVsveA6D5gEADzP/2Q==&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMFAv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAG4pukhl0X/xAAbEAACAgMBAAAAAAAAAAAAAAABAgMRAAQSEP/aAAgBAQABBQJjWEdLJryBuFuh5//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABwQAAIBBQEAAAAAAAAAAAAAAAABAhAREiIxMv/aAAgBAQAGPwIxmrpmsU0eUcp//8QAHBABAAICAwEAAAAAAAAAAAAAAQARMUEhUWFx/9oACAEBAAE/IaXBbidUS1qUXU0IvZs+TyQAxP/aAAwDAQACAAMAAAAQyA//xAAWEQEBAQAAAAAAAAAAAAAAAAABEEH/2gAIAQMBAT8QRyf/xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAgEBPxAn/8QAHBABAAEFAQEAAAAAAAAAAAAAAREAIUFRYTGB/9oACAEBAAE/ENvRAS05eGasaxBCiZHWn2nR+Wwt3tImGyqJXdA+B8oCAByv/9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -40,15 +40,15 @@
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;라는 라이브러리에서 DOM 바인딩과 관련된 라우팅 설정 기능만 간추린 라이브러리로 보시면 될 것 같습니다.&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;는 React 에서 공식적으로 제공하는 라이브러리는 아니지만 이 전부터 React 환경의 SPA 개발 시에 많은 분들이 사용해왔던 라우팅 설정에 필요한 패키지입니다.&lt;/p&gt;
-&lt;p&gt;버전이 업데이트되면서 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt; 내에서 필요한 기능에 따라 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt; 뿐만 아니라 &lt;code class=&quot;language-text&quot;&gt;react-router-native&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;react-router-config&lt;/code&gt; 등의 라이브러리가 제공되는데 저는 &lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt;을 활용해보도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt; 대한 자세한 사용법은 해당 &lt;a href=&quot;https://reacttraining.com/react-router/web/guides/quick-start&quot;&gt;링크&lt;/a&gt;를 통해 살펴보시면 좋을 것 같습니다.&lt;/p&gt;
-&lt;p&gt;그럼 해당 패키지를 사용하기 위해 설치부터 진행하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;라는 라이브러리에서 DOM 바인딩과 관련된 라우팅 설정 기능만 간추린 라이브러리로 보시면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;는 React 에서 공식적으로 제공하는 라이브러리는 아니지만 이 전부터 React 환경의 SPA 개발 시에 많은 분들이 사용해왔던 라우팅 설정에 필요한 패키지이다.&lt;/p&gt;
+&lt;p&gt;버전이 업데이트되면서 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt; 내에서 필요한 기능에 따라 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt; 뿐만 아니라 &lt;code class=&quot;language-text&quot;&gt;react-router-native&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;react-router-config&lt;/code&gt; 등의 라이브러리가 제공되는데 우선은 &lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt; 만을 활용해보도록 하자.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt; 대한 자세한 사용법은 해당 &lt;a href=&quot;https://reacttraining.com/react-router/web/guides/quick-start&quot;&gt;링크&lt;/a&gt;를 통해 살펴보면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;그럼 해당 패키지를 사용하기 위해 설치부터 진행하도록 하자.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn add --dev react-router-dom&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Client Routing&lt;/h2&gt;
-&lt;p&gt;우선 클라이언트 영역의 컴포넌트 라우팅 설정을 위해 기본적인 프로젝트 구조를 살짝 변경하도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;우선 클라이언트 영역에서 사용했던 기본 컴포넌트를 렌더링 시 라우팅 정보를 전달받을 수 있도록 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;에서 제공하는 &lt;code class=&quot;language-text&quot;&gt;BrowserRouter&lt;/code&gt; 컴포넌트로 감싸도록 합니다.&lt;/p&gt;
+&lt;p&gt;우선 클라이언트 영역의 컴포넌트 라우팅 설정을 위해 기본적인 프로젝트 구조를 살짝 변경한자.&lt;/p&gt;
+&lt;p&gt;클라이언트 영역에서 사용했던 기본 컴포넌트를 렌더링 시 라우팅 정보를 전달받을 수 있도록 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;에서 제공하는 &lt;code class=&quot;language-text&quot;&gt;BrowserRouter&lt;/code&gt; 컴포넌트로 감싸도록 한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -62,7 +62,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;root&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이후 기존에 사용했던 기본 컴포넌트를 라우팅 처리를 담당하는 메인 컴포넌트로 사용할 수 있도록 수정하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;이후 기존에 사용했던 기본 컴포넌트를 라우팅 처리를 담당하는 메인 컴포넌트로 사용할 수 있도록 수정한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -93,10 +93,10 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;기본 프로젝트 생성 시 만들어진 코드들은 사용하지 않기 때문에 지우도록 하겠습니다. 대신 라우팅 설정을 위한 링크 및 라우팅 정보에 맞게 컴포넌트 렌더링을 처리할 수 있도록 컴포넌트를 수정했습니다.&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Link&lt;/code&gt; 컴포넌트를 통해 링크 클릭 시 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트에서 해당 라우팅 정보를 읽어 &lt;code class=&quot;language-text&quot;&gt;Switch&lt;/code&gt; 영역 내에서 라우팅 정보와 연결된 컴포넌트를 렌더링 할 수 있도록 수정했습니다.&lt;/p&gt;
-&lt;p&gt;이제 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트에 전달할 &lt;code class=&quot;language-text&quot;&gt;Home&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;About&lt;/code&gt; 컴포넌트를 만들어 주면 될 것 같습니다.&lt;/p&gt;
-&lt;p&gt;이 후 &lt;code class=&quot;language-text&quot;&gt;src/components&lt;/code&gt; 폴더를 생성하고 해당 경로에 라우팅 주소와 연결할 컴포넌트를 만들도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;기본 프로젝트 생성 시 만들어진 코드들은 사용하지 않기 때문에 지우도록 하자. 대신 라우팅 설정을 위한 링크 및 라우팅 정보에 맞게 컴포넌트 렌더링을 처리할 수 있도록 컴포넌트를 수정했다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Link&lt;/code&gt; 컴포넌트를 통해 링크 클릭 시 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트에서 해당 라우팅 정보를 읽어 &lt;code class=&quot;language-text&quot;&gt;Switch&lt;/code&gt; 영역 내에서 라우팅 정보와 연결된 컴포넌트를 렌더링 할 수 있도록 수정했다.&lt;/p&gt;
+&lt;p&gt;이제 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트에 전달할 &lt;code class=&quot;language-text&quot;&gt;Home&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;About&lt;/code&gt; 컴포넌트를 만들어 주면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;이 후 &lt;code class=&quot;language-text&quot;&gt;src/components&lt;/code&gt; 폴더를 생성하고 해당 경로에 라우팅 주소와 연결할 컴포넌트를 만들도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/Home.jsx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -117,13 +117,13 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; About&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우팅을 통해 연결되는 컴포넌트에서 아직까지 특별히 처리해줄 기능은 없기 때문에 기본적인 구조로 생성했습니다.&lt;/p&gt;
-&lt;p&gt;우선 지금까지 작업한 클라이언트 라우팅 설정이 잘 동작하는지 확인해보기 위해 개발 서버를 실행해도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;라우팅을 통해 연결되는 컴포넌트에서 아직까지 특별히 처리해줄 기능은 없기 때문에 기본적인 구조로 생성했다.&lt;/p&gt;
+&lt;p&gt;우선 지금까지 작업한 클라이언트 라우팅 설정이 잘 동작하는지 확인해보기 위해 개발 서버를 실행해보자.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&quot;/client-routing-ba1fbe1a94741651dbf133f7a78553af.gif&quot; alt=&quot;client-routing&quot;&gt;&lt;/p&gt;
-&lt;p&gt;실행 후 화면에서 상딘 링크 클릭 시 라우팅 정보에 맞게 컴포넌트가 정상적으로 렌더링되는 것을 확인하실 수 있으실 겁니다.&lt;/p&gt;
+&lt;p&gt;실행 후 화면에서 상딘 링크 클릭 시 라우팅 정보에 맞게 컴포넌트가 정상적으로 렌더링되는 것을 확인할 수 있다.&lt;/p&gt;
 &lt;h3&gt;Parameters&lt;/h3&gt;
-&lt;p&gt;라우팅 설정을 통한 페이지 렌더링 시 라우팅 내 매개변수를 활용하여 동일한 컴포넌트에서 여려가지 기능을 처리해 줄 수도 있습니다. 우선 매개변수 처리를 위한 컴포넌트를 생성하고 라우팅 목록에 추가하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;라우팅 설정을 통한 페이지 렌더링 시 라우팅 내 매개변수를 활용하여 동일한 컴포넌트에서 여려가지 기능을 처리해 줄 수도 있다. 우선 매개변수 처리를 위한 컴포넌트를 생성하고 라우팅 목록에 추가하도록 한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -167,10 +167,10 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
     &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우팅 설정 목록에 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt; 주소를 활용하는 링크들과 해당 주소를 처리하기 윈한 컴포넌트 영역을 추가했습니다. 첫 번째는 &lt;code class=&quot;language-text&quot;&gt;post/:id&lt;/code&gt; 라는 형식으로 url 매개변수 정보를 받을 수 있도록 하였고, 두 번째는 url 매개변수를 받지 않는 기본 영역을 추가했습니다.&lt;/p&gt;
-&lt;p&gt;중요한 점은, 같은 url 정보를 가지는 라우팅 컴포넌트들을 여러개 설정할 경우 기본 라우팅 정보를 갖는 컴포넌트를 제일 나중에 설정해줘야 합니다. 라우팅 호출 시 &lt;code class=&quot;language-text&quot;&gt;Switch&lt;/code&gt; 컴포넌트 내에서 라우팅 목록을 순회하면서 라우팅 컴포넌트를 호출하게 되는데 url 매개변수를 갖는 라우팅 정보가 기본 라우팅 컴포넌트에 먼저 접근하게 되면 기본 컴포넌트를 호출하기 때문이죠.&lt;/p&gt;
-&lt;p&gt;query 매개변수의 경우 이 전에는 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt; 내에서 자체적으로 관련 기능을 제공해주었는데, 현재는 관련 기능을 제공하지 않기 때문에 해당 컴포넌트에서 query 매개변수를 확인해주도록 하겠습니다.
-저는 query 문자열을 객체로 변경해주는 라이브러리를 사용하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;라우팅 설정 목록에 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt; 주소를 활용하는 링크들과 해당 주소를 처리하기 윈한 컴포넌트 영역을 추가했다. 첫 번째는 &lt;code class=&quot;language-text&quot;&gt;post/:id&lt;/code&gt; 라는 형식으로 url 매개변수 정보를 받을 수 있도록 하였고, 두 번째는 url 매개변수를 받지 않는 기본 영역을 추가했다.&lt;/p&gt;
+&lt;p&gt;중요한 점은, 같은 url 정보를 가지는 라우팅 컴포넌트들을 여러개 설정할 경우 기본 라우팅 정보를 갖는 컴포넌트를 제일 나중에 설정해줘야 한다. 라우팅 호출 시 &lt;code class=&quot;language-text&quot;&gt;Switch&lt;/code&gt; 컴포넌트 내에서 라우팅 목록을 순회하면서 라우팅 컴포넌트를 호출하게 되는데 url 매개변수를 갖는 라우팅 정보가 기본 라우팅 컴포넌트에 먼저 접근하게 되면 기본 컴포넌트를 호출하기 때문인 것 같다.&lt;/p&gt;
+&lt;p&gt;query 매개변수의 경우 이 전에는 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt; 내에서 자체적으로 관련 기능을 제공해주었는데, 현재는 관련 기능을 제공하지 않기 때문에 해당 컴포넌트에서 query 매개변수를 확인해주도록 한다.
+query 문자열을 객체로 변경해주는 라이브러리를 사용하도록 하자.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn add --dev query-string&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/Posts.jsx&lt;/code&gt;&lt;/li&gt;
@@ -188,10 +188,10 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Posts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;query 매개변수 관련 라이브러리 설치 후, url 매개변수 및 query 매개변수를 확인하기 위한 컴포넌트를 만들었습니다. 어떠한 매개변수들이 호출되는지 확인하기 위한 작업만 간단히 설정해주었습니다.&lt;/p&gt;
-&lt;p&gt;그럼 지금까지 작업한 내용을 확인해보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;query 매개변수 관련 라이브러리 설치 후, url 매개변수 및 query 매개변수를 확인하기 위한 컴포넌트를 만들었다. 어떠한 매개변수들이 호출되는지 확인하기 위한 작업만 간단히 설정해주었다.&lt;/p&gt;
+&lt;p&gt;그럼 지금까지 작업한 내용을 확인해보도록 하자.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/parameters-6976945cc6614d3c518415e457db9e15.gif&quot; alt=&quot;parameters&quot;&gt;&lt;/p&gt;
-&lt;p&gt;각 링크에 설정된 url, query 매개변수 정보가 어떻게 설정되어 있는지 보여주고 있습니다. 잘 동작하네요!&lt;/p&gt;
+&lt;p&gt;각 링크에 설정된 url, query 매개변수 정보가 어떻게 설정되어 있는지 보여주고 있다.&lt;/p&gt;
 &lt;h3&gt;404 Page, Redirect&lt;/h3&gt;
 &lt;h4&gt;404&lt;/h4&gt;
 &lt;p&gt;
@@ -209,7 +209,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABNUlEQVQoz4WRS0vDQBSF+7cFH1tBN7oTcWlxJUYFQfqwaWK1pXRTEG1e9YEKZm6a5s4jbWacaBeptPZyOMxc7jdnhimZHhR1N4T2C3ReF6g1hIY7G2t4YAdRqUjeuHDUgr067FRIUbsVsn1Nyl1iBzm2AG76UH2CQwv3q2z9DDcM3Lpgm+c0l4Frp3hgRrcB+Q3/C+d7H5CimlCVUSW5FGM5zde5K/r8BbUB0RmLYcuHcJToQspMu318Ylxe1bq9PuMCk2TwTmoOaXrLYRInlOrJpN9/aFr37U7PcX3OOaPo/A/ra4exjkUhhJRS/ZQQaTSKNe2sTIYxCkazLFNSaddHaGOMp4x6H7AC/iTxKI71sEinIp1opdMMKdfdx7ewvgyefZhLLDe0PTKvUDdNJ5x7YxB9Ayq5CJwLDQ9RAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABM0lEQVQoz42RTU/CQBCG+d0mwtUEL3oz0ZMJRw0YTwJCS0lRwQMmGvupoHKgO+3S/Whruy7URCAQnDyZZCbz5E12C4oNy/Te4X4E/fE6gzHob9C2fs/aNmiuX1g2Wxac6XDUgnIDlet/HDbQwQ2q9JHmzrUNsupA4xVOO+S4yfarpFglpStarElIqUb2LsmJAl0X5eHr8mIGyohIqEipEFwkoUiZyFj2LUc6mkLTQDJjs9xxYBqE86KsrfbOKxe16/rDYMh4HM5C4xM1TaTa22WEQ0qJ1IdPz4qq9+4eDcvhnDNKzK//yIREcZxlmVhUFMV+gCNGd8iaAzAjMiVNU+kueiYbY1zK1gR2JE8Q9jGmPOJxkhMlqXyCAOOXD+92m5zTsZFme10HrWB7cqmY3urX+D9X5git4afN7QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -230,8 +230,8 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;SPA 뿐만 아니라 기본적인 웹 환경에서 사용자는 잘못된 주소를 입력하게 되는 경우가 생깁니다. 보통의 웹사이트에서 이런 경우에는 잘못된 주소로 접근했다는 안내 페이지를 보여주게 됩니다.&lt;/p&gt;
-&lt;p&gt;현재 프로젝트에서는 잘못된 주소 접근에 대한 별다른 처리를 해주지 않았기 때문에 잘못된 주소 입력 시 아무런 페이지도 호출하지 않습니다. 바꿔 말하면, 어떤 주소를 호출했을 때 해당 주소를 라우팅 목록 내에서 찾을 수 없을 경우 스위칭 영역에서 아무런 컴포넌트도 렌더링 해주지 않기 때문이죠. 이제 해당 라우팅 목록에서 찾을 수 없는 주소가 입력되었을때 특정 페이지로 연결되도록 작업을 진행하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;SPA 뿐만 아니라 기본적인 웹 환경에서 사용자는 잘못된 주소를 입력하게 되는 경우가 생긴다. 보통의 웹사이트에서 이런 경우에는 잘못된 주소로 접근했다는 안내 페이지를 보여주게 된다.&lt;/p&gt;
+&lt;p&gt;현재 프로젝트에서는 잘못된 주소 접근에 대한 별다른 처리를 해주지 않았기 때문에 잘못된 주소 입력 시 아무런 페이지도 호출하지 않는다. 바꿔 말하면, 어떤 주소를 호출했을 때 해당 주소를 라우팅 목록 내에서 찾을 수 없을 경우 스위칭 영역에서 아무런 컴포넌트도 렌더링 해주지 않기 때문이다. 이제 해당 라우팅 목록에서 찾을 수 없는 주소가 입력되었을때 특정 페이지로 연결되도록 작업을 진행하도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -254,9 +254,9 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
     &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;스위치 영역 맨 하단에 &lt;code class=&quot;language-text&quot;&gt;NotFound&lt;/code&gt; 라는 컴포넌트를 주입받는 라우트 컴포넌트를 추가했습니다. 경로 설정은 모든 주소를 받을 수 있도록 설정했습니다.&lt;/p&gt;
-&lt;p&gt;이 전에 라우팅 매개변수 설정 시 설명드린대로 스위치 컴포넌트에서는 선언된 순서대로 라우트 컴포넌트에 접근하기 때문에 모든 경로를 전달받는 라우  팅 영역에 대한 컴포넌트는 맨 하단에 설정해줘야 합니다.&lt;/p&gt;
-&lt;p&gt;최상단에 설정할 경우 모든 경로를 처리해주기 때문에 이 후 설정해 놓은 라우팅 컴포넌트에 접근하지 않게 되겠죠. 요청한 주소가 상단에 설정한 라우팅 컴포넌트에 해당하지 않는 경우, 요청한 주소는 잘못된 주소가 된다고 볼 수 있겠죠.&lt;/p&gt;
+&lt;p&gt;스위치 영역 맨 하단에 &lt;code class=&quot;language-text&quot;&gt;NotFound&lt;/code&gt; 라는 컴포넌트를 주입받는 라우트 컴포넌트를 추가했다. 경로 설정은 모든 주소를 받을 수 있도록 설정했다.&lt;/p&gt;
+&lt;p&gt;이 전에 라우팅 매개변수 설정 시 말한대로 스위치 컴포넌트에서는 선언된 순서대로 라우트 컴포넌트에 접근하기 때문에 모든 경로를 전달받는 라우팅 영역에 대한 컴포넌트는 맨 하단에 설정해줘야 한다.&lt;/p&gt;
+&lt;p&gt;최상단에 설정할 경우 모든 경로를 처리해주기 때문에 이 후 설정해 놓은 라우팅 컴포넌트에 접근하지 않게 된다. 요청한 주소가 &lt;code class=&quot;language-text&quot;&gt;NotFound&lt;/code&gt; 이 전에 설정한 라우팅 컴포넌트에 해당하지 않는 경우, 요청한 주소는 잘못된 주소가 된다고 볼 수 있다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/component/NotFound.jsx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -271,7 +271,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; NotFound&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;요청한 주소를 찾을 수 없다는 안내 메시지를 표시하는 컴포넌트를 추가 했습니다. 이제 잘못된 주소를 요청한 후 화면을 확인해 보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;요청한 주소를 찾을 수 없다는 안내 메시지를 표시하는 컴포넌트를 추가했다. 이제 잘못된 주소를 요청한 후 화면을 확인해 보도록 하자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -307,8 +307,8 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/notfound&lt;/code&gt; 라는 주소를 호출한 경우 스위치 영역에서 404 페이지 관련 컴포넌트를 렌더링 해주고 있습니다. 의도한대로 정상적으로 동작하지만 상단 링크 영역이 노출되는게 개인적으로 맘이 들지 않네요. 제 개인적인 경험에 의하면 보통의 404 페이지 UI 는 정상적인 페이지에서 공통적으로 사용하는 영역들이 포함되어 있지 않아서요. 404 페이지에 포함된 상단 링크 영역을 제거하고 싶네요.&lt;/p&gt;
-&lt;p&gt;말이 나온김에, 404 페이지를 포함한 라우팅 컴포넌트에 포함된 상단 네비게이션 링크 영역 분리 및 스위치 영역에 설정된 라우트 컴포넌트 목록도 분리하도록 하겠습니다. 이 후 작업할 코트 스플리팅 및 비동기 데이터 처리를 진행 시 코드 관리를 편하게 하기 위해서이기도 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/notfound&lt;/code&gt; 라는 주소를 호출한 경우 스위치 영역에서 404 페이지 관련 컴포넌트를 렌더링 해주고 있다. 의도한대로 정상적으로 동작하지만 상단 링크 영역이 노출되는게 개인적으로 맘이 들지 않는다. 개인적인 경험에 의하면 보통의 404 페이지 UI 는 정상적인 페이지에서 공통적으로 사용하는 영역들이 포함되어 있지 않았다. 404 페이지에 포함된 상단 링크 영역을 제거하고 싶다.&lt;/p&gt;
+&lt;p&gt;말이 나온김에, 404 페이지를 포함한 라우팅 컴포넌트에 포함된 상단 네비게이션 링크 영역 분리 및 스위치 영역에 설정된 라우트 컴포넌트 목록도 분리하도록 하자. 이 후 작업할 코트 스플리팅 및 비동기 데이터 처리 진행 시 코드 관리를 편하게 하기 위해서이기도 하다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -331,7 +331,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;메인 컴포넌트에 설정되어 있던 링크 목록 및 라우트 목록을 분리했습니다. 우선 스위치 컴포넌트 내 라우트 컴포넌트를 적접 호출하는 대신 라우팅 목록을 배열에 추가하여 각각의 요소에서 라우트 컴포넌트에 필요한 props 를 주입받도록 수정했습니다. 링크 영역의 경우 라우팅 컴포넌트에서 직접 호출해 주도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;메인 컴포넌트에 설정되어 있던 링크 목록 및 라우트 목록을 분리했다. 우선 스위치 컴포넌트 내 라우트 컴포넌트를 적접 호출하는 대신 라우팅 목록을 배열에 추가하여 각각의 요소에서 라우트 컴포넌트에 필요한 props 를 주입받도록 수정했다. 링크 영역의 경우 라우팅 컴포넌트에서 직접 호출해 주도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/lib/routes.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -364,7 +364,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Routes&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우팅 목록 배열을 반환해주는 파일을 추가했습니다. 직접 라우트 컴포넌트 반환하는 대신 라우트 컴포넌트에 전달할 props 객체 리터럴 요소를 갖도록 설정했습니다.&lt;/p&gt;
+&lt;p&gt;라우팅 목록 배열을 반환해주는 파일을 추가했다. 직접 라우트 컴포넌트 반환하는 대신 라우트 컴포넌트에 전달할 props 객체 리터럴 요소를 갖도록 설정했다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/withLayout.jsx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -404,7 +404,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; withLayout&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우트 페이지에서 사용할 공통 영역을 갖는 레이아웃 HOC 입니다. 404 페이지를 제외한 라우트 컴포넌트에서 직접 호출해서 사용하면 될 것 같습니다.&lt;/p&gt;
+&lt;p&gt;라우트 페이지에서 사용할 공통 영역을 갖는 레이아웃 HOC 이다. 404 페이지를 제외한 라우트 컴포넌트에서 직접 호출해서 사용하면 될 것 같다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/Home.jsx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -416,7 +416,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;withLayout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Home&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;레아아웃 HOC 를 통해 컴포넌트 반환하도록 설정했습니다. &lt;code class=&quot;language-text&quot;&gt;About&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Posts&lt;/code&gt; 컴포넌트도 위와 같이 수정해주시면 됩니다. 수정이 완료되면 앞서 확인했던 &lt;code class=&quot;language-text&quot;&gt;/notfound&lt;/code&gt; 주소를 호출해서 화면을 확인해보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;레아아웃 HOC 를 통해 컴포넌트를 반환하도록 설정했다. &lt;code class=&quot;language-text&quot;&gt;About&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Posts&lt;/code&gt; 컴포넌트도 위와 같이 수정하면 된다. 수정이 완료되면 앞서 확인했던 &lt;code class=&quot;language-text&quot;&gt;/notfound&lt;/code&gt; 주소를 호출해서 화면을 확인해보도록 하자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -451,7 +451,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;원하는 대로 공통 영역을 포함하지 않는 404 페이지가 호출되고 있습니다. 공통 영역을 포함하고자 한다면 레아아웃 HOC 를 통해 라우트 컴포넌트를 반환하거나 직접 컴포넌트 내부에 링크를 연결하여 정상적인 페이지로 접근할 수 있도록 하는 것도 하나의 방법이 될 것 같습니다.&lt;/p&gt;
+&lt;p&gt;원하는 대로 공통 영역을 포함하지 않는 404 페이지가 호출되고 있다. 공통 영역을 포함하고자 한다면 레아아웃 HOC 를 통해 라우트 컴포넌트를 반환하거나 직접 컴포넌트 내부에 링크를 연결하여 정상적인 페이지로 접근할 수 있도록 하는 것도 하나의 방법이 될 것 같다.&lt;/p&gt;
 &lt;h4&gt;Redirect&lt;/h4&gt;
 &lt;p&gt;
   &lt;a
@@ -468,7 +468,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABaklEQVQoz22RS08CMRCA+Wv+I6Nc/A3GEx48mXgAQyRyNHgQFgR0DT7A+IB9wT7Z3XbK0hYEUSsPETH50kza+aYzmVhRA4Gk/qWoQtmAShuqa5R0kDS41ElsJou8qw5cm3NkS7xBtg7pO3x8u0Kqhs9fofRbztzDQQkSEuwvSBTIbo7vZNnWCdvOzIln2GaapmQsOippU1n0cKP15FZUbfZlhcktWn6JGkb/851PRmw0XPI2ZJMRb1goL4aa/SwmtEM85iTw7LamuGY7Ikh3SLIalRu+qrttKwgQcTzkdjHt07q5KmueuO3LtYej5OlZLt/qBIcS2djrxZO+opiq4YUhcdzQ9RCja3LHB9oDjBBGYY8AYPAREVM8K15TsQ3T9wOwnMB2Q7out1yRDR6CLv4+3RAQkI8xH3I6YHTI6IAzzqhgPOANM1zKP3suTJkFYhmPFnqyF1jLoKIGK3teR5S4UPC/SNMEIX8BD2cEu1o9JpAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABZ0lEQVQoz22Ry07CQBSGfTXfyKgLn8HEjdGFKxcqhEiCS3FTy00FMXIJEdoOl0Jb2s6cgc4UsQoO1IQCTr7MYvJ/k5Pz72QQCGRtE/FY6MJzD162yLUXgVyb7oRyvrOWK+qQb8NdDRJvJF5eI1YmD03IooicfIeLLD2TSci5DKcSPU77Rym+f8sPkiv2EixexGKoLFrKMoISGhWV8VOLlTReVFn+Y1zvevMffxbw7+mKYMrngV/vY0kVo4WyBgOHfPnUNvsdTTH0zohiZNDrwjhbtVVkdHXbcalhYtMinscqOpa0iIwswjyv9Fq5ukndpyWl51xm6O7J6DBmK4quti13IbumhTlj1Q25ZwMbARZHpIAAIUOXFppeQ7Va6qCj27YDfcMZmC7blhUThhgs9+82XcBAZ4H/6TPO2WQB9zkTBBO/prsrOdyZHGn7UdSIQCymMdiijwuaI0er2kZ8IankX+RlQMi/LN8Exa1z09cAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -489,7 +489,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;잘못된 링크의 경우, 앞서 구현한 404 페이지를 호출하게 되지만 특정 주소가 호출되었을때 기존 라우트 목록 중 하나로 리디렉션 해주는 것도 하나의 방법이 될 수 있겠죠. 해당 작업을 진행해보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;잘못된 링크의 경우, 앞서 구현한 404 페이지를 호출하게 되지만 특정 주소가 호출되었을때 기존 라우트 목록 중 하나로 리디렉션 해주는 것도 하나의 방법이 될 수 있다. 해당 작업을 진행해보도록 하겠습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/lib/routes.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -507,7 +507,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
     component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; NotFound
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우트 목록 배열에 &lt;code class=&quot;language-text&quot;&gt;Redirect&lt;/code&gt; 컴포넌트 목록을 추가했습니다. 기존에 설정되어 있던 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt; 주소대신 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 라는 주소로 접근이 된다면 리디렉션 컴포넌트를 호출하도록 설정했습니다.&lt;/p&gt;
+&lt;p&gt;라우트 목록 배열에 &lt;code class=&quot;language-text&quot;&gt;Redirect&lt;/code&gt; 컴포넌트 목록을 추가했다. 기존에 설정되어 있던 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt; 주소대신 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 라는 주소로 접근이 된다면 리디렉션 컴포넌트를 호출하도록 설정했다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/Redirect.jsx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -519,18 +519,182 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; RedirectRoute&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;라우트 접근 시 &lt;code class=&quot;language-text&quot;&gt;Redirect&lt;/code&gt; 컴포넌트를 통해 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 로 접근된 주소를 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt;로 리디렉션해주도록 하고 있습니다. 현재 링크 설정의 경우 정적으로 구현되어 있지만, 여러 주소에 대한 리디렉션 처리가 필요할 경우 props 를 통해 전달받은 라우팅 정보를 활용해 주면 되겠죠.&lt;/p&gt;
-&lt;p&gt;이제 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 주소로 접근 시 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt;로 페이지가 이동이 되는지 확인해 보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;라우트 접근 시 &lt;code class=&quot;language-text&quot;&gt;Redirect&lt;/code&gt; 컴포넌트를 통해 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 로 접근된 주소를 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt;로 리디렉션해주도록 하고 있다. 현재 링크 설정의 경우 정적으로 구현되어 있지만, 여러 주소에 대한 리디렉션 처리가 필요할 경우 props 를 통해 전달받은 라우팅 정보를 활용해 주면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;이제 &lt;code class=&quot;language-text&quot;&gt;/post&lt;/code&gt; 주소로 접근 시 &lt;code class=&quot;language-text&quot;&gt;/posts&lt;/code&gt;로 페이지가 이동이 되는지 확인해 보도록 하자.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/redirect-d7e2a74e672a4222fc1c9754d36bc622.gif&quot; alt=&quot;redirect&quot;&gt;&lt;/p&gt;
-&lt;p&gt;원하는대로 페이지를 리디렉션 해주고 있네요. 잘못된 주소뿐만 아니라 인증이 필요한 페이지에 경우 인증 정보 유무에 따른 리디렉션 처리도 해줄 수 있게 작업해줄 수 있을 것 같습니다.&lt;/p&gt;
+&lt;p&gt;원하는대로 페이지를 리디렉션 해주고 있다. 잘못된 주소뿐만 아니라 인증이 필요한 페이지에 경우 인증 정보 유무에 따른 리디렉션 처리도 해줄 수 있게 작업해줄 수 있을 것 같다.&lt;/p&gt;
 &lt;h2&gt;Server Routing&lt;/h2&gt;
-&lt;p&gt;지금까지 클라이언트 영역에서만 라우팅 처리를 했는데, 이제 클라이언트에 설정한 라우팅 정보를 서버에서 활용할 수 있도록 작업을 진행하겠습니다.&lt;/p&gt;
+&lt;p&gt;지금까지 클라이언트 영역에서만 라우팅 처리를 했는데, 이제 클라이언트에 설정한 라우팅 정보를 서버에서 활용할 수 있도록 작업을 진행하자.&lt;/p&gt;
+&lt;p&gt;기본적인 서버 렌더링을 위한 설정은 간단하다. 우선 기존에 있던 &lt;code class=&quot;language-text&quot;&gt;renderer.js&lt;/code&gt; 파일 경로를 &lt;code class=&quot;language-text&quot;&gt;src/lib&lt;/code&gt; 안으로 옮긴 뒤, 서버 렌더링 시 라우팅 설정을 해주도록 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/lib/renderer.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-dom/server&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; StaticRouter &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-router-dom&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; App &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./App&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; html &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;StaticRouter location&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;App &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;StaticRouter&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; html&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&amp;lt;div id=&quot;root&quot;&gt;&amp;lt;/div&gt;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;`&amp;lt;div id=&quot;root&quot;&gt;&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;app&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&amp;lt;/div&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; renderer&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;컴포넌트 렌더링 시 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;에서 제공하는 &lt;code class=&quot;language-text&quot;&gt;StaticRouter&lt;/code&gt; 컴포넌트로 감싸주도록 했다. &lt;code class=&quot;language-text&quot;&gt;StaticRouter&lt;/code&gt; 컴포넌트 설정 시 서버로부터 전달받은 라우팅 주소를 &lt;code class=&quot;language-text&quot;&gt;location&lt;/code&gt;이라는 props 로 전달해주도록 했다. 서버 호출 시 라우팅 주소를 전달받기 위해 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 를 수정하도록 하자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; renderer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../build.server/lib/renderer&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;*&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; html &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; html&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; indexHTML &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;html&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;렌더링 함수 호출 경로를 수정한 뒤 함수 호출 시, 서버 라우팅 정보를 전달하기 위해 매개변수를 추가하도록 수정했다. 수정을 완료한 후 서버를 실행해보자.&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/routing-ssr-b9887363ea73a67018b114592d9501fc-6ea70.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 68.5483870967742%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABJ0AAASdAHeZh94AAABx0lEQVQ4y51T2W7bMBDU//9dHhsgkZPotkzxPkVOl3KdNkbQpllgQFKklrMzy0ZcJKwUkNsGrQJKzsiEfd+/hcYpB7tq7CEi74kSFkpY8N1oYgiQg4JeFvBpxDQYnGcLZyyC5uDbDrZlCL7Du0QsMlL6HHWvSTFCTQZq6LB2M55bi2U2kOcR7PWEpx8cDw8C3QudkQHGJmhdEWFuo7l+qxceDPWksY0Lhn4icMhFwksFxgoua8a2FUSfv1ayN540NIiUPZOoKUVE0jOlhBgDISLQpdd1OtYVieZ7ICPijlLKO5rgPPSsSUOG9e0CvjLSjVF5CpyT+1JCCEElGVhradQHnHEI1BXRxiNRjSPhYTfdpGYGpzjNLXLwtPt/7t6SNpV+jVqy51SeVvDKkn4ajFhbbpF8Onqz/nQb7/HOsGpTI6edyiYnpx6sX9A+A91pQte2UCNHEOGf7A6Gfya0q4OhdtnGM7UPcGojHh8lhleO4dSh73oMwwCxcrhfzO9Z/i7ZxKNdjKDD0kLpAqUKyBd6knWuIJUkKRikoLZSHsmlD+V+YKhnBcXoXZN7OdSeu5VRvmzINSG939qHdrN3h/Cp+H8zpMZPodJFe6z2vFcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;routing-ssr&quot;
+        title=&quot;&quot;
+        src=&quot;/static/routing-ssr-b9887363ea73a67018b114592d9501fc-fb8a0.png&quot;
+        srcset=&quot;/static/routing-ssr-b9887363ea73a67018b114592d9501fc-1a291.png 148w,
+/static/routing-ssr-b9887363ea73a67018b114592d9501fc-2bc4a.png 295w,
+/static/routing-ssr-b9887363ea73a67018b114592d9501fc-fb8a0.png 590w,
+/static/routing-ssr-b9887363ea73a67018b114592d9501fc-6ea70.png 744w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;페이지 소스 확인 시, 서버 호출 시에도 렌더링이 잘 이루어지는 것을 확인했다.&lt;/p&gt;
+&lt;h3&gt;404 Page, Redirect&lt;/h3&gt;
+&lt;p&gt;기본적인 서버 구현만으로도 404 및 리디렉션 페이지도 잘 동작하지만, 서버 요청 시 응답 코드를 설정해주면 더 좋을 것 같다. SEO 측 환경에서 해당 페이지가 어떠한 상태인지 확인해주면 좋기도 하니까.&lt;/p&gt;
+&lt;p&gt;우선 서버 렌더링 컴포넌트에서 서버 측 응답 코드를 설정해주기 위한 매개변수를 추가하도록 하자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/lib/renderer.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-dom/server&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; StaticRouter &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-router-dom&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; App &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./App&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; html &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; context &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;StaticRouter location&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; context&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;App &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;StaticRouter&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    html&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; html&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;&amp;lt;div id=&quot;root&quot;&gt;&amp;lt;/div&gt;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;`&amp;lt;div id=&quot;root&quot;&gt;&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;app&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&amp;lt;/div&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; renderer&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;서버 응답 정보를 설정하기 위한 context 인자를 추가했다. 해당 인자를 통해 서버 정보를 전달해 줄 수 있고 이 후 정리할 비동기 데이터 설정도 같이 처리해 줄 수 있다. 이후 html 및 클라이언트를 거친 후 변경되는 context 인자를 반환하기 위해 반환 타입을 수정한다.&lt;/p&gt;
+&lt;p&gt;그럼 이제 404 페이지 컴포넌트부터 수정해보자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/NotFound.jsx&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Route &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-router-dom&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;NotFound&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Route
+      render&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; staticContext &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;staticContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          staticContext&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;404&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+            &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;h1&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;404&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Not Found&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;h1&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;div&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; NotFound&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;서버 측 응답 코드를 설정해주기 위해 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트를 렌더링주도록 설정했다. 서버 렌더링 시 넘겨준 context 인자를 확인하여 해당 인자 내 &lt;code class=&quot;language-text&quot;&gt;staticContext&lt;/code&gt; 인스턴스가 있는지 확인한다. 서버 렌더링 시 빈 객체 리터럴을 전달해주었지만, &lt;code class=&quot;language-text&quot;&gt;StaticRouter&lt;/code&gt; 를 거치게 되면 관련 인스턴스가 설정되는 것 같다. 해당 인자는 서버 실행 시에만 확인되기 때문에 조건문을 통해 확인 후 서버 응답 정보를 설정해주도록 설정했다.&lt;/p&gt;
+&lt;p&gt;다음은 &lt;code class=&quot;language-text&quot;&gt;Redirect&lt;/code&gt; 컴포넌트를 수정해보도록 하자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components/Redirect.jsx&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Route&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Redirect &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-router-dom&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;RedirectRoute&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Route
+      render&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; staticContext &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;staticContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          staticContext&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;301&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Redirect &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/post&quot;&lt;/span&gt; to&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/posts&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; RedirectRoute&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;NotFound&lt;/code&gt; 컴포넌트와 같이 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트를 활용하여 서버 측 응답 코드를 설정해주었다.&lt;/p&gt;
+&lt;p&gt;이제 서버에서 클라이언트에서 전달해준 응답 코드를 받을 수 있도록 수정한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;*&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; html&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; context &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; html&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; indexHTML &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;301&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;301&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;html&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이제 서버 렌더링 함수에서 html 문자열 및 서버 응답 정보를 같이 넘겨주기 때문에 해당 인자를 구분해서 받을 수 있도록 수정했다. 그리고 앞서 클라이언트에서 설정한 상태 코드가 확인될 경우 그에 맞게 서버 응답 상태를
+설정해주도록 수정했다.&lt;/p&gt;
+&lt;p&gt;이제 서버 측에서 잘못된 페이지나 리디렉션이 필요한 페이지의 상태를 알고 있고, SEO에서 해당 페이지 요청 시에 대한 응답 코드를 확인할 수 있을 것 같다. 정상적인 경우에는 클라이어트에서 따로 응답 코드를 설정해 주지 않아 &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt;로 확인되겠지만, 응답 코드가 없을 경우에는 서버에서 정상적인 응답 코드를 전달해주도록 했다.&lt;/p&gt;
 &lt;h2&gt;다음 과제&lt;/h2&gt;
-&lt;p&gt;지금까지 Isomorphic SPA 의 라우팅 구현에 대한 내용을 소개해 드렸습니다. 다음 3 부에서는 코트 스플리팅에 대해 소개하도록 하겠습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 1부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글입니다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react 및 그와 관련된 새로운 도구들을 활용하여 프로젝트를 시작했을때 “전에는 이렇게 작업했었지..” 하는 내용을 남기고자 합니다. 단순한 개발과정뿐만 아니라 isomorphic SPA 에 개념 또한 기존에 생각했던 내용을 정리해서 스스로 이해하려고 합니다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 합니다.&lt;/p&gt;
+&lt;p&gt;지금까지 Isomorphic SPA 의 라우팅 구현에 대한 내용을 정리했다. 다음은 코트 스플리팅에 대해 정리하도록 하자.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 1부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react 및 그와 관련된 새로운 도구들을 활용하여 프로젝트를 시작했을때 “전에는 이렇게 작업했었지..” 하는 내용을 남기고자 한다. 단순한 개발과정뿐만 아니라 isomorphic SPA 에 개념 또한 기존에 생각했던 내용을 정리해서 스스로 이해하려고 한다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 한다. 잘 모르는 부분은 모른다고 남겨놓자. 다른 사람에게 설명하기 보다는 스스로의 학습 내용을 정리하는 글이기 때문에 편한 말투로 작성했다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Isomorphic JavaScript&lt;/h2&gt;
-&lt;p&gt;isomorphic 란 사전적 의미로 ”&lt;em&gt;같은 모양의, 동일 구조의, 등정형(等晶形)의&lt;/em&gt;” 라는 뜻은 가진 단어라고 네이버 사전에 나와있네요. 제가 생각하는 &lt;strong&gt;Isomorphic JavaScript&lt;/strong&gt; 은 일반적으로 라우팅 기능, 정적 렌더링과 같이 주로 서버 영역에서 담당했던 기능들을 클라이언트 영역에서 처리함으로서 양쪽의 환경에서 같은 코드를 활용 할 수 있도록 하는 것이라고 생각했습니다. 이렇게 함으로써 백엔드 환경에서 처리해야 할 불필요하거나 반복적인 작업을 최소화해주는 것이죠. 프론트엔드 영역에서 작업한 환경 그대로 서버에서 사용 가능하기 때문이죠. 그걸 처리하는 언어는 JavaScript 가 될 것이구요.&lt;/p&gt;
+&lt;p&gt;isomorphic 란 사전적 의미로 ”&lt;em&gt;같은 모양의, 동일 구조의, 등정형(等晶形)의&lt;/em&gt;” 라는 뜻은 가진 단어라고 네이버 사전에 나와있다. 내가 생각하는 &lt;strong&gt;Isomorphic JavaScript&lt;/strong&gt; 은 일반적으로 라우팅 기능, 정적 렌더링과 같이 주로 서버 영역에서 담당했던 기능들을 클라이언트 영역에서 처리함으로서 양쪽의 환경에서 같은 코드를 활용 할 수 있도록 하는 것이라고 생각했다. 이렇게 함으로써 백엔드 환경에서 처리해야 할 불필요하거나 반복적인 작업을 최소화해준다. 프론트엔드 영역에서 작업한 환경 그대로 서버에서 사용 가능하기 때문이다. 그걸 처리하는 언어는 JavaScript 가 될 것이다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -546,7 +710,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 62.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAa1rRGvF/8QAGxAAAgIDAQAAAAAAAAAAAAAAAAEDEQIEExL/2gAIAQEAAQUC4RnCNi142eFSxpn/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAwEBPwGI/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAECAQE/Aauv/8QAGRAAAgMBAAAAAAAAAAAAAAAAARAAESEx/9oACAEBAAY/AurDKGP/xAAcEAEAAQQDAAAAAAAAAAAAAAABABARITFRYaH/2gAIAQEAAT8hvihQ3DWfIfdE6mUGXEyl1p//2gAMAwEAAgADAAAAEFDv/8QAFhEBAQEAAAAAAAAAAAAAAAAAABFR/9oACAEDAQE/EIxD/8QAFxEBAAMAAAAAAAAAAAAAAAAAABFRYf/aAAgBAgEBPxCdtn//xAAcEAEBAAICAwAAAAAAAAAAAAABEQAhMUFR8PH/2gAIAQEAAT8QEUGILHxzjkWhWo1kWVqv3eRMhip7vOFuyJsO/mAHBM//2Q==&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 62.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABrWrI14//xAAbEAABBAMAAAAAAAAAAAAAAAABAAMREwIEEv/aAAgBAQABBQKhtUNlDXbI5EDGCv/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/AYj/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEQH/2gAIAQIBAT8Bq6//xAAZEAACAwEAAAAAAAAAAAAAAAAQEQABMSH/2gAIAQEABj8C0ctxYf/EABwQAQACAgMBAAAAAAAAAAAAAAEAESExEFFhkf/aAAgBAQABPyG0UKG6hrL8l+QeMzgZdQLLXj//2gAMAwEAAgADAAAAEFvv/8QAFhEBAQEAAAAAAAAAAAAAAAAAABFR/9oACAEDAQE/EIxD/8QAFxEBAAMAAAAAAAAAAAAAAAAAABFRYf/aAAgBAgEBPxCdtn//xAAcEAEBAAICAwAAAAAAAAAAAAABEQAhEFExQWH/2gAIAQEAAT8QHUGIWPXnGpUFajWetSXVjIYYshu5vUSbnfw4/9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -566,10 +730,10 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;”&lt;em&gt;이미 node.js 를 활용하면 충분히 JavaScript 만으로 동작이 가능한데?&lt;/em&gt;“라고 말씀하실수도 있지만 앞서 말씀드렸듯이 백엔드 영역에서 기존에 처리했던 기능들을 프론트엔드에서 처리하는 것이죠. 단순히 서버 환경을 JavaScript 로 구성했다고 해서 isomorphic 해지지는 않는다고 생각합니다. 이 글에서는 백엔드 환경에서 처리했던 기능 중 하나인 라우팅 및 정적 렌더링의 기능을 프론트엔드 영역에서 처리하는 것을 중점으로 말씀드려고 합니다.&lt;/p&gt;
+&lt;p&gt;”&lt;em&gt;이미 node.js 를 활용하면 충분히 JavaScript 만으로 동작이 가능한데?&lt;/em&gt;“라고 말할수도 있지만 앞서 말했듯이 백엔드 영역에서 기존에 처리했던 기능들을 프론트엔드에서 처리하는 것이다. 단순히 서버 환경을 JavaScript 로 구성했다고 해서 isomorphic 해지지는 않는다고 생각한다. 이 글에서는 백엔드 환경에서 처리했던 기능 중 하나인 라우팅 및 정적 렌더링의 기능을 프론트엔드 영역에서 처리하는 것을 중점으로 말하려고 한다.&lt;/p&gt;
 &lt;h2&gt;routing&lt;/h2&gt;
-&lt;p&gt;제가 벡엔드 개발 경험이 많지 않아 전문적으로 상세하기 말씀드릴 수는 없지만 일반적으로 서버에서는 요청된 주소에 따라 각 주소에 맞는 페이지를 호출해주도록 하는 작업을 하죠. 이러한 작업은 node.js 환경에서 주로 사용하는 &lt;code class=&quot;language-text&quot;&gt;express&lt;/code&gt; 의 라우팅 기능을 통해 처리해주었죠. 서버에서의 라우팅 설정의 경우 페이지가 몇개 없으면 상관없지만 웹 앱 규모가 커지면 커질수록 관리하기 어려워지겠죠. 이러한 작업을 이제는 서버에서 처리하지 않으려고 합니다.&lt;/p&gt;
-&lt;p&gt;그럼 이렇게 생각하시는 분들고 계실것 같습니다. ”&lt;em&gt;그럼 페이지 변경 시 마다 해당 페이지에 필요한 데이터들은 어떻게 가져오지?&lt;/em&gt;” 이 전에 서버 환경에서의 라우팅 설정은 새로운 페이지를 요청할 때 마다 새로고침한 후 해당 페이지에 필요한 리소스들을 전달받아 이러한 작업들을 처리해주었습니다. 하지만 Isomorphic JavaScript 에서는 그렇게 하지 않을 것입니다. &lt;code class=&quot;language-text&quot;&gt;Single Page Application(SPA)&lt;/code&gt; 으로 개발하면 되니까요.&lt;/p&gt;
+&lt;p&gt;벡엔드 개발 경험이 많지 않아 전문적으로 상세하기 말할 수는 없지만 일반적으로 서버에서는 요청된 주소에 따라 각 주소에 맞는 페이지를 호출해주도록 하는 작업을 한다. 이러한 작업은 node.js 환경에서 주로 사용하는 &lt;code class=&quot;language-text&quot;&gt;express&lt;/code&gt; 의 라우팅 기능을 통해 처리해주었다. 서버에서의 라우팅 설정의 경우 페이지가 몇개 없으면 상관없지만 웹 앱 규모가 커지면 커질수록 관리하기 어려워진다. 이러한 작업을 이제는 서버에서 처리하지 않으려고 한다.&lt;/p&gt;
+&lt;p&gt;그럼 이렇게 생각하시는 사람들도 있을것 같다. ”&lt;em&gt;그럼 페이지 변경 시 마다 해당 페이지에 필요한 데이터들은 어떻게 가져오지?&lt;/em&gt;” 이 전에 서버 환경에서의 라우팅 설정은 새로운 페이지를 요청할 때 마다 새로고침한 후 해당 페이지에 필요한 리소스들을 전달받아 이러한 작업들을 처리해주었다. 하지만 Isomorphic JavaScript 에서는 그렇게 하지 않을 것이다. &lt;code class=&quot;language-text&quot;&gt;Single Page Application(SPA)&lt;/code&gt; 으로 개발하면 되니깐.&lt;/p&gt;
 &lt;h2&gt;Single Page Applications(SPA)&lt;/h2&gt;
 &lt;p&gt;
   &lt;a
@@ -608,7 +772,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;SPA&lt;/strong&gt; 라는 용어의 개념은 알고 계시는 분들이 많고 위에 언급한 내용도 있기 때문에 자세히 설명하지 않지 않으려 합니다. 처음 페이지 요청 시 필요한 정적 리소스를 가져와서 페이지 새로고침 없이 서비스를 이용할 수 있는 웹 어플리케이션을 말하지 않나 싶네요.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SPA&lt;/strong&gt; 라는 용어의 개념은 알고 계시는 분들이 많고 위에 언급한 내용도 있기 때문에 자세히 설명하지 않지 않으려 한다. 처음 페이지 요청 시 필요한 정적 리소스를 가져와서 페이지 새로고침 없이 서비스를 이용할 수 있는 웹 어플리케이션을 말하지 않나 싶다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -624,7 +788,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 33.94428152492669%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsSAAALEgHS3X78AAABIElEQVQY012P2U7DMBBF/f+/ghAIURV45YmWpUh9qlpolcSJ661NYnu8JTiyQIA1c215zsy10fh3DcMwZdJxtIzpsjRVBTUevM/l3zDKXO6ZthhT5kv+stxcX+1ubw7386h1xmKcwKwowSGE4Xvk8OM/jhEATqeO0qDU1PT/kSMqi+JpsSBNFaHxGjtVBRAhRu+9k7KvSrbbBsG9hRiCMo53nrWWdb43ASmlul5/bFbb1QXezA7rS14tOReEkPPbK364+5zP4Hkp6prS4x6LdWEfV8X73hTMoOSffM4nYTUFdQRFLJyd9wZAcd7iqq1xT4jR2jkHLsjOytaIziptUf6hUtqAS6GNMwa0VsnnSFmdRIhmOlIpJaSa0RZMijTuC4Dyjck03ESkAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 33.94428152492669%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsSAAALEgHS3X78AAABHUlEQVQY02VQy27CQAzM//9KhaqqApVzTzzUUokTghaUF8kmuyGJ195nuoBARR3ZPnjGM5Kj4RHe+3OHOQyqqjBJMEspz70xV/qvOLrq/A3OudDXZb1cbJ5H29eXw3TiJITVhbnjcmyt9TdLf88PUkXUNB1jFiA4Dv8QJUk8m82LY+qoMDLXkFoSzjptjG5EnyZst3Oca0XWGkBdd6ZqVdWZHk0E0He9/N6stqunbDM+rEd1uqhrXhTF6fMjm779TMa0nPM8Z6zcZ3wdq/dV/LXHuMIopFvnTg1XwAhKgkLRKcQiEdR1m6VtnvXFEaXUWpO2olOiRd4pkOp8HJ4EIJF0KIkakaQEVpYlq/IwOD+WjFVMCEGBQ6kIQwW7X3OZjbmDwR07AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -645,10 +809,10 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;하나의 화면이라면 페이지 주소가 하나일텐데, 보통 웹 서비스는 하나의 페이지로 이루어져 있지 않죠. 그리고 페이지를 이동할 경우 각각의 페이지에 맞는 여러가지 주소가 필요합니다. SPA 환경에서의 라우팅 설정은 앞서 말씀드린대로 처음 페이지 요청 시 렌더링에 필요한 정적 리소스를 모두 가져오게 됩니다. 그리고 페이지 이동 시 실제로 이동하는 것으로 보여지게 하는 것이죠. 미리 가져온 리소스와 JavaScript 에서 제공하는 &lt;strong&gt;History API&lt;/strong&gt; 를 통해서요. 페이지 주소 변경 시 변경이 필요한 영역에 대한 DOM 구조를 변경시키는 것이죠. 그리고 저는 해당 작업을 클라이언트에서 쉽게 처리해줄 수 있는 라이브러리를 사용하려고 합니다.&lt;/p&gt;
-&lt;p&gt;이미 많은 분들이 여러가지 JavaScript 프레임워크를 활용하여 SPA 개발을 하시는데, 저는 그나마 할 줄 아는데 react 뿐이여서 react 를 활용한 SPA 개발을 시작했습니다.&lt;/p&gt;
+&lt;p&gt;하나의 화면이라면 페이지 주소가 하나일텐데, 보통 웹 서비스는 하나의 페이지로 이루어져 있지 않다. 그리고 페이지를 이동할 경우 각각의 페이지에 맞는 여러가지 주소가 필요하다. SPA 환경에서의 라우팅 설정은 앞서 말한대로 처음 페이지 요청 시 렌더링에 필요한 정적 리소스를 모두 가져오게 된다. 그리고 페이지 이동 시 실제로 이동하는 것으로 보여지게 하는 것이다. 미리 가져온 리소스와 JavaScript 에서 제공하는 &lt;strong&gt;History API&lt;/strong&gt; 를 통해서. 페이지 주소 변경 시 변경이 필요한 영역에 대한 DOM 구조를 변경시키는 것이다. 그리고 해당 작업을 클라이언트에서 쉽게 처리해줄 수 있는 라이브러리를 사용하려고 한다.&lt;/p&gt;
+&lt;p&gt;이미 많은 사람들이 여러가지 JavaScript 프레임워크를 활용하여 SPA 개발을 하는데, 나는 그나마 할 줄 아는데 react 뿐이여서 react 를 활용한 SPA 개발을 시작했다.&lt;/p&gt;
 &lt;h2&gt;Search Engine Optimization(SEO) &amp;#x26; Server Side Rendering(SSR)&lt;/h2&gt;
-&lt;p&gt;클라이언트에서 제공하는 라우팅 설정을 통해 SPA 를 개발하더라도 문제점이 있긴 합니다. &lt;strong&gt;검색엔진 최적화(SEO)&lt;/strong&gt; 를 위해서는 웹 페이지 요청 시 해당 페이지에 맞는 정적 렌더링 정보가 필요한데 기본적인 클라이언트 환경의 SPA 개발을 통해서는 정적 렌더링이 제공되지 않습니다. 정적 렌더링을 하려면 결국 &lt;strong&gt;서버 측 렌더링(SSR)&lt;/strong&gt; 이 필요합니다. 하지만 react 및 관련 서드파티 라이브러리를 통해 SPA 구조에서도 페이지 요청 시에 필요한 정적 렌더링 작업을 구현할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;클라이언트에서 제공하는 라우팅 설정을 통해 SPA 를 개발하더라도 문제점이 있긴 하다. &lt;strong&gt;검색엔진 최적화(SEO)&lt;/strong&gt; 를 위해서는 웹 페이지 요청 시 해당 페이지에 맞는 정적 렌더링 정보가 필요한데 기본적인 클라이언트 환경의 SPA 개발을 통해서는 정적 렌더링이 제공되지 않는다. 정적 렌더링을 하려면 결국 &lt;strong&gt;서버 측 렌더링(SSR)&lt;/strong&gt; 이 필요하다. 하지만 react 및 관련 서드파티 라이브러리를 통해 SPA 구조에서도 페이지 요청 시에 필요한 정적 렌더링 작업을 구현할 수 있다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -664,7 +828,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 75.07836990595611%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAQX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAefVi7wSUif/xAAaEAACAwEBAAAAAAAAAAAAAAACAwABExES/9oACAEBAAEFAoxJLGVacwsfR49//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAGxAAAQUBAQAAAAAAAAAAAAAAAAIREiJBARD/2gAIAQEABj8CJK4nzZlnbSjn/8QAHBAAAgICAwAAAAAAAAAAAAAAAREAIRBBMXGB/9oACAEBAAE/IQVoHuUcWqwLbj8cDFykSEVbn//aAAwDAQACAAMAAAAQaB//xAAWEQEBAQAAAAAAAAAAAAAAAAABACH/2gAIAQMBAT8Qwkv/xAAXEQEBAQEAAAAAAAAAAAAAAAABABFB/9oACAECAQE/EFeW3//EAB0QAQEAAgEFAAAAAAAAAAAAAAERADFhIUFRkeH/2gAIAQEAAT8QjfWXBjTGxamLVYHBhuZvqXg7zxiS9oDcmLkd1O6/M//Z&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 75.07836990595611%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAc+1C7wSOE//xAAZEAADAQEBAAAAAAAAAAAAAAABAgMAEhP/2gAIAQEAAQUCGrIyG6l5oUDU4Lf/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAdEAACAgEFAAAAAAAAAAAAAAAAARESECIjMTJx/9oACAEBAAY/AiXR+Y6u8cmpNo21CP/EABwQAQACAgMBAAAAAAAAAAAAAAEAESFBEDFRwf/aAAgBAQABPyFaoz6QaljWHAFfuJcdxCOwtXT7P//aAAwDAQACAAMAAAAQ+C//xAAXEQADAQAAAAAAAAAAAAAAAAAAASEx/9oACAEDAQE/EMg0f//EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAECAQE/EFZ//8QAHRABAAICAwEBAAAAAAAAAAAAAREhADFBUWEQwf/aAAgBAQABPxBBgsuzArlKR16a+HiVUWvW/wAwUkiOLquTnB8GhWXs7fM//9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -683,17 +847,17 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;앞서 말씀드린대로 최초 페이지 로딩시에는 서버 렌더링을 통해 SEO 에 필요한 정적 데이터를 제공해주는 것이죠. 이 후 페이지 요청 시에는 클라이언트 렌더링을 통한 페이지 전환을 이루게 되구요. 이 전 웹 환경에서는 페이지 요청 시 서버 측에서 일일히 페이지 로딩을 통해 정적 렌더링 정보를 제공했지만 사용자 입장에서는 불필요한 동작이기도 했죠.&lt;/p&gt;
-&lt;p&gt;이제 사용자는 페이지 요청 시 일일히 새로고침을 당할 필요가 없습니다. 최초 한번의 페이지 새로고침만 필요할 뿐이죠. 사실 사용자는 SSR 에 크게 관심이 없을지도 모릅니다. 사용자가 서버로부터 각 페이지 필요한 데이터를 매번 확인하지 않죠. 각 페이지에 대한 데이터들은 검색엔진에서만 관심이 있을 뿐입니다. 오히려 SEO 이 필요하지 않은 경우라면 굳이 SSR 설정이 필요하지 않겠죠. 하지면 저는 Isomorphic SPA 를 개발해야 하기 때문에 SSR 작업을 진행하겠습니다. 이 글을 쓰는 주된 이유이기도 하니까요.&lt;/p&gt;
+&lt;p&gt;앞서 말한대로 최초 페이지 로딩시에는 서버 렌더링을 통해 SEO 에 필요한 정적 데이터를 제공해주는 것이다. 이 후 페이지 요청 시에는 클라이언트 렌더링을 통한 페이지 전환을 이루게 된다. 이 전 웹 환경에서는 페이지 요청 시 서버 측에서 일일히 페이지 로딩을 통해 정적 렌더링 정보를 제공했지만 사용자 입장에서는 불필요한 동작이기도 했다.&lt;/p&gt;
+&lt;p&gt;이제 사용자는 페이지 요청 시 일일히 새로고침을 당할 필요가 없다. 최초 한번의 페이지 새로고침만 필요할 뿐. 사실 사용자는 SSR 에 크게 관심이 없을지도 모른다. 사용자가 서버로부터 각 페이지 필요한 데이터를 매번 확인하지 않는다. 각 페이지에 대한 데이터들은 검색엔진에서만 관심이 있을 뿐이다. 오히려 SEO 이 필요하지 않은 경우라면 굳이 SSR 설정이 필요하지 않다. 하지면 Isomorphic SPA 를 개발해야 하기 때문에 SSR 작업을 진행하겠다. 이 글을 쓰는 주된 이유이기도 하니까.&lt;/p&gt;
 &lt;h2&gt;create-react-app(CRA)&lt;/h2&gt;
-&lt;p&gt;처음 react 로 개발 시작할때 기본 설정 및 빌드 환경 설정 등 직접 세팅하는게 여간 귀찮았는데, CRA 을 쓴 이후부터는 거의 대부분의 (사실상 전체) 프로젝트를 시작할때 CRA 를 쓰고 있습니다. CRA 를 쓰지 않고 개발환경을 설정할때는 그것대로 공부가 되긴 하는데 그러한 내용은 기회가 되면 정리하려고 합니다.&lt;/p&gt;
-&lt;p&gt;우선 CRA 를 사용하기 해당 라이브러리를 전역으로 설치해줍니다.&lt;/p&gt;
+&lt;p&gt;처음 react 로 개발 시작할때 기본 설정 및 빌드 환경 설정 등 직접 세팅하는게 여간 귀찮았는데, CRA 을 쓴 이후부터는 거의 대부분의 (사실상 전체) 프로젝트를 시작할때 CRA 를 쓰고 있다. CRA 를 쓰지 않고 개발환경을 설정할때는 그것대로 공부가 되긴 하는데 그러한 내용은 기회가 되면 정리하려고 한다.&lt;/p&gt;
+&lt;p&gt;우선 CRA 를 사용하기 해당 라이브러리를 전역으로 설치해준다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -g create-react-app&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;그리고 프로젝트를 생성할 경로로 이동하여 이런식으로 프로젝트명을 입력해준 후 CRA 프로젝트를 만들어줍니다. 사실 SPA 를 개발하기 위한 기본환경 구성은 CRA 를 통한 프로젝트 생성 시 거의 준비가 된다고 생각합니다.&lt;/p&gt;
+&lt;p&gt;그리고 프로젝트를 생성할 경로로 이동하여 이런식으로 프로젝트명을 입력해준 후 CRA 프로젝트를 만들어준다. 사실 SPA 를 개발하기 위한 기본환경 구성은 CRA 를 통한 프로젝트 생성 시 거의 준비가 된다고 생각한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt; create-react-app my-project&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;그리고 개발 서버를 실행해줍니다.&lt;/p&gt;
+&lt;p&gt;그리고 개발 서버를 실행한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이제 사용하는 브라우저를 통해 기본적으로 설정되어 있는 웹 앱 구조가 마련되는 것을 보실 수 있으실 겁니다.&lt;/p&gt;
+&lt;p&gt;이제 사용하는 브라우저를 통해 기본적으로 설정되어 있는 웹 앱 구조가 마련되는 것을 볼 수 있다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -734,7 +898,7 @@ ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span c
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;개발 서버 호출 및 빌드 시 해당 파일에 접근하도록 되어 있습니다. 현재 파일에서 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트를 렌더링 해주고 있습니다.&lt;/p&gt;
+&lt;p&gt;개발 서버 호출 및 빌드 시 해당 파일에 접근하도록 되어 있다. 현재 파일에서 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트를 렌더링 해주고 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; ReactDOM &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-dom&apos;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./index.css&apos;&lt;/span&gt;
@@ -750,7 +914,7 @@ serviceWorker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;s
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;기본적으로 제공되는 프로젝트 구성입니다. 프로젝트 생성 시에는 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트 하나로만 이루어져 있습니다.&lt;/p&gt;
+&lt;p&gt;기본적으로 제공되는 프로젝트 구성이다. 프로젝트 생성 시에는 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트 하나로만 이루어져 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Component &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; logo &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./logo.svg&apos;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./App.css&apos;&lt;/span&gt;
@@ -782,19 +946,22 @@ serviceWorker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;s
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;public/index.html&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;개발 서버 및 빌드 시 사용되는 메인 페이지입니다. &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot; /&amp;gt;&lt;/code&gt; 요소에서 컴포넌트를 렌더링한 결과를 보여주도록 하고 있습니다.&lt;/p&gt;
+&lt;p&gt;개발 서버 및 빌드 시 사용되는 메인 페이지다. &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot; /&amp;gt;&lt;/code&gt; 요소에서 컴포넌트를 렌더링한 결과를 보여주도록 하고 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token doctype&quot;&gt;&amp;lt;!DOCTYPE html&gt;&lt;/span&gt;
 &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;en&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;utf-8&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;link&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;shortcut icon&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;%PUBLIC_URL%/favicon.ico&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;viewport&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;width=device-width, initial-scale=1, shrink-to-fit=no&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;theme-color&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#000000&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;utf-8&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;link&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;shortcut icon&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;%PUBLIC_URL%/favicon.ico&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt;
+      &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;viewport&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;width=device-width, initial-scale=1, shrink-to-fit=no&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;theme-color&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#000000&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;&amp;lt;!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     --&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;link&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;manifest&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;%PUBLIC_URL%/manifest.json&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;link&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;manifest&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;%PUBLIC_URL%/manifest.json&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;&amp;lt;!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -807,9 +974,7 @@ serviceWorker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;s
     &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;React App&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;noscript&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-      You need to enable JavaScript to run this app.
-    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;noscript&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;noscript&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; You need to enable JavaScript to run this app. &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;noscript&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;root&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;&amp;lt;!--
       This HTML file is a template.
@@ -823,10 +988,10 @@ serviceWorker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;s
     --&gt;&lt;/span&gt;
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이렣게 프로젝트 생성만으로 SPA 가 되는것은 아니지만 클라이언트 SPA 구현은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;react-helmet&lt;/code&gt; 등 관련 서드파티 라이브러리를 통해 쉽게 개발할 수 있다고 생각합니다. 그리고 그렇게 만들어진 SPA 를 서버에서 실행할수 있게 설정해줌으로써 Isomorphic SPA 가 되는것이죠. 그럼 이제 라우팅 설정과 SSR 설정이 필요한데 저는 SSR 설정부터 진행하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;이렣게 프로젝트 생성만으로 SPA 가 되는것은 아니지만 클라이언트 SPA 구현은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;react-helmet&lt;/code&gt; 등 관련 서드파티 라이브러리를 통해 쉽게 개발할 수 있다고 생각한다. 그리고 그렇게 만들어진 SPA 를 서버에서 실행할수 있게 설정해줌으로써 Isomorphic SPA 가 되는것이다. 그럼 이제 라우팅 설정과 SSR 설정이 필요한데 SSR 설정부터 진행하도록 하겠다.&lt;/p&gt;
 &lt;h2&gt;SSR 설정&lt;/h2&gt;
-&lt;p&gt;앞서 말씀드린대로 저는 SSR 설정부터 진행하도록 하겠습니다. SSR 설정은 개인적으로 제일 작업하기 까다로운 부분이기도 하며, 나중에 작업하려면 클라이언트 영역의 구조를 수정해야 하는 경우도 생기기도 해서요. 그래서 미리 준비를 해놓으려고 합니다.&lt;/p&gt;
-&lt;p&gt;우선 앞서 실행한 프로젝트의 페이지 소스 보기를 통해 정적 렌더링이 이루어지는 확인해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;앞서 말한대로 SSR 설정부터 진행하도록 하겠다. SSR 설정은 개인적으로 제일 작업하기 까다로운 부분이기도 하며, 나중에 작업하려면 클라이언트 영역의 구조를 수정해야 하는 경우도 생기기도 한다. 그래서 미리 준비를 해놓으려고 한다.&lt;/p&gt;
+&lt;p&gt;우선 앞서 실행한 프로젝트의 페이지 소스 보기를 통해 정적 렌더링이 이루어지는 확인해 보겠다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -864,14 +1029,14 @@ serviceWorker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;s
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;보시는 바와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인하실 수 있습니다. 프론트엔드 영역에서 페이지 호출 후 DOM 렌더링 통해 화면에 보여줄 컨텐츠를 그려주기 때문이죠.&lt;/p&gt;
+&lt;p&gt;보는 바와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인하실 수 있다. 프론트엔드 영역에서 페이지 호출 후 DOM 렌더링 통해 화면에 보여줄 컨텐츠를 그려주기 때문이다.&lt;/p&gt;
 &lt;h3&gt;서버 만들기&lt;/h3&gt;
-&lt;p&gt;그럼 우선 SSR 에 필요한 서버를 구축하도록 하겠습니다. 저는 서버 구성에 필요한 패키지들을 설치하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;그럼 우선 SSR 에 필요한 서버를 구축하도록 하겠다. 서버 구성에 필요한 패키지들을 설치하도록 한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn global add cross-env nodemon
 
 yarn add --dev express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;설치한 패키지들을 간략히 설명드리자면 &lt;code class=&quot;language-text&quot;&gt;cross-env&lt;/code&gt; 는 실행환경의 운영체제에 상관없이 서버에 필요한 정보를 설정해줄 수 있는 패키지입니다. &lt;code class=&quot;language-text&quot;&gt;nodemon&lt;/code&gt;은 서버 코드가 수정될 경우 서버를 재시작할 수 있도록 도와주는 패키지이구요. 그리고 &lt;code class=&quot;language-text&quot;&gt;express&lt;/code&gt;를 서버를 구성하기 위한 라이브러리입니다.&lt;/p&gt;
-&lt;p&gt;설치 완료 후 서버 실행에 필요한 명령어를 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;에 추가하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;설치한 패키지들을 간략히 설명하자면 &lt;code class=&quot;language-text&quot;&gt;cross-env&lt;/code&gt; 는 실행환경의 운영체제에 상관없이 서버에 필요한 정보를 설정해줄 수 있는 패키지이다. &lt;code class=&quot;language-text&quot;&gt;nodemon&lt;/code&gt;은 서버 코드가 수정될 경우 서버를 재시작할 수 있도록 도와주는 패키지임. 그리고 &lt;code class=&quot;language-text&quot;&gt;express&lt;/code&gt;를 서버를 구성하기 위한 라이브러리이다.&lt;/p&gt;
+&lt;p&gt;설치 완료 후 서버 실행에 필요한 명령어를 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;에 추가하도록 한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -882,7 +1047,7 @@ yarn add --dev express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;eject&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;react-scripts eject&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;serve&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;cross-env PORT=9000 nodemon server/index.js&quot;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;그리고 서버 구성에 필요한 파일을 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 경로에 추가하도록 하겠습니다. 포트 설정 및 라우팅 설정 후 서버를 시작하게 해줍니다.&lt;/p&gt;
+&lt;p&gt;그리고 서버 구성에 필요한 파일을 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 경로에 추가하도록 한다. 포트 설정 및 라우팅 설정 후 서버를 시작하게 해준다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -895,7 +1060,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 
 app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;`App listening on port &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이제 서버를 실행하면 다음과 같은 화면을 보실수 있으실겁니다.&lt;/p&gt;
+&lt;p&gt;이제 서버를 실행하면 다음과 같은 화면을 볼 수 있다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -933,7 +1098,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;페이지 소스를 확인해보면 서버에서 전달받은 데이터를 문제없이 렌더링 해주고 있습니다.&lt;/p&gt;
+&lt;p&gt;페이지 소스를 확인해보면 서버에서 전달받은 데이터를 문제없이 렌더링 해주고 있다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -972,10 +1137,10 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   &lt;/a&gt;
     &lt;/p&gt;
 &lt;h3&gt;정적 리소스 가져오기&lt;/h3&gt;
-&lt;p&gt;이제 클라이언트 측 데이터들을 서버 렌더링 할 수 있도록 해당 서버에 필요한 작업을 진행하도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;우선 서버에서 사용할 정적 리소스들을 만들기 위해 프로젝트 빌드 명령어를 실행합니다.&lt;/p&gt;
+&lt;p&gt;이제 클라이언트 측 데이터들을 서버 렌더링 할 수 있도록 해당 서버에 필요한 작업을 진행하도록 하자.&lt;/p&gt;
+&lt;p&gt;우선 서버에서 사용할 정적 리소스들을 만들기 위해 프로젝트 빌드 명령어를 실행한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;완료가 되면 build 폴더가 생성되는 것을 확인할 수 있습니다. 해당 폴더에는 현재 프로젝트에 대한 번들링 파일들을 제공합니다. 이제 번들링된 파일을 서버에서 읽을 수 있도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정하겠습니다.&lt;/p&gt;
+&lt;p&gt;완료가 되면 build 폴더가 생성되는 것을 확인할 수 있다. 해당 폴더에는 현재 프로젝트에 대한 번들링 파일들을 제공한다. 이제 번들링된 파일을 서버에서 읽을 수 있도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -986,56 +1151,22 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;hello!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;express 에서 제공하는 static 메서드를 통해 build 된 파일을 사용할 수 있도록 하게 해줍니다.&lt;/p&gt;
-&lt;p&gt;아직 더 해야 할 작업이 있지만 우선 다시 서버를 실행해 보겠습니다. 정적 리소스만 읽어왔을 뿐인데 정상적인 페이지가 나오게 되는 것을 보실 수 있으실 겁니다.&lt;/p&gt;
-&lt;p&gt;이러한 이유는 서버에서 메인 페이지 호출 시 빌드된 파일 중 하나인 index.html 를 메인 페이지 리소스로 인식하여 렌더링하도록 설정이 되기 때문입니다.&lt;/p&gt;
-&lt;p&gt;
-  &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-  
-  &lt;span
-    class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
-  &gt;
-    &lt;span
-      class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 55.86419753086419%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABJ0AAASdAHeZh94AAACHElEQVQozzVSybLjIAzM/3/YO81lqt5hUo4XvODd2BiMlyQ9DXnvoBIIqWm1dPv68xff/2I80hKJkMFSUeP7/sAwKqyrgZoXzLTzuiCbHlFSMId5uUScVXjEOe6PPMRvzjnszkKvKwEmTLOi71G3LYaph7EGxmhszHPHAUtvtw2zXnFdT6y7xdlIVI3Bfly42ZU/bxOsXbFpBadb2GXEOi2w84jdDLB6xGYvHG6H205s25PnAweBtX7yjXfGX88XbvM0YOlaFMWGXq5YGoUqtyjFhqnR6CqDLDvQVA6q1qiLAW2psEiFme03jcMwkL1xuE4yVNPIZIkoapDGA7JohIgniExBsrgrO1RiRJ5JlGmBPBa8lyiyAlVVke2K8yBzt1ECAg7DSAYZLUGeZ0jTOHgpC9Q1QcqSvoIQzKHVTcM3SV8zXpNhi2nyklHL8/SAAwFyWsG2i5AsRI6WQ/kUNAHUxz0jfx/HEXrR8APdqKMHer1eeL/fH0DPMIqiUBjHCe73ewD38SRJwtmD/5pnpJQK3tcfnL4xJvib/y1NU7ISP0yqwNi36GMe9JeZUhP6viPDgb4nWA9JWTxGy8FqrXHruo4MSoKUoe0kEbxXqEq26PWTH1Ylc7IsD3JkHEiaCnaTohAF1nnlatnPUGbSHuuZRZY/7WhqR/0clvngXlqY2XAlLBZlyJKr1buwKl23h7PTB/Zlx0F7v974DxA2OQnBJHPSAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-    &gt;
-      &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
-        alt=&quot;server-src2&quot;
-        title=&quot;&quot;
-        src=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png&quot;
-        srcset=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-1a291.png 148w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-2bc4a.png 295w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png 590w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-526de.png 885w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png 972w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-      /&gt;
-    &lt;/span&gt;
-  &lt;/span&gt;
-  
-  &lt;/a&gt;
-    &lt;/p&gt;
-&lt;p&gt;위와 같이 페이지 소스를 보면 정적 리소스 설정만 해주었을 뿐인데 빌드된 파일 중 하나인 index.html 코드를 렌더링해주고 있습니다.&lt;/p&gt;
-&lt;p&gt;자세히 보시면 클라이언트 렌더링을 했을때와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인하실 수 있습니다. index.html 에서 호출된 스크립트를 통해 페이지를 그려주기 때문이죠.
-또 다른 문제점은 정적 리소스를 통해 인덱스 페이지가 설정된 경우 해당 이후 설정한 라우팅 정보를 무시하게 되죠.&lt;/p&gt;
-&lt;p&gt;이제 메인 페이지 접근 시에도 라우팅 설정 정보에 접근할 수 있게 static 메서드 호출 시 인자를 추가하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;express 에서 제공하는 static 메서드를 통해 build 된 파일을 사용할 수 있도록 하게 해준다.&lt;/p&gt;
+&lt;p&gt;아직 더 해야 할 작업이 있지만 우선 다시 서버를 실행해 보자. 정적 리소스만 읽어왔을 뿐인데 정상적인 페이지가 나오게 되는 것을 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;이러한 이유는 서버에서 메인 페이지 호출 시 빌드된 파일 중 하나인 index.html 를 메인 페이지 리소스로 인식하여 렌더링하도록 설정이 되기 때문인 것 같다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./server-src2.png&quot; alt=&quot;server-src2&quot;&gt;&lt;/p&gt;
+&lt;p&gt;위와 같이 페이지 소스를 보면 정적 리소스 설정만 해주었을 뿐인데 빌드된 파일 중 하나인 index.html 코드를 렌더링해주고 있다.&lt;/p&gt;
+&lt;p&gt;자세히 보면 클라이언트 렌더링을 했을때와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인할 수 있다. index.html 에서 호출된 스크립트를 통해 페이지를 그려주기 때문인 것 같다.
+또 다른 문제점은 정적 리소스를 통해 인덱스 페이지가 설정된 경우 해당 이후 설정한 라우팅 정보를 무시하게 된다.&lt;/p&gt;
+&lt;p&gt;이제 메인 페이지 접근 시에도 라우팅 설정 정보에 접근할 수 있게 static 메서드 호출 시 인자를 추가하도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;build&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; index&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;두번째 인자로 정적 리소스 설정 시 인덱스 페이지 정보를 넘겨주지 않게 합니다. 해당 인자를 넘겨줌으로서 빌드된 파일 중 &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;를 메인 페이지에서 렌더링하지 않도록 하는 것이죠.&lt;/p&gt;
-&lt;p&gt;다시 페이지를 확인해보시면 처음 서버를 실행했을때와 같이 &lt;em&gt;“hello!”&lt;/em&gt; 라는 문자가 출력되는 화면을 보실 수 있으실겁니다. 기존에 설정했던 정적 리소스들도 문제없이 설정되었고 이제 메인 페이지도 라우터를 거치게 되었습니다.&lt;/p&gt;
+&lt;p&gt;두번째 인자로 정적 리소스 설정 시 인덱스 페이지 정보를 넘겨주지 않게 한다. 해당 인자를 넘겨줌으로서 빌드된 파일 중 &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;를 메인 페이지에서 렌더링하지 않도록 한다.&lt;/p&gt;
+&lt;p&gt;다시 페이지를 확인해보시면 처음 서버를 실행했을때와 같이 &lt;em&gt;“hello!”&lt;/em&gt; 라는 문자가 출력되는 화면을 볼 수 있다. 기존에 설정했던 정적 리소스들도 문제없이 설정되었고 이제 메인 페이지도 라우터를 거치게 되었다.&lt;/p&gt;
 &lt;h3&gt;컴포넌트 렌더링&lt;/h3&gt;
-&lt;p&gt;그럼 이제 메인 페이지에서 react 컴포넌트를 렌더링하도록 해주면 될것 같습니다. 컴포넌트 정보를 문자열로 변경하주는 &lt;code class=&quot;language-text&quot;&gt;renderToString&lt;/code&gt; 및 프로젝트의 메인 컴포넌트인 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 파일을 import 하도록 하겠습니다. 그리고 페이지 호출 시 해당 컴포넌트의 렌더링 정보를 뿌려주도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정하겠습니다.&lt;/p&gt;
+&lt;p&gt;그럼 이제 메인 페이지에서 react 컴포넌트를 렌더링하도록 해주면 될것 같다. 컴포넌트 정보를 문자열로 변경하주는 &lt;code class=&quot;language-text&quot;&gt;renderToString&lt;/code&gt; 및 프로젝트의 메인 컴포넌트인 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 파일을 import 하도록 하자. 그리고 페이지 호출 시 해당 컴포넌트의 렌더링 정보를 뿌려주도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1049,11 +1180,11 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;*&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;App &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이렇게만 해주었을때 정상적으로 동작되면 좋겠지만 node.js 환경에서는 es6 문법 및 react 에서 사용하는 jsx 문법, css 문법 등 프론트엔드 영역에서 사용되는 많은 문법들이 지원되지 않아 실행 시 오류가 발생하게 됩니다. 서버에서 해당 문법들이 정상적으로 동작할 수 있도록 하기 위해 서버 전용 빌드 설정을 추가하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;이렇게만 해주었을때 정상적으로 동작되면 좋겠지만 node.js 환경에서는 es6 문법 및 react 에서 사용하는 jsx 문법, css 문법 등 프론트엔드 영역에서 사용되는 많은 문법들이 지원되지 않아 실행 시 오류가 발생하게 된다. 서버에서 해당 문법들이 정상적으로 동작할 수 있도록 하기 위해 서버 전용 빌드 설정을 추가하도록 하자.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn global add @babel/cli @babel/core&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;우선 babal 명령어를 사용하기 위한 패키지를 전역으로 설치해 주세요.&lt;/p&gt;
+&lt;p&gt;우선 babal 명령어를 사용하기 위한 패키지를 전역으로 설치한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn add --dev @babel/plugin-transform-runtime @babel/preset-env @babel/preset-react babel-plugin-transform-require-ignor babel-plugin-inline-svg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;es6 문법 지원에 필요한 babel 및 관련 플러그인 들을 패키지에 추가하도록 하겠습니다. 이제 babel 컴파일에 필요한 &lt;code class=&quot;language-text&quot;&gt;babal.config.js&lt;/code&gt; 파일을 만들어 주도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;es6 문법 지원에 필요한 babel 및 관련 플러그인 들을 패키지에 추가하도록 한다. 이제 babel 컴파일에 필요한 &lt;code class=&quot;language-text&quot;&gt;babal.config.js&lt;/code&gt; 파일을 만들어 주도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;babel.config.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1077,8 +1208,8 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
     plugins&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;.babelrc&lt;/code&gt; 파일로 프리셋 및 플러그인 설정을 해줘도 되지만 저는 &lt;code class=&quot;language-text&quot;&gt;babel.config.js&lt;/code&gt; 파일을 사용했습니다. 해당 파일에서 babel 사용 시 필요한 프리셋 및 플러그인을 사용할 수 있도록 설정했습니다. 현재 설정의 경우 현재 프로젝트에서 사용하는 컴포넌트에 필요한 설정만 해주었지만, 프로젝트를 개발하면서 추가 설정이 필요한 경우 상황에 맞게 추가해주면 될꺼 같네요. 보다 자세한 사용법은 babel Docs 를 참고하시면 될 것 같습니다.&lt;/p&gt;
-&lt;p&gt;이제 서버용 컴포넌트 파일을 생성하기 위한 명령어를 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;에 추가하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;.babelrc&lt;/code&gt; 파일로 프리셋 및 플러그인 설정을 해줘도 되지만 &lt;code class=&quot;language-text&quot;&gt;babel.config.js&lt;/code&gt; 파일을 사용했다. 해당 파일에서 babel 사용 시 필요한 프리셋 및 플러그인을 사용할 수 있도록 설정했다. 현재 설정의 경우 현재 프로젝트에서 사용하는 컴포넌트에 필요한 설정만 해주었지만, 프로젝트를 개발하면서 추가 설정이 필요한 경우 상황에 맞게 추가해주면 될꺼 같다. 보다 자세한 사용법은 babel Docs 를 참고하자.&lt;/p&gt;
+&lt;p&gt;이제 서버용 컴포넌트 파일을 생성하기 위한 명령어를 &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;에 추가하도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1090,12 +1221,12 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   &lt;span class=&quot;token property&quot;&gt;&quot;eject&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;react-scripts eject&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;serve&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;yarn build &amp;amp;&amp;amp; yarn build:serve &amp;amp;&amp;amp; cross-env PORT=9000 nodemon server/index.js&quot;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;서버용 컴포넌트 파일을 빌드해주는 &lt;strong&gt;build:serve&lt;/strong&gt; 명령어를 추가했습니다. 그리고 개발 서버 실행 전 컴포넌트 빌드를 해줄 수 있도록 수정했습니다. &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; 폴더에 있는 컴포넌트 파일을 &lt;code class=&quot;language-text&quot;&gt;build.server&lt;/code&gt;에 컴파일하도록 설정했습니다. 그리고 js 파일 이외의 것들은 복사해 가지고 오도록 설정했습니다. 이 외에도 명령어 실행 시 다양한 옵션을 줄 수 있는데 자세한 내용은 babel 관련 Docs 를 참고하시면 될 것 같습니다.&lt;/p&gt;
-&lt;p&gt;이제 명령어를 실행해 보시면 &lt;code class=&quot;language-text&quot;&gt;build.server&lt;/code&gt; 폴더가 생성되고 폴더안에는 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; 폴더에서 사용 중인 컴파일된 js 파일 및 css 파일 등을 확인하실 수 있으실 겁니다.&lt;/p&gt;
-&lt;p&gt;클라이언트 컴포넌트를 따로 컴파일하지 않고 서버에서 런타임 시 직접 babel 을 설정해줘도 되지만 런타임 시 직접 컴포넌트에 접근하여 코드를 변환하는 작업을 거치게 되면 불필요한 자원이 낭비된다고 볼 수 있겟죠.&lt;/p&gt;
-&lt;p&gt;사실 현재 설정한 플러그인 중에 런타임 시점에서 문법 변환을 확인하도록 해주는 플러그인을 사용하긴 하지만 미리 컴파일된 파일을 읽어오는 방법이 서버 런타임 시에 컴파일을 하는 방법보다는 성능 상 이점이 있을 것이라 생각합니다.&lt;/p&gt;
-&lt;p&gt;다만 성능 상 문제가 되지 않는 경우라면 서버에서 babel 컴파일을 해주는 것도 큰 문제가 없다고 생각합니다. 사실 서버에서 직접 처리해도록 하는 것이 구현과정에 있어서는 훨씬 간편하기도 합니다.&lt;/p&gt;
-&lt;p&gt;이제 서버에서 사용할 컴포넌트 렌더링 관련 파일을 만들도록 하겠습니다. &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 파일을 생성한 후 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;에 있던 코드 중 렌더링 관련 코드를 옮기도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;서버용 컴포넌트 파일을 빌드해주는 &lt;strong&gt;build:serve&lt;/strong&gt; 명령어를 추가했다. 그리고 개발 서버 실행 전 컴포넌트 빌드를 해줄 수 있도록 수정했다. &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; 폴더에 있는 컴포넌트 파일을 &lt;code class=&quot;language-text&quot;&gt;build.server&lt;/code&gt;에 컴파일하도록 설정했다. 그리고 js 파일 이외의 것들은 복사해 가지고 오도록 설정했다. 이 외에도 명령어 실행 시 다양한 옵션을 줄 수 있는데 자세한 내용은 babel 관련 Docs 를 참고하시면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;이제 명령어를 실행해 보면 &lt;code class=&quot;language-text&quot;&gt;build.server&lt;/code&gt; 폴더가 생성되고 폴더안에는 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; 폴더에서 사용 중인 컴파일된 js 파일 및 css 파일 등을 확인하실 수 있다.&lt;/p&gt;
+&lt;p&gt;클라이언트 컴포넌트를 따로 컴파일하지 않고 서버에서 런타임 시 직접 babel 을 설정해줘도 되지만 런타임 시 직접 컴포넌트에 접근하여 코드를 변환하는 작업을 거치게 되면 불필요한 자원이 낭비된다고 생각한다.&lt;/p&gt;
+&lt;p&gt;사실 현재 설정한 플러그인 중에 런타임 시점에서 문법 변환을 확인하도록 해주는 플러그인을 사용하긴 하지만 미리 컴파일된 파일을 읽어오는 방법이 서버 런타임 시에 컴파일을 하는 방법보다는 성능 상 이점이 있을 것이라 생각한다.&lt;/p&gt;
+&lt;p&gt;다만 성능 상 문제가 되지 않는 경우라면 서버에서 babel 컴파일을 해주는 것도 큰 문제가 없다고 생각한다. 사실 서버에서 직접 처리해도록 하는 것이 구현과정에 있어서는 훨씬 간편하기도 하다.&lt;/p&gt;
+&lt;p&gt;이제 서버에서 사용할 컴포넌트 렌더링 관련 파일을 만들도록 하자. &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 파일을 생성한 후 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;에 있던 코드 중 렌더링 관련 코드를 옮기자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1108,7 +1239,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; renderer&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;서버에서 직접 컴포넌트 렌더링하지 않고 컴파일된 빌드 파일에 접근하기 위해 클라이언트 영역에 파일을 만들어 주었습니다. 이제 컴파일된 해당 파일을 서버에서 사용할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;서버에서 직접 컴포넌트 렌더링하지 않고 컴파일된 빌드 파일에 접근하기 위해 클라이언트 영역에 파일을 만들어 주었다. 이제 컴파일된 해당 파일을 서버에서 사용할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt; 파일을 수정하도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1126,7 +1257,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 
 app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;`App listening on port &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;서버에서 렌더링 함수를 호출하여 컴포넌트 렌더링 결과를 보여주도록 설정했습니다. 앞서 설정한 서버용 빌드 명령어를 실행한 후 다시 서버를 실행해 주세요. 서버는 정상적으로 실행이 잘됩니다. 이제 화면을 확인해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;서버에서 렌더링 함수를 호출하여 컴포넌트 렌더링 결과를 보여주도록 설정했다. 앞서 설정한 서버용 빌드 명령어를 실행한 후 다시 서버를 실행해 준다. 서버는 정상적으로 실행이 잘된다. 이제 화면을 확인해 보자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -1163,7 +1294,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;뭔가 나오긴 하는데 조금 이상합니다. 이미지는 깨져있고, 스타일도 적용되어 있지 않네요.&lt;/p&gt;
+&lt;p&gt;뭔가 나오긴 하는데 조금 이상하다. 이미지는 깨져있고, 스타일도 적용되어 있지 않다.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -1200,11 +1331,11 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;페이지 소스를 확인해 보니 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트의 렌더링 결과는 서버에서 잘 전달해주는 것 같습니다. 하지만 해당 컴포넌트를 감싸는 html 코드가 없네요. 당연한 결과지만 해당 컴포넌트는 html 코드 전체를 그려주지 않기 때문에 렌더링에 필요한 리소스를 가져오지 못합니다. 해당 컴포넌트를 담아낼 html 코드가 필요하니 기존에 번들링된 파일 중 index.html 파일을 읽어서 렌더링에 필요한 데이터를 가져올 수 있도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;우선 작업하기 전 패키지 하나를 설치하겠습니다.&lt;/p&gt;
+&lt;p&gt;페이지 소스를 확인해 보니 &lt;code class=&quot;language-text&quot;&gt;src/App.js&lt;/code&gt; 컴포넌트의 렌더링 결과는 서버에서 잘 전달해주는 것 같다. 하지만 해당 컴포넌트를 감싸는 html 코드가 없다. 당연한 결과지만 해당 컴포넌트는 html 코드 전체를 그려주지 않기 때문에 렌더링에 필요한 리소스를 가져오지 못한다. 해당 컴포넌트를 담아낼 html 코드가 필요하니 기존에 번들링된 파일 중 index.html 파일을 읽어서 렌더링에 필요한 데이터를 가져올 수 있도록 하자.&lt;/p&gt;
+&lt;p&gt;우선 작업하기 전 패키지 하나를 설치하자.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;yarn add --dev pretty&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;렌더링된 html 코드를 보기 좋게 정리해주는 패키지입니다. 굳이 설정하지 않으셔도 되지만 저는 해당 패키지를 사용하도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;먼저 서버를 수정하겠습니다.&lt;/p&gt;
+&lt;p&gt;렌더링된 html 코드를 보기 좋게 정리해주는 패키지이다. 굳이 설정하지 않아도 되지만 해당 패키지를 사용하도록 하자.&lt;/p&gt;
+&lt;p&gt;먼저 서버를 수정한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1225,8 +1356,8 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 
 app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;`App listening on port &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;파일을 읽기 위한 &lt;code class=&quot;language-text&quot;&gt;fs&lt;/code&gt; 및 앞서 설치한 &lt;code class=&quot;language-text&quot;&gt;pretty&lt;/code&gt; 패키지를 임포트했습니다. &lt;code class=&quot;language-text&quot;&gt;fs&lt;/code&gt; 는 node.js 에서 제공하는 기본 기능이기 때문에 따로 설치하지 않으셔도 됩니다.&lt;/p&gt;
-&lt;p&gt;이제 페이지가 호출되면 &lt;code class=&quot;language-text&quot;&gt;readFileSync&lt;/code&gt; 함수를 통해 동기적으로 index.html 파일을 읽어온 뒤 &lt;code class=&quot;language-text&quot;&gt;renderer&lt;/code&gt; 함수에 읽어온 index.html 의 문자열 정보를 넘겨주게 했습니다. 그리고 반환된 결과값을 예쁘게 포장한 뒤 출력하도록 헸습니다. 이제 &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 코드를 수정하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;파일을 읽기 위한 &lt;code class=&quot;language-text&quot;&gt;fs&lt;/code&gt; 및 앞서 설치한 &lt;code class=&quot;language-text&quot;&gt;pretty&lt;/code&gt; 패키지를 임포트했다. &lt;code class=&quot;language-text&quot;&gt;fs&lt;/code&gt; 는 node.js 에서 제공하는 기본 기능이기 때문에 따로 설치하지 않아도 된다.&lt;/p&gt;
+&lt;p&gt;이제 페이지가 호출되면 &lt;code class=&quot;language-text&quot;&gt;readFileSync&lt;/code&gt; 함수를 통해 동기적으로 index.html 파일을 읽어온 뒤 &lt;code class=&quot;language-text&quot;&gt;renderer&lt;/code&gt; 함수에 읽어온 index.html 의 문자열 정보를 넘겨주게 했다. 그리고 반환된 결과값을 예쁘게 포장한 뒤 출력하도록 했다. 이제 &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 코드를 수정하도록 하자.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1240,8 +1371,8 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
 module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; renderer&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;인자로 html 코드를 받게 수정했습니다. html 코드를 받게되면 컴포넌트 렌더링 문자열을 비어있는 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소안에 적용한 결과를 돌려주게 했습니다. 이 전에 클라이언트에서만 담당했던 렌더링 작업을 서버에서도 해주도록 했습니다.&lt;/p&gt;
-&lt;p&gt;다시 화면을 확인해보도록 하죠.&lt;/p&gt;
+&lt;p&gt;인자로 html 코드를 받게 수정했다. html 코드를 받게되면 컴포넌트 렌더링 문자열을 비어있는 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소안에 적용한 결과를 돌려주게 했다. 이 전에 클라이언트에서만 담당했던 렌더링 작업을 서버에서도 해주도록 했다.&lt;/p&gt;
+&lt;p&gt;다시 화면을 확인해보도록 하자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -1278,7 +1409,7 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;이제야 원하던 화면을 볼 수 있게 된거 같습니다. 페이지 소스도 확인해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;이제야 원하던 화면을 볼 수 있게 된거 같다. 페이지 소스도 확인해 보자.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -1315,10 +1446,9 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;페이지 소스에서도 컴포넌트의 렌더링 데이터를 정상적으로 출력해주고 있습니다. 아직 클라이언트 측 라우팅 설정 및 비동기 데이터 설정 등 할 일이 많지만 지금까지 작업한 프로젝트를 바탕으로 Isomorphic SPA 를 구현하기 위한 기본적인 환경 설정을 마련한 것 같습니다.&lt;/p&gt;
+&lt;p&gt;페이지 소스에서도 컴포넌트의 렌더링 데이터를 정상적으로 출력해주고 있다. 아직 클라이언트 측 라우팅 설정 및 비동기 데이터 설정 등 할 일이 많지만 지금까지 작업한 프로젝트를 바탕으로 Isomorphic SPA 를 구현하기 위한 기본적인 환경 설정을 마련한 것 같다.&lt;/p&gt;
 &lt;h2&gt;다음 과제&lt;/h2&gt;
-&lt;p&gt;지금까지 기본적인 Isomorphic SPA 의 개념 및 CRA 를 활용한 SSR 기본적인 구현에 대한 내용을 소개해 드렸습니다. 아직 부족한 내용도 많고 설명을 제대로 못드린 부분도 있다고 생각합니다. 그래도 처음 개발을 시작하시는 분들에게 조금이라도 도움이 되었으면 하는 바람입니다.&lt;/p&gt;
-&lt;p&gt;다음 2 부에서는 라우팅 설정에 대해 소개하도록 하겠습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[당신이 결코 들어보지 못했을 15 가지의 HTML 요소 메소드.]]></title><description><![CDATA[초심자를 위한 HTML 과 DOM 의 차이점에 대해 알아 보겠습니다. 일반적으로 오래 쓰여진   요소는 확실히 HTML…]]></description><link>https://pjb0811.github.io/15-html-element-methods-youve-potentially-never-heard-of/</link><guid isPermaLink="false">https://pjb0811.github.io/15-html-element-methods-youve-potentially-never-heard-of/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sat, 03 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;초심자를 위한&lt;/h2&gt;
+&lt;p&gt;지금까지 기본적인 Isomorphic SPA 의 개념 및 CRA 를 활용한 SSR 기본적인 구현에 대한 내용을 정리했다. 아직 부족한 내용도 많고 설명을 제대로 못한 부분도 있다. 다음 2 부에서는 라우팅 설정에 대해 정리하도록 하자.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[당신이 결코 들어보지 못했을 15 가지의 HTML 요소 메소드.]]></title><description><![CDATA[초심자를 위한 HTML 과 DOM 의 차이점에 대해 알아 보겠습니다. 일반적으로 오래 쓰여진   요소는 확실히 HTML…]]></description><link>https://pjb0811.github.io/15-html-element-methods-youve-potentially-never-heard-of/</link><guid isPermaLink="false">https://pjb0811.github.io/15-html-element-methods-youve-potentially-never-heard-of/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sat, 03 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;초심자를 위한&lt;/h2&gt;
 &lt;p&gt;HTML 과 DOM 의 차이점에 대해 알아 보겠습니다.&lt;/p&gt;
 &lt;p&gt;일반적으로 오래 쓰여진 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;table&amp;gt;&lt;/code&gt; 요소는 확실히 HTML 입니다. 끝에 &lt;code class=&quot;language-text&quot;&gt;.html&lt;/code&gt;가 있는 파일에서 사용할 수 있습니다. 보기 및 작동 방식에 영향을 주는 일련의 속성이 있습니다.&lt;/p&gt;
 &lt;p&gt;그게 다입니다. 자바스크립트와는 아무 상관이 없습니다.&lt;/p&gt;
@@ -1338,7 +1468,7 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 69.19999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAgABBf/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/aAAwDAQACEAMQAAAB4DDNCyj/xAAXEAADAQAAAAAAAAAAAAAAAAAAEBIB/9oACAEBAAEFAiXWr//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQMBAT8BU0p//8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8BZ//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAQEBAQEAAAAAAAAAAAAAAAERABAh/9oACAEBAAE/IQuG2Z8xoEFnP//aAAwDAQACAAMAAAAQQ+//xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxBiH//EABYRAQEBAAAAAAAAAAAAAAAAAAARQf/aAAgBAgEBPxCsR//EABoQAQEBAQADAAAAAAAAAAAAAAERACExUXH/2gAIAQEAAT8QoDErqHk3SXL7kkr0vMta7//Z&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 69.19999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAgABBf/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAHgMOaFkn//xAAXEAADAQAAAAAAAAAAAAAAAAAAEBIB/9oACAEBAAEFAiXWr//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQMBAT8BU0p//8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8BZ//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAQEBAQEAAAAAAAAAAAAAAAERABAh/9oACAEBAAE/IQuG2Z8xoEFnP//aAAwDAQACAAMAAAAQS+//xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxBiH//EABYRAQEBAAAAAAAAAAAAAAAAAAARQf/aAAgBAgEBPxCsR//EABoQAQEBAQADAAAAAAAAAAAAAAERACExUXH/2gAIAQEAAT8QoDErqHk3SXL7kkr0vMta7//Z&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;main&quot; title=&quot;&quot; src=&quot;/static/main-2e8669b2cc7abcecbee2b21a24a57d6e-f8fb9.jpeg&quot; srcset=&quot;/static/main-2e8669b2cc7abcecbee2b21a24a57d6e-e8976.jpeg 148w,
 /static/main-2e8669b2cc7abcecbee2b21a24a57d6e-63df2.jpeg 295w,
 /static/main-2e8669b2cc7abcecbee2b21a24a57d6e-f8fb9.jpeg 590w,
@@ -1571,7 +1701,7 @@ newRow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 106.86274509803921%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAABgElEQVQ4y32T2W7DIBBF8///V6mVWrWJ08UGYhazDVsHR0rsFDqaFwsf7p2FwzDB+wgDgY8xvpzhRMLrNzwP/jjC2xc8HZ1YYikll0YcrDac0UU7LrTUIJTFtD47yMbnxaYQm+AKpxSNVikGKUUM4Kxx1q5H+Zq9qPDDZSmlEIL3PqWu4F25rJffvo0xUnBOB9BTgTn7Sy9LTo/Kag1OT6DHAvgTa6SjOZpH2+h5mohUUpBjF3a0RHe3vYWVWvSyzBXu2WYlhQaMAQDYdrQd+jVjtS3lGAkhUkh1OXds0wz8tjI7GNturdV6EbXbLbgWbHej2onnZIzm5Bg6yreCG7AxqFxhWH7KdSr7LLkDxxjHcZIYbAi6B8c2jDVLIXBJBDt1bN9b3bDtnFM4K9q0TSq8eZ1/azZ1Py/nqoxTdeyeluagHh/GNrzzWLKav4NlJQic6ibn22K2YVU3Wwj2CYY24OT/g+1qm7NzG97MqWXb+/VJ4oaRgoCfN8m3rcb4Bfnny1fC0lggAAAAAElFTkSuQmCC&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 106.86274509803921%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAABfUlEQVQ4y32T6W7CQAyEef/nq1RVQmoJ0DZkQ/Y+vFedIEFIvVj+EyVfxp7Z3XUX+PyFboCvPn6cQjfE/Te8H8Ohh/0Z3g6em1RrLZWonTOGj0wbz4WRBoRy2D4UD8WGol2OiQQXOOdkjc4pSilSBO+sd255VW7dqhne/CznHGMMIeTcFHwo1+Xn92drrRSCsyOYS4WphGura8lbZa210lqMx2j6ih/5kWpWkt2OnVK69BepJB8OgDCgwrhtz2ryj7HXC6OyQf9fwIHVDASMBQASfWddtC3leVtKOaVhGKSQ6npqKLMC/H5knmC03XtvjBZsMew/PC/snqJ6Ei/F2nnnhtusFmjCmDMaNqFhmo6qlkjDGFWPUWG1c64l0TDujMdLKSXGjobDw2pibDRMqTkqym1WwrS+ncTOCKsrNbZjJartxVgX3ieJc/Of6MYaBaa66ul+MGkYVfGQiPEMlhFwDq/g29icnWh4lRM9tpJyuc9DRSBMq+Zrq7H+AMNHy1RG/WkYAAAAAElFTkSuQmCC&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;typescript-love&quot; title=&quot;&quot; src=&quot;/static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-fb8a0.png&quot; srcset=&quot;/static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-1a291.png 148w,
 /static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-2bc4a.png 295w,
 /static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-fb8a0.png 590w,
@@ -1700,7 +1830,7 @@ newRow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 82.80773143438454%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAIAAABSJhvpAAAACXBIWXMAAAsSAAALEgHS3X78AAACSElEQVQ4y5XTy2sTQRgA8LGtwaJIK7Ri1YP+A6IHwYN/gAiCUBBURNCLtFpsSNtoKonVtIoXXwcRoRiqFK2VUoIn6UWb7G7cPJs026SSxm6z27z2/cjOOot4qQmNw3eYb+b7zQNmwPoGw4uSYZo1aOoGlFWtmRBlRZBkwHFctVJhWZZhmHK5DCE0m2uGYQAsTkWoXCC6jMfSZCrLClpR1BlBYwUddVBa4DVFN+rjo0+WeibiBx8lurzxbm+s00N2eH4c8Ia7HoT3uq1Opyc0v1RE1TUDbsU2JwYcwXYX0eMNd4+RqHr/wzBwYLtdoSOPo63DOBgMfIyw9fGeeyFgD/ZOrWSKyq+qisKfqpx4lljI8mWp9hpjEZ6NNcDtowQYwffdJw9NROIb0vgCjdLrM6ubon78eeLY0wQ616doI+wiWpxE2x0C3A7ga+KtuRzo+3543FqI5rXzPgqNN97ZRexwEjYXAYYwPC8MIGwP7nQSrU782sxqDcKTLxI+otDwzm13Q7tGQ2AYJ9fFIX8e9C+OfFkL5Pgbsz8VHZ5+lXzbCNscGBjEWuwYGAj0z+VOvUyCvsUONzn2lZ5PVq5MZ8DNbx/CTH18dXrl4jvqkhXpc5OpXt/y5ffUhan0mTfJs5Np++es25+N5jmrGv6DVa5oKDxUBEPkTE00VQHKAkpNhTdNuM3zLGyWqjy/ZeIPQseEf6M+ZnkjSdECwyo1qNc0S1rVcNsfYuESp2ZomWblIifKqmQ23SxcFTSmqtFlpcTrsqT+F/4Nn0NewEMzvVQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 82.80773143438454%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAIAAABSJhvpAAAACXBIWXMAAAsSAAALEgHS3X78AAACVElEQVQ4y5WTy08TURTGr2ib1GgCJoSgLIz/AHFj4salC11pdKMxujDGKAqCTWkpQqNQQ9z4WhATTcRHiFoiKnGjroR2OqUP2o70gdgCQzszLZ25827veMvC+GgDnnyLe27O75zvJueCFTrHQ0lHhlpGWJKi1ZSs/iFRVqAkA1HgIV8qcmyBZYRS0TCQsbmoVCqAiCbDyYw3Mu+bS8xSCyzUOFFnoM6KOj6wUM9DXdErteF9d+J7bsfaRuIt7ihWkyuI1ToUar4VahycbR0ONbkC7+Mcri5X0N+w2U4Aq8/iJHcPh5pvVrGWoRCwEtudgb0jka02P+j2vg4zteEdAwFw3XfieSrFKpmimi2qU9/W9t+PfUrx2PYokQc93om5OrClnwS9/l2uYJs7HF2V3F9oYPOff/OdEfX2e7H2uzHsyxOpBzvJBge5zUGCLq8/K155mwGXpnGjCC0tl7RjY0lsu/5kJ7nFTpr7SPxOfxZ2TmZAt89kJ00O8oJnEQMHHsTGyFxteOeNgKkvYOkPYLfBFdE2tQQ6Zno/Lk3/EC5OLCo6OjRK1YXNVgJcIxp6CNDp7ZjMHHxIgcszjQNB12f6HVU8O54GV7++CuVrw+fGU6deJE9XlTj6mDr+dP7My+TJZ4nDj6gjTxJdnvTAh4XIMl+tRv/A0hqnS0JFhhrkDU1ECixLEKdIFgyENljPVaZQgvDXFfptufEo7BSrZpMqzAjleIKGOUYuI62sGeulaD02/hgFXk3TCs3KHC/KqmRsOqpwCWr5kkYXFI7XZUn9L/gnKxBebrBZ4mcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -2312,7 +2442,7 @@ promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 65.8%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAABc0lEQVQoz42SCW6DMBBFOUubpmFJICzGxivGYJpGaqTe/y79iROatqpa6YNGZt7MZzxRpqZCjalwZT8XwpbabaiOuU4Zfypp0GrfBj0WBO/lPKqoJ/zA5Ez5ZDqbcZ+LqWjlumIh47nutp0J2nEbE7HwUcE8EzNnmrcyp0OuThRGavZ4yUDepuGVmRo713Ym7oASn3AMoH9rx6k0GqqsrYYDsnNhQwYsJK28SKVUJUSucH7hIzy5eh20Z9LV/ViasdA+bSUaLjCcB4UYnyDEZ3grXsjw3hr/XNKHnFyncvOGvFwMhRz2yuXniY6Id6JHFcBtJl6oOTHtE8Lvh7kMDMyO91DGdIgzZtZVF6F7xh2c12ba1N3qK7nAN+YKY2znzjHVzB8b6xOqzm1vN3Qv/EjQctXBYBQz04zHvZnXVGOeqPcT/k2A+9q9bsUQUxM34tsO/Q2nkBhj7rBA2NOE6vU/4UQ4AJl0e+0KNWwIFvO/zj8A24mflYMWat4AAAAASUVORK5CYII=&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 65.8%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAABeUlEQVQoz42Si67bIAyG8yxr15YmTUhzAQIEAuRysmratPd/l/0pO1k1HWlH+rEM8mdbNknWT7QfU+nLYabK3U24cEM6kwr59c6jjiWLOtAWdn9PKj4zuQq9cDnZzmUSKSbK9KkSMeJcd7fORuXSkVbtfELF3KlFCiuZzrnP+58cjdTi8IxA3KWRlZ0at9RuYWFFir8w4b4YvrNxultTWlN5V/kV0YX2MQItXJmGUt7DxsqRT3CK/ps3s9ChduPdjtTMKdcouMPo/Py08PEOBxb+Bt/UW+t/MTufS/6laA+02RK/94Y4qj3VoexDsU10xDVXDikAs0yt3P7oUJCp4waIfZ5xYGByOUCZME/fwtlgVM9kKPq1ttOl7o4v2Csc+Xd4wNg2mHAj5kfj5ivrX3f4Kqw3bnhf9Z+BEWGb8VHa5cQteOT7kP9QCemGOjxuKhBuSaP++UP/g8WQQmokMuADpSpcuTl9Er6qkMqQPTeBHZxbdao+2/lv3MSflwi4RB4AAAAASUVORK5CYII=&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;my alt text&quot; title=&quot;&quot; src=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png&quot; srcset=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-1a291.png 148w,
 /static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-2bc4a.png 295w,
 /static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png 590w,
