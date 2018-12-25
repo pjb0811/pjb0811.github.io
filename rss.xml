@@ -1,9 +1,140 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 11 Dec 2018 04:48:20 GMT</lastBuildDate><author><![CDATA[Jeongbin Park]]></author><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 2부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[pjb0811.github.io]]></title><description><![CDATA[프론트엔드 웹 개발 기술 블로그]]></description><link>https://pjb0811.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 25 Dec 2018 08:28:50 GMT</lastBuildDate><author><![CDATA[Jeongbin Park]]></author><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 3부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 번 글은 코드 스플리팅에 관한 내용이다. 이 번 포스팅을 포함한 SPA…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part3/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part3/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Mon, 24 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 번 글은 코드 스플리팅에 관한 내용이다. 이 번 포스팅을 포함한 SPA와 관련된 글 내용은 정리하는데 오래 걸리지 않는 내용이지만 다른 프로젝트에 대한 내용을 준비 중이라 글 작성이 늦어지는 것 같다. 최대한 빨리 정리해보도록 하자. 앞서 작성한 글대로 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 한다. 잘 모르는 부분은 모른다고 남겨놓자. 다른 사람에게 설명하기 보다는 스스로의 학습 내용을 정리하는 글이기 때문에 편한 말투로 작성했다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;우선 코드 스플리팅에 대해 간단히 정리하고 넘어가도록 하자. 앞서 설명한 대로 SPA 환경에서 페이지 호출 시 해당 앱과 관련된 모든 리소스를 호출하게 된다. 이는 페이지 호출 시 해당 라우팅과 관련없는 페이지의 리소스도 요청한다는 의미가 된다. 앱 규모가 작으면 상관없겠지만 규모가 큰 앱의 경우 불필요한 리소스 요청으로 인해 페이지 로딩 속도에 영향을 줄 수 있다.&lt;/p&gt;
+&lt;p&gt;코드 스플리팅은 페이지 요청 시 사용자가 요청한 라우팅 페이지와 관련된 코드만 분리해서 요청하도록 하는 방법으로 이해하면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;해당 기법의 경우 특정 라이브러리의 도움 없이 구현할 수 있지만 라이브러리를 활용하도록 하자. 기본 문법을 활용한 코드 스플리팅 방법은 충분히 학습한 뒤 다시 정리해보도록 하자. React 개발 환경에서 코드 스플리팅을 지원해주는 여러가지 라이브러리가 있는데 그 중에서 &lt;code class=&quot;language-text&quot;&gt;react-loadable&lt;/code&gt;을 활용하도록 하자.&lt;/p&gt;
+&lt;h2&gt;react-loadable&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-7c2a1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 25.674157303370787%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAACXBIWXMAAAsSAAALEgHS3X78AAABM0lEQVQY00WKy0oCUQBA5wtatOwLIog2VhRu3ItBm2hRLqJNHxFu+oM+oUJ7KlYOSmNP0iQSNb2jjvfaPB0dHR3v5DzwFlEEh7M4HGp4DEf3Cr7kh2/tz3zHDEMcgfi5hd81mx+OUpKFBuaT4ty1bGTgR8W8EnBFs6t9fAgpaSLMTYW5rTTavuXnolzwBnrj0n5BDr32DuqNtVR14Vz0JeTla9Ybk3w0nDyCoayxV6qu0pToiTUDtLzOIH+Cnz7jg4y0m+09CMZOVt5MN1cSYDYiLsXR4gWYPxU8UTRzIvuTSiApbDAUgIN6TS9lWoDt1bgBV+gi0RQ7VgP02ZxazLVZ3qgAnQX6h2qWi1q5orN5rZhTwYtKuWPiEuKQXzvjf76L/YPzN1iEdC3Sd4nuEntMvgC1KPHDpGhocwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;react-loadable&quot;
+        title=&quot;&quot;
+        src=&quot;/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-fb8a0.png&quot;
+        srcset=&quot;/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-1a291.png 148w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-2bc4a.png 295w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-fb8a0.png 590w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-526de.png 885w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-fa2eb.png 1180w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-08f6a.png 1770w,
+/static/react-loadable-8fd75a9f9cfdfeeaa6be9a38e0299da3-7c2a1.png 1780w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-loadable&lt;/code&gt; 은 앞서 설명한 코드 스플리팅 구현을 쉽게 도와주는 라이브러리라 보면 된다. 컴포넌트 및 라우터 기반의 스플리팅을 제공하며 클라이언트 및 서버 사이드 렌더링 환경에 대한 구현 기능도 제공한다. 우선 클라이언트 영역 내 코드 스플리팅 방법에 대해 알아보자.&lt;/p&gt;
+&lt;h2&gt;Client&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/lib/routes.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; loadData &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./loadData&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Loadable &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-loadable&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;loading&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;loading&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;div&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; Routes &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    exact&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/Home&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;/about&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/About&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;/posts/:id&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/Posts&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    loadData&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; path &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;loadData&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;/posts&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/Posts&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    loadData&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; path &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;loadData&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;/post&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/Redirect&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    path&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;*&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Loadable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      loader&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;../components/NotFound&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      loading&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Routes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;우선 라우팅 컴포넌트를 호출하는 코드를 수정하자. 기존에는 기본적인 import 문법으로 컴포넌트를 호출하여 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt; 에서 제공하는 &lt;code class=&quot;language-text&quot;&gt;Route&lt;/code&gt; 컴포넌트의 매개변수로 라우팅 컴포넌트를 넘겨주었다.&lt;/p&gt;
+&lt;h3&gt;부록 - 나중에 정리할 일&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/index.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; ReactDOM &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-dom&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; App &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./App&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; serviceWorker &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./serviceWorker&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; BrowserRouter &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-router-dom&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Loadable &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-loadable&apos;&lt;/span&gt;
+
+Loadable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;preloadReady&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  ReactDOM&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;BrowserRouter&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;App &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;BrowserRouter&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;root&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;우선 &lt;code class=&quot;language-text&quot;&gt;src/index.js&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Server&lt;/h2&gt;
+&lt;h3&gt;부록 - 나중에 정리할 일&lt;/h3&gt;
+&lt;h2&gt;다음 과제&lt;/h2&gt;
+&lt;p&gt;지금까지 Isomorphic SPA 의 코트 스플리팅 구현에 대한 내용을 정리했다. 다음은 비동기 데이터에 대한 SSR설정에 대해 정리해 보도록 하자.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TypeScript를 활용한 JQuery 프로젝트 리팩토링]]></title><description><![CDATA[제목 2]]></description><link>https://pjb0811.github.io/jquery-project-refactoring-using-typescript/</link><guid isPermaLink="false">https://pjb0811.github.io/jquery-project-refactoring-using-typescript/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Wed, 19 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;제목 2&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 2부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part2/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전 글에 이어 라우팅 설정 내용을 정리했다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 한다. 잘 모르는 부분은 모른다고 남겨놓자. 다른 사람에게 설명하기 보다는 스스로의 학습 내용을 정리하는 글이기 때문에 편한 말투로 작성했다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;이 전 작업한 글에서 기본적인 Isomorphic SPA 설정은 해주었지만 미처 작업하지 못한 내용들이 많이 있다. 그 중에서 라우팅 설정부터 먼저 진행하려고 한다.&lt;/p&gt;
-&lt;p&gt;이 후 작업 내용을 보시면 이해하실 수 있겠지만 라우팅 설정과 관련된 서드파티 라이브러리를 통해 기본적인 라우팅 설정 및 코드 스플리팅, 비동기 데이터에 대한 정적 데이터 렌더링까지 처리하기 위해서이다.&lt;/p&gt;
+&lt;p&gt;이 후 작업 내용을 보면 이해할 수 있겠지만 라우팅 설정과 관련된 서드파티 라이브러리를 통해 기본적인 라우팅 설정 및 코드 스플리팅, 비동기 데이터에 대한 정적 데이터 렌더링까지 처리하기 위해서이다.&lt;/p&gt;
 &lt;p&gt;React 개발 환경에서 라우팅 설정을 지원해주는 여러가지 라이브러리가 있는데 그 중에서 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;을 활용하도록 하자.&lt;/p&gt;
+&lt;h2&gt;react-router&lt;/h2&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -19,7 +150,7 @@
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMFAv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAG4pukhl0X/xAAbEAABBAMAAAAAAAAAAAAAAAABAgMREgAEEP/aAAgBAQABBQImMIslzXcCqJmBz//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABwQAAIBBQEAAAAAAAAAAAAAAAABAhAREiIxMv/aAAgBAQAGPwIxmrpmsU0eUcp//8QAHBABAAICAwEAAAAAAAAAAAAAAQARMUEhUWFx/9oACAEBAAE/Ia3BbidU61qUDU0CL2bPk8kAMT//2gAMAwEAAgADAAAAEMgP/8QAFhEBAQEAAAAAAAAAAAAAAAAAARBB/9oACAEDAQE/EEcn/8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8QJ//EABwQAQACAgMBAAAAAAAAAAAAAAERIQAxQVFhgf/aAAgBAQABPxCf3ZASp5fDnKMQKEKJkeuneLzMrFe3vETDZVsveA6D5gEADzP/2Q==&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMFAv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAG4pukhl0X/xAAbEAACAgMBAAAAAAAAAAAAAAABAgMRAAQSEP/aAAgBAQABBQJjWEdLJryBuFuh5//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABwQAAIBBQEAAAAAAAAAAAAAAAABAhAREiIxMv/aAAgBAQAGPwIxmrpmsU0eUcp//8QAHBABAAICAwEAAAAAAAAAAAAAAQARMUEhUWFx/9oACAEBAAE/IaXBbidUS1qUXU0IvZs+TyQAxP/aAAwDAQACAAMAAAAQyA//xAAWEQEBAQAAAAAAAAAAAAAAAAABEEH/2gAIAQMBAT8QRyf/xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAgEBPxAn/8QAHBABAAEFAQEAAAAAAAAAAAAAAREAIUFRYTGB/9oACAEBAAE/ENvRAS05eGasaxBCiZHWn2nR+Wwt3tImGyqJXdA+B8oCAByv/9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -40,7 +171,7 @@
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;라는 라이브러리에서 DOM 바인딩과 관련된 라우팅 설정 기능만 간추린 라이브러리로 보시면 될 것 같다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;라는 라이브러리에서 DOM 바인딩과 관련된 라우팅 설정 기능만 간추린 라이브러리로 보면 될 것 같다.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt;는 React 에서 공식적으로 제공하는 라이브러리는 아니지만 이 전부터 React 환경의 SPA 개발 시에 많은 분들이 사용해왔던 라우팅 설정에 필요한 패키지이다.&lt;/p&gt;
 &lt;p&gt;버전이 업데이트되면서 &lt;code class=&quot;language-text&quot;&gt;react-router&lt;/code&gt; 내에서 필요한 기능에 따라 &lt;code class=&quot;language-text&quot;&gt;react-router-dom&lt;/code&gt; 뿐만 아니라 &lt;code class=&quot;language-text&quot;&gt;react-router-native&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;react-router-config&lt;/code&gt; 등의 라이브러리가 제공되는데 우선은 &lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt; 만을 활용해보도록 하자.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-react-dom&lt;/code&gt; 대한 자세한 사용법은 해당 &lt;a href=&quot;https://reacttraining.com/react-router/web/guides/quick-start&quot;&gt;링크&lt;/a&gt;를 통해 살펴보면 될 것 같다.&lt;/p&gt;
@@ -209,7 +340,7 @@ query 문자열을 객체로 변경해주는 라이브러리를 사용하도록 
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABNUlEQVQoz4WRS0vDQBSF+7cFH1tBN7oTcWlxJUYFQfqwaWK1pXRTEG1e9YEKZm6a5s4jbWacaBeptPZyOMxc7jdnhimZHhR1N4T2C3ReF6g1hIY7G2t4YAdRqUjeuHDUgr067FRIUbsVsn1Nyl1iBzm2AG76UH2CQwv3q2z9DDcM3Lpgm+c0l4Frp3hgRrcB+Q3/C+d7H5CimlCVUSW5FGM5zde5K/r8BbUB0RmLYcuHcJToQspMu318Ylxe1bq9PuMCk2TwTmoOaXrLYRInlOrJpN9/aFr37U7PcX3OOaPo/A/ra4exjkUhhJRS/ZQQaTSKNe2sTIYxCkazLFNSaddHaGOMp4x6H7AC/iTxKI71sEinIp1opdMMKdfdx7ewvgyefZhLLDe0PTKvUDdNJ5x7YxB9Ayq5CJwLDQ9RAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABM0lEQVQoz42RTU/CQBCG+d0mwtUEL3oz0ZMJRw0YTwJCS0lRwQMmGvupoHKgO+3S/Whruy7URCAQnDyZZCbz5E12C4oNy/Te4X4E/fE6gzHob9C2fs/aNmiuX1g2Wxac6XDUgnIDlet/HDbQwQ2q9JHmzrUNsupA4xVOO+S4yfarpFglpStarElIqUb2LsmJAl0X5eHr8mIGyohIqEipEFwkoUiZyFj2LUc6mkLTQDJjs9xxYBqE86KsrfbOKxe16/rDYMh4HM5C4xM1TaTa22WEQ0qJ1IdPz4qq9+4eDcvhnDNKzK//yIREcZxlmVhUFMV+gCNGd8iaAzAjMiVNU+kueiYbY1zK1gR2JE8Q9jGmPOJxkhMlqXyCAOOXD+92m5zTsZFme10HrWB7cqmY3urX+D9X5git4afN7QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -468,7 +599,7 @@ query 문자열을 객체로 변경해주는 라이브러리를 사용하도록 
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABaklEQVQoz22RS08CMRCA+Wv+I6Nc/A3GEx48mXgAQyRyNHgQFgR0DT7A+IB9wT7Z3XbK0hYEUSsPETH50kza+aYzmVhRA4Gk/qWoQtmAShuqa5R0kDS41ElsJou8qw5cm3NkS7xBtg7pO3x8u0Kqhs9fofRbztzDQQkSEuwvSBTIbo7vZNnWCdvOzIln2GaapmQsOippU1n0cKP15FZUbfZlhcktWn6JGkb/851PRmw0XPI2ZJMRb1goL4aa/SwmtEM85iTw7LamuGY7Ikh3SLIalRu+qrttKwgQcTzkdjHt07q5KmueuO3LtYej5OlZLt/qBIcS2djrxZO+opiq4YUhcdzQ9RCja3LHB9oDjBBGYY8AYPAREVM8K15TsQ3T9wOwnMB2Q7out1yRDR6CLv4+3RAQkI8xH3I6YHTI6IAzzqhgPOANM1zKP3suTJkFYhmPFnqyF1jLoKIGK3teR5S4UPC/SNMEIX8BD2cEu1o9JpAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 52.48425472358292%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAABYlAAAWJQFJUiTwAAABZ0lEQVQoz22Ry07CQBSGfTXfyKgLn8HEjdGFKxcqhEiCS3FTy00FMXIJEdoOl0Jb2s6cgc4UsQoO1IQCTr7MYvJ/k5Pz72QQCGRtE/FY6MJzD162yLUXgVyb7oRyvrOWK+qQb8NdDRJvJF5eI1YmD03IooicfIeLLD2TSci5DKcSPU77Rym+f8sPkiv2EixexGKoLFrKMoISGhWV8VOLlTReVFn+Y1zvevMffxbw7+mKYMrngV/vY0kVo4WyBgOHfPnUNvsdTTH0zohiZNDrwjhbtVVkdHXbcalhYtMinscqOpa0iIwswjyv9Fq5ukndpyWl51xm6O7J6DBmK4quti13IbumhTlj1Q25ZwMbARZHpIAAIUOXFppeQ7Va6qCj27YDfcMZmC7blhUThhgs9+82XcBAZ4H/6TPO2WQB9zkTBBO/prsrOdyZHGn7UdSIQCymMdiijwuaI0er2kZ8IankX+RlQMi/LN8Exa1z09cAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -686,9 +817,8 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;html&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이제 서버 렌더링 함수에서 html 문자열 및 서버 응답 정보를 같이 넘겨주기 때문에 해당 인자를 구분해서 받을 수 있도록 수정했다. 그리고 앞서 클라이언트에서 설정한 상태 코드가 확인될 경우 그에 맞게 서버 응답 상태를
-설정해주도록 수정했다.&lt;/p&gt;
-&lt;p&gt;이제 서버 측에서 잘못된 페이지나 리디렉션이 필요한 페이지의 상태를 알고 있고, SEO에서 해당 페이지 요청 시에 대한 응답 코드를 확인할 수 있을 것 같다. 정상적인 경우에는 클라이어트에서 따로 응답 코드를 설정해 주지 않아 &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt;로 확인되겠지만, 응답 코드가 없을 경우에는 서버에서 정상적인 응답 코드를 전달해주도록 했다.&lt;/p&gt;
+&lt;p&gt;이제 서버 렌더링 함수에서 html 문자열 및 서버 응답 정보를 같이 넘겨주기 때문에 해당 인자를 구분해서 받을 수 있도록 수정했다. 그리고 앞서 클라이언트에서 설정한 상태 코드가 확인될 경우 그에 맞게 서버 응답 상태를 설정해주도록 수정했다.&lt;/p&gt;
+&lt;p&gt;이제 서버 측에서 잘못된 페이지나 리디렉션이 필요한 페이지의 상태를 알고 있고, SEO 에서 해당 페이지 요청 시에 대한 응답 코드를 확인할 수 있을 것 같다. 정상적인 경우에는 클라이어트에서 따로 응답 코드를 설정해 주지 않아 &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt;로 확인되겠지만, 응답 코드가 없을 경우에는 서버에서 정상적인 응답 코드를 전달해주도록 했다.&lt;/p&gt;
 &lt;h2&gt;다음 과제&lt;/h2&gt;
 &lt;p&gt;지금까지 Isomorphic SPA 의 라우팅 구현에 대한 내용을 정리했다. 다음은 코트 스플리팅에 대해 정리하도록 하자.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React를 활용한 isomorphic SPA 개발하기 - 1부]]></title><description><![CDATA[react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react…]]></description><link>https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</link><guid isPermaLink="false">https://pjb0811.github.io/development-isomorphic-spa-using-react-part1/</guid><dc:creator><![CDATA[Jeongbin Park]]></dc:creator><pubDate>Fri, 16 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;react 를 활용한 isomorphic SPA 개발에 대한 내용을 정리한 글이다. 이 전에 개발했던 내용들을 다시 정리하는 목적도 있고 앞으로 react 및 그와 관련된 새로운 도구들을 활용하여 프로젝트를 시작했을때 “전에는 이렇게 작업했었지..” 하는 내용을 남기고자 한다. 단순한 개발과정뿐만 아니라 isomorphic SPA 에 개념 또한 기존에 생각했던 내용을 정리해서 스스로 이해하려고 한다. 의식의 흐름대로 정리하는 내용이라 부족한 부분도 있을꺼 같은데, 그건 그때 그때 정리하면서 업데이트하려고 한다. 잘 모르는 부분은 모른다고 남겨놓자. 다른 사람에게 설명하기 보다는 스스로의 학습 내용을 정리하는 글이기 때문에 편한 말투로 작성했다.&lt;/p&gt;
@@ -710,7 +840,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 62.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAa1rRGvF/8QAGxAAAgIDAQAAAAAAAAAAAAAAAAEDEQIEExL/2gAIAQEAAQUC4RnCNi142eFSxpn/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAwEBPwGI/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAECAQE/Aauv/8QAGRAAAgMBAAAAAAAAAAAAAAAAARAAESEx/9oACAEBAAY/AurDKGP/xAAcEAEAAQQDAAAAAAAAAAAAAAABABARITFRYaH/2gAIAQEAAT8hvihQ3DWfIfdE6mUGXEyl1p//2gAMAwEAAgADAAAAEFDv/8QAFhEBAQEAAAAAAAAAAAAAAAAAABFR/9oACAEDAQE/EIxD/8QAFxEBAAMAAAAAAAAAAAAAAAAAABFRYf/aAAgBAgEBPxCdtn//xAAcEAEBAAICAwAAAAAAAAAAAAABEQAhMUFR8PH/2gAIAQEAAT8QEUGILHxzjkWhWo1kWVqv3eRMhip7vOFuyJsO/mAHBM//2Q==&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 62.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABrWrI14//xAAbEAABBAMAAAAAAAAAAAAAAAABAAMREwIEEv/aAAgBAQABBQKhtUNlDXbI5EDGCv/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/AYj/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEQH/2gAIAQIBAT8Bq6//xAAZEAACAwEAAAAAAAAAAAAAAAAQEQABMSH/2gAIAQEABj8C0ctxYf/EABwQAQACAgMBAAAAAAAAAAAAAAEAESExEFFhkf/aAAgBAQABPyG0UKG6hrL8l+QeMzgZdQLLXj//2gAMAwEAAgADAAAAEFvv/8QAFhEBAQEAAAAAAAAAAAAAAAAAABFR/9oACAEDAQE/EIxD/8QAFxEBAAMAAAAAAAAAAAAAAAAAABFRYf/aAAgBAgEBPxCdtn//xAAcEAEBAAICAwAAAAAAAAAAAAABEQAhEFExQWH/2gAIAQEAAT8QHUGIWPXnGpUFajWetSXVjIYYshu5vUSbnfw4/9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -788,7 +918,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 33.94428152492669%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsSAAALEgHS3X78AAABIElEQVQY012P2U7DMBBF/f+/ghAIURV45YmWpUh9qlpolcSJ661NYnu8JTiyQIA1c215zsy10fh3DcMwZdJxtIzpsjRVBTUevM/l3zDKXO6ZthhT5kv+stxcX+1ubw7386h1xmKcwKwowSGE4Xvk8OM/jhEATqeO0qDU1PT/kSMqi+JpsSBNFaHxGjtVBRAhRu+9k7KvSrbbBsG9hRiCMo53nrWWdb43ASmlul5/bFbb1QXezA7rS14tOReEkPPbK364+5zP4Hkp6prS4x6LdWEfV8X73hTMoOSffM4nYTUFdQRFLJyd9wZAcd7iqq1xT4jR2jkHLsjOytaIziptUf6hUtqAS6GNMwa0VsnnSFmdRIhmOlIpJaSa0RZMijTuC4Dyjck03ESkAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 33.94428152492669%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsSAAALEgHS3X78AAABHUlEQVQY02VQy27CQAzM//9KhaqqApVzTzzUUokTghaUF8kmuyGJ195nuoBARR3ZPnjGM5Kj4RHe+3OHOQyqqjBJMEspz70xV/qvOLrq/A3OudDXZb1cbJ5H29eXw3TiJITVhbnjcmyt9TdLf88PUkXUNB1jFiA4Dv8QJUk8m82LY+qoMDLXkFoSzjptjG5EnyZst3Oca0XWGkBdd6ZqVdWZHk0E0He9/N6stqunbDM+rEd1uqhrXhTF6fMjm779TMa0nPM8Z6zcZ3wdq/dV/LXHuMIopFvnTg1XwAhKgkLRKcQiEdR1m6VtnvXFEaXUWpO2olOiRd4pkOp8HJ4EIJF0KIkakaQEVpYlq/IwOD+WjFVMCEGBQ6kIQwW7X3OZjbmDwR07AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -828,7 +958,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 75.07836990595611%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAQX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAefVi7wSUif/xAAaEAACAwEBAAAAAAAAAAAAAAACAwABExES/9oACAEBAAEFAoxJLGVacwsfR49//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAGxAAAQUBAQAAAAAAAAAAAAAAAAIREiJBARD/2gAIAQEABj8CJK4nzZlnbSjn/8QAHBAAAgICAwAAAAAAAAAAAAAAAREAIRBBMXGB/9oACAEBAAE/IQVoHuUcWqwLbj8cDFykSEVbn//aAAwDAQACAAMAAAAQaB//xAAWEQEBAQAAAAAAAAAAAAAAAAABACH/2gAIAQMBAT8Qwkv/xAAXEQEBAQEAAAAAAAAAAAAAAAABABFB/9oACAECAQE/EFeW3//EAB0QAQEAAgEFAAAAAAAAAAAAAAERADFhIUFRkeH/2gAIAQEAAT8QjfWXBjTGxamLVYHBhuZvqXg7zxiS9oDcmLkd1O6/M//Z&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 75.07836990595611%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAc+1C7wSOE//xAAZEAADAQEBAAAAAAAAAAAAAAABAgMAEhP/2gAIAQEAAQUCGrIyG6l5oUDU4Lf/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAdEAACAgEFAAAAAAAAAAAAAAAAARESECIjMTJx/9oACAEBAAY/AiXR+Y6u8cmpNo21CP/EABwQAQACAgMBAAAAAAAAAAAAAAEAESFBEDFRwf/aAAgBAQABPyFaoz6QaljWHAFfuJcdxCOwtXT7P//aAAwDAQACAAMAAAAQ+C//xAAXEQADAQAAAAAAAAAAAAAAAAAAASEx/9oACAEDAQE/EMg0f//EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAECAQE/EFZ//8QAHRABAAICAwEBAAAAAAAAAAAAAREhADFBUWEQwf/aAAgBAQABPxBBgsuzArlKR16a+HiVUWvW/wAwUkiOLquTnB8GhWXs7fM//9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -1154,41 +1284,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;express 에서 제공하는 static 메서드를 통해 build 된 파일을 사용할 수 있도록 하게 해준다.&lt;/p&gt;
 &lt;p&gt;아직 더 해야 할 작업이 있지만 우선 다시 서버를 실행해 보자. 정적 리소스만 읽어왔을 뿐인데 정상적인 페이지가 나오게 되는 것을 볼 수 있다.&lt;/p&gt;
 &lt;p&gt;이러한 이유는 서버에서 메인 페이지 호출 시 빌드된 파일 중 하나인 index.html 를 메인 페이지 리소스로 인식하여 렌더링하도록 설정이 되기 때문인 것 같다.&lt;/p&gt;
-&lt;p&gt;
-  &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-  
-  &lt;span
-    class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
-  &gt;
-    &lt;span
-      class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 55.86419753086419%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABJ0AAASdAHeZh94AAACHElEQVQozzVSybLjIAzM/3/YO81lqt5hUo4XvODd2BiMlyQ9DXnvoBIIqWm1dPv68xff/2I80hKJkMFSUeP7/sAwKqyrgZoXzLTzuiCbHlFSMId5uUScVXjEOe6PPMRvzjnszkKvKwEmTLOi71G3LYaph7EGxmhszHPHAUtvtw2zXnFdT6y7xdlIVI3Bfly42ZU/bxOsXbFpBadb2GXEOi2w84jdDLB6xGYvHG6H205s25PnAweBtX7yjXfGX88XbvM0YOlaFMWGXq5YGoUqtyjFhqnR6CqDLDvQVA6q1qiLAW2psEiFme03jcMwkL1xuE4yVNPIZIkoapDGA7JohIgniExBsrgrO1RiRJ5JlGmBPBa8lyiyAlVVke2K8yBzt1ECAg7DSAYZLUGeZ0jTOHgpC9Q1QcqSvoIQzKHVTcM3SV8zXpNhi2nyklHL8/SAAwFyWsG2i5AsRI6WQ/kUNAHUxz0jfx/HEXrR8APdqKMHer1eeL/fH0DPMIqiUBjHCe73ewD38SRJwtmD/5pnpJQK3tcfnL4xJvib/y1NU7ISP0yqwNi36GMe9JeZUhP6viPDgb4nWA9JWTxGy8FqrXHruo4MSoKUoe0kEbxXqEq26PWTH1Ylc7IsD3JkHEiaCnaTohAF1nnlatnPUGbSHuuZRZY/7WhqR/0clvngXlqY2XAlLBZlyJKr1buwKl23h7PTB/Zlx0F7v974DxA2OQnBJHPSAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-    &gt;
-      &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
-        alt=&quot;server-src2&quot;
-        title=&quot;&quot;
-        src=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png&quot;
-        srcset=&quot;/static/server-src2-61b7550bdd83db673e954db6ff7983be-1a291.png 148w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-2bc4a.png 295w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-fb8a0.png 590w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-526de.png 885w,
-/static/server-src2-61b7550bdd83db673e954db6ff7983be-6657d.png 972w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-      /&gt;
-    &lt;/span&gt;
-  &lt;/span&gt;
-  
-  &lt;/a&gt;
-    &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./server-src2.png&quot; alt=&quot;server-src2&quot;&gt;&lt;/p&gt;
 &lt;p&gt;위와 같이 페이지 소스를 보면 정적 리소스 설정만 해주었을 뿐인데 빌드된 파일 중 하나인 index.html 코드를 렌더링해주고 있다.&lt;/p&gt;
 &lt;p&gt;자세히 보면 클라이언트 렌더링을 했을때와 같이 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div id=&amp;quot;root&amp;quot;/&amp;gt;&lt;/code&gt; 요소 내에 아무것도 없는 것을 확인할 수 있다. index.html 에서 호출된 스크립트를 통해 페이지를 그려주기 때문인 것 같다.
 또 다른 문제점은 정적 리소스를 통해 인덱스 페이지가 설정된 경우 해당 이후 설정한 라우팅 정보를 무시하게 된다.&lt;/p&gt;
@@ -1260,7 +1356,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;클라이언트 컴포넌트를 따로 컴파일하지 않고 서버에서 런타임 시 직접 babel 을 설정해줘도 되지만 런타임 시 직접 컴포넌트에 접근하여 코드를 변환하는 작업을 거치게 되면 불필요한 자원이 낭비된다고 생각한다.&lt;/p&gt;
 &lt;p&gt;사실 현재 설정한 플러그인 중에 런타임 시점에서 문법 변환을 확인하도록 해주는 플러그인을 사용하긴 하지만 미리 컴파일된 파일을 읽어오는 방법이 서버 런타임 시에 컴파일을 하는 방법보다는 성능 상 이점이 있을 것이라 생각한다.&lt;/p&gt;
 &lt;p&gt;다만 성능 상 문제가 되지 않는 경우라면 서버에서 babel 컴파일을 해주는 것도 큰 문제가 없다고 생각한다. 사실 서버에서 직접 처리해도록 하는 것이 구현과정에 있어서는 훨씬 간편하기도 하다.&lt;/p&gt;
-&lt;p&gt;이제 서버에서 사용할 컴포넌트 렌더링 관련 파일을 만들도록 하자. &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 파일을 생성한 후 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;에 있던 코드 중 렌더링 관련 코드를 옮기자.&lt;/p&gt;
+&lt;p&gt;이제 서버에서 사용할 컴포넌트 렌더링 관련 파일을 만들도록 하자. &lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt; 파일을 생성한 후 &lt;code class=&quot;language-text&quot;&gt;server/index.js&lt;/code&gt;에 있던 코드 중 렌더링 관련 코드를 옮기자. 내보내는 방식은 서버에서 읽을 수 있도록 commonjs 문법으로 작성하도록 한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/renderer.js&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1502,7 +1598,7 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 69.19999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAgABBf/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/aAAwDAQACEAMQAAAB4DDNCyj/xAAXEAADAQAAAAAAAAAAAAAAAAAAEBIB/9oACAEBAAEFAiXWr//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQMBAT8BU0p//8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8BZ//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAQEBAQEAAAAAAAAAAAAAAAERABAh/9oACAEBAAE/IQuG2Z8xoEFnP//aAAwDAQACAAMAAAAQQ+//xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxBiH//EABYRAQEBAAAAAAAAAAAAAAAAAAARQf/aAAgBAgEBPxCsR//EABoQAQEBAQADAAAAAAAAAAAAAAERACExUXH/2gAIAQEAAT8QoDErqHk3SXL7kkr0vMta7//Z&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 69.19999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAgABBf/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAHgMOaFkn//xAAXEAADAQAAAAAAAAAAAAAAAAAAEBIB/9oACAEBAAEFAiXWr//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQMBAT8BU0p//8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQIBAT8BZ//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAQEBAQEAAAAAAAAAAAAAAAERABAh/9oACAEBAAE/IQuG2Z8xoEFnP//aAAwDAQACAAMAAAAQS+//xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxBiH//EABYRAQEBAAAAAAAAAAAAAAAAAAARQf/aAAgBAgEBPxCsR//EABoQAQEBAQADAAAAAAAAAAAAAAERACExUXH/2gAIAQEAAT8QoDErqHk3SXL7kkr0vMta7//Z&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;main&quot; title=&quot;&quot; src=&quot;/static/main-2e8669b2cc7abcecbee2b21a24a57d6e-f8fb9.jpeg&quot; srcset=&quot;/static/main-2e8669b2cc7abcecbee2b21a24a57d6e-e8976.jpeg 148w,
 /static/main-2e8669b2cc7abcecbee2b21a24a57d6e-63df2.jpeg 295w,
 /static/main-2e8669b2cc7abcecbee2b21a24a57d6e-f8fb9.jpeg 590w,
@@ -1735,7 +1831,7 @@ newRow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 106.86274509803921%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAABgElEQVQ4y32T2W7DIBBF8///V6mVWrWJ08UGYhazDVsHR0rsFDqaFwsf7p2FwzDB+wgDgY8xvpzhRMLrNzwP/jjC2xc8HZ1YYikll0YcrDac0UU7LrTUIJTFtD47yMbnxaYQm+AKpxSNVikGKUUM4Kxx1q5H+Zq9qPDDZSmlEIL3PqWu4F25rJffvo0xUnBOB9BTgTn7Sy9LTo/Kag1OT6DHAvgTa6SjOZpH2+h5mohUUpBjF3a0RHe3vYWVWvSyzBXu2WYlhQaMAQDYdrQd+jVjtS3lGAkhUkh1OXds0wz8tjI7GNturdV6EbXbLbgWbHej2onnZIzm5Bg6yreCG7AxqFxhWH7KdSr7LLkDxxjHcZIYbAi6B8c2jDVLIXBJBDt1bN9b3bDtnFM4K9q0TSq8eZ1/azZ1Py/nqoxTdeyeluagHh/GNrzzWLKav4NlJQic6ibn22K2YVU3Wwj2CYY24OT/g+1qm7NzG97MqWXb+/VJ4oaRgoCfN8m3rcb4Bfnny1fC0lggAAAAAElFTkSuQmCC&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 106.86274509803921%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAABfUlEQVQ4y32T6W7CQAyEef/nq1RVQmoJ0DZkQ/Y+vFedIEFIvVj+EyVfxp7Z3XUX+PyFboCvPn6cQjfE/Te8H8Ohh/0Z3g6em1RrLZWonTOGj0wbz4WRBoRy2D4UD8WGol2OiQQXOOdkjc4pSilSBO+sd255VW7dqhne/CznHGMMIeTcFHwo1+Xn92drrRSCsyOYS4WphGura8lbZa210lqMx2j6ih/5kWpWkt2OnVK69BepJB8OgDCgwrhtz2ryj7HXC6OyQf9fwIHVDASMBQASfWddtC3leVtKOaVhGKSQ6npqKLMC/H5knmC03XtvjBZsMew/PC/snqJ6Ei/F2nnnhtusFmjCmDMaNqFhmo6qlkjDGFWPUWG1c64l0TDujMdLKSXGjobDw2pibDRMqTkqym1WwrS+ncTOCKsrNbZjJartxVgX3ieJc/Of6MYaBaa66ul+MGkYVfGQiPEMlhFwDq/g29icnWh4lRM9tpJyuc9DRSBMq+Zrq7H+AMNHy1RG/WkYAAAAAElFTkSuQmCC&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;typescript-love&quot; title=&quot;&quot; src=&quot;/static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-fb8a0.png&quot; srcset=&quot;/static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-1a291.png 148w,
 /static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-2bc4a.png 295w,
 /static/typescript-love-d872a4b3157c4e38e840ee02d21dc55e-fb8a0.png 590w,
@@ -1864,7 +1960,7 @@ newRow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cla
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 82.80773143438454%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAIAAABSJhvpAAAACXBIWXMAAAsSAAALEgHS3X78AAACSElEQVQ4y5XTy2sTQRgA8LGtwaJIK7Ri1YP+A6IHwYN/gAiCUBBURNCLtFpsSNtoKonVtIoXXwcRoRiqFK2VUoIn6UWb7G7cPJs026SSxm6z27z2/cjOOot4qQmNw3eYb+b7zQNmwPoGw4uSYZo1aOoGlFWtmRBlRZBkwHFctVJhWZZhmHK5DCE0m2uGYQAsTkWoXCC6jMfSZCrLClpR1BlBYwUddVBa4DVFN+rjo0+WeibiBx8lurzxbm+s00N2eH4c8Ia7HoT3uq1Opyc0v1RE1TUDbsU2JwYcwXYX0eMNd4+RqHr/wzBwYLtdoSOPo63DOBgMfIyw9fGeeyFgD/ZOrWSKyq+qisKfqpx4lljI8mWp9hpjEZ6NNcDtowQYwffdJw9NROIb0vgCjdLrM6ubon78eeLY0wQ616doI+wiWpxE2x0C3A7ga+KtuRzo+3543FqI5rXzPgqNN97ZRexwEjYXAYYwPC8MIGwP7nQSrU782sxqDcKTLxI+otDwzm13Q7tGQ2AYJ9fFIX8e9C+OfFkL5Pgbsz8VHZ5+lXzbCNscGBjEWuwYGAj0z+VOvUyCvsUONzn2lZ5PVq5MZ8DNbx/CTH18dXrl4jvqkhXpc5OpXt/y5ffUhan0mTfJs5Np++es25+N5jmrGv6DVa5oKDxUBEPkTE00VQHKAkpNhTdNuM3zLGyWqjy/ZeIPQseEf6M+ZnkjSdECwyo1qNc0S1rVcNsfYuESp2ZomWblIifKqmQ23SxcFTSmqtFlpcTrsqT+F/4Nn0NewEMzvVQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 82.80773143438454%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAIAAABSJhvpAAAACXBIWXMAAAsSAAALEgHS3X78AAACVElEQVQ4y5WTy08TURTGr2ib1GgCJoSgLIz/AHFj4salC11pdKMxujDGKAqCTWkpQqNQQ9z4WhATTcRHiFoiKnGjroR2OqUP2o70gdgCQzszLZ25827veMvC+GgDnnyLe27O75zvJueCFTrHQ0lHhlpGWJKi1ZSs/iFRVqAkA1HgIV8qcmyBZYRS0TCQsbmoVCqAiCbDyYw3Mu+bS8xSCyzUOFFnoM6KOj6wUM9DXdErteF9d+J7bsfaRuIt7ihWkyuI1ToUar4VahycbR0ONbkC7+Mcri5X0N+w2U4Aq8/iJHcPh5pvVrGWoRCwEtudgb0jka02P+j2vg4zteEdAwFw3XfieSrFKpmimi2qU9/W9t+PfUrx2PYokQc93om5OrClnwS9/l2uYJs7HF2V3F9oYPOff/OdEfX2e7H2uzHsyxOpBzvJBge5zUGCLq8/K155mwGXpnGjCC0tl7RjY0lsu/5kJ7nFTpr7SPxOfxZ2TmZAt89kJ00O8oJnEQMHHsTGyFxteOeNgKkvYOkPYLfBFdE2tQQ6Zno/Lk3/EC5OLCo6OjRK1YXNVgJcIxp6CNDp7ZjMHHxIgcszjQNB12f6HVU8O54GV7++CuVrw+fGU6deJE9XlTj6mDr+dP7My+TJZ4nDj6gjTxJdnvTAh4XIMl+tRv/A0hqnS0JFhhrkDU1ECixLEKdIFgyENljPVaZQgvDXFfptufEo7BSrZpMqzAjleIKGOUYuI62sGeulaD02/hgFXk3TCs3KHC/KqmRsOqpwCWr5kkYXFI7XZUn9L/gnKxBebrBZ4mcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -2476,7 +2572,7 @@ promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
 &lt;figure&gt;
   
   &lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 65.8%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAABc0lEQVQoz42SCW6DMBBFOUubpmFJICzGxivGYJpGaqTe/y79iROatqpa6YNGZt7MZzxRpqZCjalwZT8XwpbabaiOuU4Zfypp0GrfBj0WBO/lPKqoJ/zA5Ez5ZDqbcZ+LqWjlumIh47nutp0J2nEbE7HwUcE8EzNnmrcyp0OuThRGavZ4yUDepuGVmRo713Ym7oASn3AMoH9rx6k0GqqsrYYDsnNhQwYsJK28SKVUJUSucH7hIzy5eh20Z9LV/ViasdA+bSUaLjCcB4UYnyDEZ3grXsjw3hr/XNKHnFyncvOGvFwMhRz2yuXniY6Id6JHFcBtJl6oOTHtE8Lvh7kMDMyO91DGdIgzZtZVF6F7xh2c12ba1N3qK7nAN+YKY2znzjHVzB8b6xOqzm1vN3Qv/EjQctXBYBQz04zHvZnXVGOeqPcT/k2A+9q9bsUQUxM34tsO/Q2nkBhj7rBA2NOE6vU/4UQ4AJl0e+0KNWwIFvO/zj8A24mflYMWat4AAAAASUVORK5CYII=&amp;apos;); background-size: cover; display: block;&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 65.8%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAABeUlEQVQoz42Si67bIAyG8yxr15YmTUhzAQIEAuRysmratPd/l/0pO1k1HWlH+rEM8mdbNknWT7QfU+nLYabK3U24cEM6kwr59c6jjiWLOtAWdn9PKj4zuQq9cDnZzmUSKSbK9KkSMeJcd7fORuXSkVbtfELF3KlFCiuZzrnP+58cjdTi8IxA3KWRlZ0at9RuYWFFir8w4b4YvrNxultTWlN5V/kV0YX2MQItXJmGUt7DxsqRT3CK/ps3s9ChduPdjtTMKdcouMPo/Py08PEOBxb+Bt/UW+t/MTufS/6laA+02RK/94Y4qj3VoexDsU10xDVXDikAs0yt3P7oUJCp4waIfZ5xYGByOUCZME/fwtlgVM9kKPq1ttOl7o4v2Csc+Xd4wNg2mHAj5kfj5ivrX3f4Kqw3bnhf9Z+BEWGb8VHa5cQteOT7kP9QCemGOjxuKhBuSaP++UP/g8WQQmokMuADpSpcuTl9Er6qkMqQPTeBHZxbdao+2/lv3MSflwi4RB4AAAAASUVORK5CYII=&amp;apos;); background-size: cover; display: block;&quot;&gt;
       &lt;img class=&quot;gatsby-resp-image-image&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot; alt=&quot;my alt text&quot; title=&quot;&quot; src=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png&quot; srcset=&quot;/static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-1a291.png 148w,
 /static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-2bc4a.png 295w,
 /static/simple-user-greeting-component-69c7e68b61938651fa43f60087d27aab-fb8a0.png 590w,
