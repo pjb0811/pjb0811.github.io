@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-23
+
+### Added
+
+- Import Space component from @jbpark/ui-kit
+- Wrap navigation links in Space component for improved spacing
+
+### Changed
+
+- Update @jbpark/ui-kit dependency to version 2.10.0
+- Change navigation links to use Typography.Link component
+
 ## [0.1.0] - 2026-07-23
 
 ### Added
