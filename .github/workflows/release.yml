@@ -1,0 +1,60 @@
+name: Release (manual backfill)
+
+# Optional utility: create/recreate a GitHub Release for an existing tag,
+# reading the entry from CHANGELOG.md. This repo has no automated tagging
+# (no npm publish step to hang it off of, unlike ui-kit), so this only runs
+# if you manually tag a commit and want a Release page for it.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing git tag to create/recreate a GitHub Release for (e.g. v0.5.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: Get changelog entry
+        id: changelog
+        run: |
+          VERSION=${{ github.event.inputs.tag }}
+          VERSION=${VERSION#v}
+          CHANGELOG_FILE="CHANGELOG.md"
+          if [ -f "$CHANGELOG_FILE" ]; then
+            # Can't use awk's `/start/,/end/` range here: the end pattern
+            # (any "## [" header) also matches the start line itself, so the
+            # range would close immediately and yield nothing. Skip the
+            # start header explicitly and exit before printing the next one.
+            CONTENT=$(awk -v version="$VERSION" '
+              $0 ~ "^## \\[" version "\\]" { found=1; next }
+              found && /^## \[/ { exit }
+              found { print }
+            ' "$CHANGELOG_FILE")
+            {
+              echo "body<<EOF"
+              echo "$CONTENT"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          body: ${{ steps.changelog.outputs.body || format('Release {0}', github.event.inputs.tag) }}
+          draft: false
+          prerelease: ${{ contains(github.event.inputs.tag, 'alpha') || contains(github.event.inputs.tag, 'beta') || contains(github.event.inputs.tag, 'rc') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
