@@ -1,5 +1,6 @@
 ---
 import UiLayout from '@jbpark/ui-kit/Layout';
+import Space from '@jbpark/ui-kit/Space';
 import Typography from '@jbpark/ui-kit/Typography';
 
 import ProjectCard from '../components/ProjectCard';
@@ -16,18 +17,20 @@ import Layout from '../layouts/Layout.astro';
       <Typography.Text className="text-sm font-medium text-muted-foreground">
         jbpark
       </Typography.Text>
-      <nav class="flex gap-6 text-sm">
-        <a href="#projects" class="text-muted-foreground hover:text-foreground">
-          Projects
-        </a>
-        <a
-          href="https://github.com/pjb0811"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted-foreground hover:text-foreground"
-        >
-          GitHub
-        </a>
+      <nav class="text-sm">
+        <Space size={24}>
+          <Typography.Link href="#projects" className="text-muted-foreground hover:text-foreground">
+            Projects
+          </Typography.Link>
+          <Typography.Link
+            href="https://github.com/pjb0811"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            GitHub
+          </Typography.Link>
+        </Space>
       </nav>
     </UiLayout.Header>
 
