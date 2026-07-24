@@ -1,0 +1,44 @@
+name: Version
+
+on:
+  push:
+    branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # No `publish` input here — this repo is private (never published to
+      # npm), so this only opens/updates a "Version Packages" PR against
+      # main from whatever .changeset/*.md files have accumulated, bumping
+      # package.json's version and consolidating CHANGELOG.md. Merging that
+      # PR is itself a normal push to main, which deploy.yml already
+      # handles — no separate publish step needed.
+      - name: Open/update Version Packages PR
+        uses: changesets/action@v1
+        with:
+          version: npm exec changeset version
+          commit: '🔖 chore: version packages'
+          title: '🔖 chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
