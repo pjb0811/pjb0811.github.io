@@ -1,5 +1,11 @@
 # pjb0811.github.io
 
+## 0.2.2
+
+### Patch Changes
+
+- fe60107: Add ui-kit and use-hooks demo links, fix the broken live-editor demo link, and correct the live-editor description's inaccurate "sandboxed for safety" claim.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
