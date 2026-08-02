@@ -1,5 +1,11 @@
 # pjb0811.github.io
 
+## 0.2.4
+
+### Patch Changes
+
+- 705fb53: Add the missing npm link for live-editor so its npm version badge and link render like the other projects.
+
 ## 0.2.3
 
 ### Patch Changes
