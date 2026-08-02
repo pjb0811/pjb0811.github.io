@@ -1,5 +1,11 @@
 # pjb0811.github.io
 
+## 0.2.3
+
+### Patch Changes
+
+- 1881055: Fix the live-editor demo link, which pointed to an unrelated third-party project (live-editor.vercel.app) instead of the actual live-editor deployment (live-editor-lab.vercel.app).
+
 ## 0.2.2
 
 ### Patch Changes
