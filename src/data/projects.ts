@@ -40,6 +40,6 @@ export const projects: Project[] = [
       'An interactive UI editor with real-time preview and drag-and-drop. Canvas edits sync back to source code via AST transforms, rendered in an isolated iframe (not a security sandbox).',
     stack: ['React', 'dnd-kit', 'CodeMirror', 'Babel AST'],
     githubUrl: 'https://github.com/pjb0811/live-editor',
-    demoUrl: 'https://live-editor.vercel.app',
+    demoUrl: 'https://live-editor-lab.vercel.app',
   },
 ];
