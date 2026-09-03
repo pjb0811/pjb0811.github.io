@@ -1,29 +1,26 @@
 #!/usr/bin/env node
-// Drafts a .changeset/pr-<number>.md file by asking GitHub Models to
-// summarize this PR's diff to src/ as a semver bump + one-paragraph
-// description, in changesets' own file format. Runs once per PR (the
-// calling workflow skips this script entirely if a changeset file for this
-// PR already exists), so it never overwrites something a human already
-// wrote or edited.
+// Drafts a .changeset/pr-<number>.md file by asking an LLM to summarize
+// this PR's diff to src/ as a semver bump + one-paragraph description, in
+// changesets' own file format. Runs once per PR (the calling workflow skips
+// this script entirely if a changeset file for this PR already exists), so
+// it never overwrites something a human already wrote or edited.
 //
 // This repo is never published (private: true) — changesets is used here
 // purely to accumulate a human-readable CHANGELOG.md, not to drive npm
 // releases, so "bump" only affects the changelog section headers.
+//
+// Uses NVIDIA's OpenAI-compatible API Catalog endpoint. GitHub Models (the
+// previous backend) was retired 2026-07-30 and now returns 410 Gone. Model
+// selection, fallback logic, and <think>-block stripping live in
+// nvidia-chat.mjs.
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
+import { nvidiaChat, requireEnv } from './nvidia-chat.mjs';
 
-const MODEL = process.env.GITHUB_MODELS_MODEL || 'openai/gpt-4o-mini';
-const API_URL = 'https://models.github.ai/inference/chat/completions';
 const MAX_DIFF_CHARS = 12000;
 const PACKAGE_NAME = 'pjb0811.github.io';
 const PACKAGE_DIR = 'src';
-
-function requireEnv(name) {
-  const value = process.env[name];
-  if (!value) throw new Error(`Missing required env var: ${name}`);
-  return value;
-}
 
 function diffBetween(base, head) {
   return execFileSync(
@@ -33,6 +30,9 @@ function diffBetween(base, head) {
   );
 }
 
+// The model isn't guaranteed to honor a strict JSON-only instruction, so
+// pull the object out of a ```json fenced block if present and fall back to
+// parsing the raw content otherwise.
 function extractJson(content) {
   const fenced = content.match(/```(?:json)?\s*([\s\S]*?)```/);
   const raw = fenced ? fenced[1] : content;
@@ -40,7 +40,7 @@ function extractJson(content) {
 }
 
 async function main() {
-  const token = requireEnv('GITHUB_TOKEN');
+  const apiKey = requireEnv('NVIDIA_API_KEY');
   const baseSha = requireEnv('BASE_SHA');
   const headSha = requireEnv('HEAD_SHA');
   const prNumber = requireEnv('PR_NUMBER');
@@ -81,42 +81,32 @@ async function main() {
     'respond with { "bump": "patch", "summary": "" }.',
   ].join(' ');
 
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json',
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-    body: JSON.stringify({
-      model: MODEL,
+  // A drafted changeset is a nice-to-have, not something worth failing the
+  // "draft" check over — if the API is unavailable even after all candidates
+  // are exhausted, skip drafting (exit 0) instead of blocking the PR. A human
+  // can always add a changeset by hand.
+  let result;
+  try {
+    const content = await nvidiaChat(apiKey, {
       temperature: 0,
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: `\`\`\`diff\n${truncatedDiff}\n\`\`\`` },
       ],
-    }),
-  });
+    });
 
-  if (!response.ok) {
-    throw new Error(
-      `GitHub Models request failed: ${response.status} ${response.statusText} — ${await response.text()}`,
+    result = extractJson(content);
+    if (!result || typeof result !== 'object') {
+      throw new Error('Model response is not an object');
+    }
+    if (!['major', 'minor', 'patch'].includes(result.bump)) {
+      throw new Error(`Invalid bump type "${result.bump}"`);
+    }
+  } catch (err) {
+    console.log(
+      `NVIDIA API unavailable, skipping changeset draft: ${err.message}`,
     );
-  }
-
-  const body = await response.json();
-  const content = body.choices?.[0]?.message?.content;
-  if (!content) {
-    throw new Error('GitHub Models response missing choices[0].message.content');
-  }
-
-  const result = extractJson(content);
-  if (!result || typeof result !== 'object') {
-    throw new Error('Model response is not an object');
-  }
-  if (!['major', 'minor', 'patch'].includes(result.bump)) {
-    throw new Error(`Invalid bump type "${result.bump}"`);
+    return;
   }
 
   if (!result.summary || !result.summary.trim()) {
