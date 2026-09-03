@@ -44,12 +44,13 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Draft changeset via GitHub Models
+      - name: Draft changeset via NVIDIA API
         if: steps.existing.outputs.exists == 'false'
         env:
-          # Use a personal PAT with models:read — GITHUB_TOKEN doesn't get
-          # the free-tier rate-limit benefit of the personal subscription.
-          GITHUB_TOKEN: ${{ secrets.GH_MODELS_PAT }}
+          # GitHub Models (the previous backend) was retired 2026-07-30 and
+          # now returns 410 Gone — moved to NVIDIA's API Catalog, matching
+          # the other pjb0811 repos. See .github/scripts/nvidia-chat.mjs.
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
