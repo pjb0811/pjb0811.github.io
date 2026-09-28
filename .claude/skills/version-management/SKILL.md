@@ -10,7 +10,7 @@ description: "changesets 기반 버전 관리 흐름(Version Packages PR → Git
 ## 릴리스 흐름
 
 1. **changeset 추가**: 눈에 띄는 변경이 있는 PR에는 `.changeset/*.md`가 필요하다. `npm exec changeset`으로 수동 생성하거나, `changeset-draft.yml`(필수 상태 체크 `draft`)이 PR별로 초안을 자동 생성/갱신해준다.
-2. **Version Packages PR**: main에 push될 때마다 `version.yml`이 돌면서, 누적된 changeset들로 `changeset-release/main` 브랜치에 "🔖 chore: version packages" PR을 열고 유지한다. `package.json` 버전 bump + `CHANGELOG.md` 갱신.
+2. **Version Packages PR**: main에 push될 때마다 `version.yml`이 돌면서, 누적된 changeset들로 `changeset-release/main` 브랜치에 "chore: version packages" PR을 열고 유지한다. `package.json` 버전 bump + `CHANGELOG.md` 갱신.
 3. **머지 시 동작**: 이 저장소는 `publish.yml`이 없다 — Version Packages PR을 머지하는 것도 그냥 평범한 main push라서, `deploy.yml`(GitHub Pages 배포: build → `actions/deploy-pages`)이 다른 커밋과 동일하게 실행될 뿐이다. 별도의 배포 승인/확인 절차가 필요 없다 (npm publish 같은 외부 공개 행위가 없음).
 
 즉 이 저장소에서는 Version Packages PR 머지를 다른 일반 PR 머지와 동일하게 취급해도 된다 — use-hooks/ui-kit처럼 "머지 = npm 공개 배포"라는 긴장감은 없다.
