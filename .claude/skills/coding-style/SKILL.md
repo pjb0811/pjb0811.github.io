@@ -1,6 +1,6 @@
 ---
 name: coding-style
-description: "Repo-agnostic coding-conventions toolkit — a growing set of procedures for working consistently within any codebase. Currently covers: (A) discovering and following a project's existing directory structure and coding conventions before writing/editing code (checks CLAUDE.md/AGENTS.md, README/CONTRIBUTING, formatter/linter configs, and neighboring files); (B) safely renaming directories/files to a different naming convention (e.g. PascalCase to kebab-case) across a codebase without breaking imports or losing git history. Use when the user says '코딩 스타일대로', '컨벤션 맞춰줘', '이 프로젝트 스타일로', 'follow the project conventions', 'match the existing style', '케밥 케이스로 바꿔줘', '폴더명 리네임', 'rename directories to kebab-case', or before creating/editing a file in an unfamiliar repo without already having its conventions in context."
+description: "Repo-agnostic coding-conventions toolkit — a growing set of procedures for working consistently within any codebase. Currently covers: (A) discovering and following a project's existing directory structure and coding conventions before writing/editing code (checks CLAUDE.md/AGENTS.md, README/CONTRIBUTING, formatter/linter configs, and neighboring files); (B) safely renaming directories/files to a different naming convention (e.g. PascalCase to kebab-case) across a codebase without breaking imports or losing git history; (C) writing and rewriting code comments: lead with what the code does, keep a reason only as a present-tense constraint, and replace history with an issue number. Use when the user says '주석 정리', '주석 다시 써줘', 'rewrite the comments', or whenever writing a code comment; also when the user says '코딩 스타일대로', '컨벤션 맞춰줘', '이 프로젝트 스타일로', 'follow the project conventions', 'match the existing style', '케밥 케이스로 바꿔줘', '폴더명 리네임', 'rename directories to kebab-case', or before creating/editing a file in an unfamiliar repo without already having its conventions in context."
 ---
 
 # Coding Style
@@ -9,6 +9,7 @@ description: "Repo-agnostic coding-conventions toolkit — a growing set of proc
 
 - **A. 기존 컨벤션 파악하고 따르기** — 코드를 작성/수정하기 전에 항상 먼저 확인
 - **B. 네이밍 컨벤션 일괄 변경** — 디렉토리/파일명 케이스 컨벤션을 바꿔야 할 때
+- **C. 주석 작성** — 코드 주석을 새로 쓰거나 기존 주석을 다시 쓸 때
 
 ---
 
@@ -135,3 +136,62 @@ const importRe = /(from\s+|require\()(['"])(\.[^'"]*)\2/g;
 - **같은 leaf 이름이 여러 부모 아래 중복됨** (예: `Item`이 `Menu/Item`, `List/Item`에 각각 존재): 이름 기반 매핑이라도 세그먼트 경계를 지키면 문제없다 — 어차피 같은 변환 함수를 적용하므로 결과가 항상 일관된다.
 - **범위 밖인데 이름이 겹치는 디렉토리가 있음**: 매핑 테이블에 포함하지 말고, 혹시 스크립트가 잘못 건드렸으면 typecheck 에러로 발견해서 되돌린다.
 - **public export 이름까지 바꿔야 하는지 애매함**: 추측하지 말고 사용자에게 breaking change 여부를 확인한다.
+
+---
+
+## C. 주석 작성
+
+주석은 **지금 코드를 처음 읽는 사람**을 위해 쓴다. 이 코드를 고친 당시의 리뷰어가 아니다. 과거에 무엇이 잘못됐고 어떻게 고쳤는지는 git 기록과 이슈에 이미 남아 있다. 영어가 모국어가 아닌 사람이나 번역 도구로 읽는 사람도 바로 이해할 수 있어야 한다.
+
+### C1. 규칙
+
+1. **무엇을 하는지 먼저** 1~2문장으로 쓴다. 이름과 코드만 봐도 분명하면 주석을 달지 않는다.
+2. **이유는 코드만 보면 잘못 고치기 쉬울 때만** 쓴다. 과거 이야기가 아니라 지금 지켜야 할 제약을 현재형으로 쓴다 ("Don't add `onChange` here: a callback must come from the current render (#336).").
+3. **과거 이야기는 이슈 번호 하나로** 대신한다. "used to", "previously", "the previous implementation", "before #N", "no longer", "any more" 같은 표현을 쓰지 않는다. `(#450)`이면 충분하다.
+4. **평이한 단어와 짧은 문장**을 쓴다. 관용 표현("funnelled", "churn", "dead end", "for free")은 피한다.
+5. **공개 API 주석은 완전하게 둔다.** props, 공개 인터페이스의 필드, 반환 타입 설명은 사용자를 위한 계약이므로 값, 기본값, 상호작용을 빠짐없이 쓴다. 과거 이야기만 뺀다.
+6. **벤치마크 수치, 검토했다 버린 대안, 다른 파일의 옛 버전 이야기**는 주석에 남기지 않고 PR이나 이슈에 쓴다.
+
+### C2. 예시 (pjb0811/live-editor#538)
+
+```ts
+// 전: 과거 이야기가 대부분이다
+// Uncontrolled usage (`<Live.Dnd />` with no `value`) used to read
+// nothing but DEFAULT_TEMPLATE forever: every edit committed through
+// useSectionDocument writes into PreviewContext, but this component
+// never read `code` back — so the section a reader just dragged in
+// vanished on the very next render. ...
+const value = _value === undefined ? code : _value;
+
+// 후: 지금 무엇을 하는지
+// The host's `value` when it passes one (controlled), otherwise the
+// provider's code. An empty string counts as a value, as in `Live.Preview`.
+const value = _value === undefined ? code : _value;
+```
+
+```ts
+// 전: 이유를 이야기로 설명한다
+// Deliberately no `onChange`: a callback belongs to the render that made
+// it, not to the parse. Keeping the two in one memo is what caused #336 —
+// editing another section leaves `selectedCode` ... identical, so the memo
+// was reused and handed back callbacks still bound to the previous document ...
+
+// 후: 지켜야 할 제약과 이슈 번호
+// One entry per bound property, from `fields` alone. Don't add `onChange`
+// here: a callback must come from the current render, and this memo can
+// outlive it (#336).
+```
+
+### C3. 기존 주석을 다시 쓸 때
+
+- **코드는 바꾸지 않는다.** 주석만 바꾸는 PR에 동작 변경을 섞지 않는다.
+- **코드가 그대로인지 확인한다.** 수정 전후 파일을 주석 없이 트랜스파일해서 비교한다(예: TypeScript `transpileModule`에 `removeComments: true`). 출력이 같아야 한다.
+- **실제 코드와 어긋난 주석은 이번에 고친다.** 다시 쓰다 보면 예전 버전을 설명하는 주석이 나온다. 코드를 읽고 지금 동작에 맞게 쓴다.
+- **줄 수와 과거 이야기 표현 수를 전후로 세어** PR에 적는다.
+- **영역 단위로 PR을 나눈다.** 한 PR에 리뷰할 수 있는 만큼만 넣는다.
+
+### C 엣지 케이스
+
+- **우회 코드(workaround)**: 외부 라이브러리 버그 때문에 이상해 보이는 코드는 이유를 남긴다. 다만 "무엇을 우회하는지"와 "없애도 되는 조건"을 현재형으로 쓰고, 발견 경위는 이슈로 보낸다.
+- **이슈 번호가 없는 과거 이야기**: 이야기를 지우고 제약만 남긴다. 제약도 없다면 주석을 지운다.
+- **저장소 언어**: 주석 언어는 저장소 관례를 따른다(pjb0811 저장소들은 영어). 한국어 설명이 필요하면 코드가 아니라 문서(README.ko.md, live-editor의 `ARCHITECTURE.ko.md` 등)에 둔다.
