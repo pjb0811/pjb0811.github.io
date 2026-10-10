@@ -25,4 +25,4 @@ description: "pjb0811.github.io specifics for releases: the site is `private: tr
 ## 워크플로
 
 - `.github/workflows/changeset-draft.yml`, `version.yml`, `deploy.yml`(GitHub Pages: build → `actions/deploy-pages`), `release.yml`(태그는 있는데 Release가 없을 때 `workflow_dispatch`로 보충, `tag` 입력값 필요), `ci.yml`
-- `version.yml`의 Version Packages PR 제목과 커밋에는 아직 gitmoji(`🔖`)가 붙어 있다. 정리는 #33에서 다룬다.
+- `version.yml`은 Version Packages PR을 `chore: version packages`라는 제목과 커밋으로 연다. 봇 커밋도 커밋 규칙(gitmoji 없음)을 따른다.

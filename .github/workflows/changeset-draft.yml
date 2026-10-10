@@ -67,7 +67,7 @@ jobs:
             # `capped` is set by draft-bump.mjs when the model's `major` was
             # lowered to `minor`, so the lowered bump shows in the PR's
             # commit list and isn't taken as the model's own call.
-            git commit -m "📝 docs: draft changeset for PR #${{ github.event.pull_request.number }}${{ steps.draft.outputs.capped == 'true' && ' (model suggested major; capped at minor)' || '' }}"
+            git commit -m "docs: draft changeset for PR #${{ github.event.pull_request.number }}${{ steps.draft.outputs.capped == 'true' && ' (model suggested major; capped at minor)' || '' }}"
             git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
           else
             echo "No changeset produced (nothing under src/, or model found no user-facing change) — skipping commit."
