@@ -34,15 +34,16 @@ Write comments for someone reading the code now: say what the code does first, g
 
 ## Shared skills
 
-Procedures shared by every pjb0811 repository are global Claude Code skills in the private repository `pjb0811/skills`. Agents that can't read them follow the summaries in this file.
+Procedures shared by every pjb0811 repository are global Claude Code skills in the public repository [`pjb0811/skills`](https://github.com/pjb0811/skills), and the shared decisions are in its [`global/CLAUDE.md`](https://github.com/pjb0811/skills/blob/main/global/CLAUDE.md). Agents without them installed follow the summaries in this file.
 
-| Skill                                 | Use                                                                                             |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `commit`, `pr`, `issue`               | Commit messages, PR and issue bodies                                                            |
-| `coding-style`                        | Conventions, renames, comments (C), boolean names (D), braces (E), subcomponent file layout (F) |
-| `changesets-release`, `publish-check` | Release flow and pre-release checks                                                             |
-| `shared-library-first`                | Reusable UI goes to ui-kit and hooks to use-hooks first                                         |
-| `ref-verification`                    | Read repository state from git refs, not the worktree                                           |
+| Skill                                 | Use                                                                                                                                                                            |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `commit`, `pr`, `issue`               | Commit messages, PR and issue bodies                                                                                                                                           |
+| `coding-style`                        | Conventions, renames, comments (C), boolean names (D), braces (E), subcomponent file layout (F), blank lines (G), order of code inside a component (H), feature subfolders (I) |
+| `changesets-release`, `publish-check` | Release flow and pre-release checks                                                                                                                                            |
+| `shared-library-first`                | Reusable UI goes to ui-kit and hooks to use-hooks first                                                                                                                        |
+| `ref-verification`                    | Read repository state from git refs, not the worktree                                                                                                                          |
+| `repo-settings`                       | Align the repository's GitHub settings (merge methods, auto-merge, default-branch ruleset) with the standard                                                                   |
 
 ### Commit messages
 
@@ -54,12 +55,12 @@ Procedures shared by every pjb0811 repository are global Claude Code skills in t
 
 ### Repository skills
 
-| Skill                   | Path                                    | Use                                                         |
-| ----------------------- | --------------------------------------- | ----------------------------------------------------------- |
-| `version-management`    | `.claude/skills/version-management/`    | This site's release and deploy specifics                    |
-| `react-best-practices`  | `.claude/skills/react-best-practices/`  | Vercel, React performance rules                             |
-| `composition-patterns`  | `.claude/skills/composition-patterns/`  | Vercel, component composition patterns                      |
-| `web-design-guidelines` | `.claude/skills/web-design-guidelines/` | Vercel, UI and accessibility review                         |
-| `writing-guidelines`    | `.claude/skills/writing-guidelines/`    | Vercel, review of the site's copy                           |
+| Skill                   | Path                                    | Use                                      |
+| ----------------------- | --------------------------------------- | ---------------------------------------- |
+| `version-management`    | `.claude/skills/version-management/`    | This site's release and deploy specifics |
+| `react-best-practices`  | `.claude/skills/react-best-practices/`  | Vercel, React performance rules          |
+| `composition-patterns`  | `.claude/skills/composition-patterns/`  | Vercel, component composition patterns   |
+| `web-design-guidelines` | `.claude/skills/web-design-guidelines/` | Vercel, UI and accessibility review      |
+| `writing-guidelines`    | `.claude/skills/writing-guidelines/`    | Vercel, review of the site's copy        |
 
 The Vercel skills are copied unmodified from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) at `063bee9`. `.prettierignore` lists them so a formatter doesn't change them. To update, copy the directories again from a newer commit and change this commit. `deploy-to-vercel` isn't included: the site deploys to GitHub Pages.
